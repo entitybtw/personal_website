@@ -1,0 +1,49 @@
+body {
+  background-color: #383838;
+  color: #ffffff;
+}
+p { 
+  font-size: 100px;
+  float: right;
+  position: absolute;
+  top: 20px;
+  right: 500px;
+}
+h1.itsnotme {
+  font-size: 7px;
+  font-family: arial;
+}
+img {
+  width: 500px;
+  height: auto;
+  border-radius: 30px;
+}
+img.ep {
+  float: right;
+}
+h2.right {
+  top: 200px;
+  position: absolute;
+  right: 500px;
+  font-size: 20px;
+}
+h2.right2 {
+  top: 220px;
+  position: absolute;
+  right: 500px;
+  font-size: 20px;
+}
+h2.right3 {
+  top: 240px;
+  position: absolute;
+  right: 500px;
+  font-size: 20px;
+}
+a.github {
+  width: 35px;
+  height: auto;
+  border-radius: 20px;
+  position: absolute;
+  right: 1525px;
+  top: 485px;
+}
