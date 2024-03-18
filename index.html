@@ -15,6 +15,7 @@
       color: #2c3e50;
       font-size: 1em;
       font-family: 'Source Serif Pro', 'Helvetica Neue', serif;
+      overflow-y: scroll; /* Добавлено для прокрутки на мобильных устройствах */
     }
 
     h1,
@@ -34,7 +35,7 @@
     }
 
     .header {
-      padding: 8.5em 0;
+      padding: 8.5em 0; /* Изменено для мобильных устройств */
       background-image: url('https://dl.dropboxusercontent.com/u/18570019/header-image.jpg');
       background-repeat: no-repeat;
       background-size: cover;
@@ -49,21 +50,21 @@
     .header-intro {
       margin-bottom: 0em;
       color: #e67e22;
-      font-size: 2.25em;
+      font-size: 2.25em; /* Изменено для мобильных устройств */
       text-shadow: 0px 1px 0px #d35400;
     }
 
     .header-name {
       margin-top: -0.2em;
       color: #e67e22;
-      font-size: 6.0em;
+      font-size: 6.0em; /* Изменено для мобильных устройств */
       text-shadow: 0px 3px 0px #d35400;
       font-weight: 700;
     }
 
     .about,
     .questions {
-      max-width: 37.5em;
+      max-width: 37.5em; /* Изменено для мобильных устройств */
       margin: 0 auto;
       margin-top: 3em;
       line-height: 1.5em;
@@ -74,7 +75,7 @@
     }
 
     .footer {
-      padding: 4em 0;
+      padding: 4em 0; /* Изменено для мобильных устройств */
       color: #fff;
       background: #e67e22;
       margin-top: 3em;
@@ -94,40 +95,53 @@
       display: inline-block;
       margin: 0 1.0em;
     }
+
+     @media only screen and (max-width : 600px) {
+        .header-intro {
+            font-size : 1.5em; 
+        }
+        .header-name{
+            font-size : 3.0em; 
+        }
+        .about, .questions{
+            max-width :90%;
+        }
+     }
+
   </style>
 </head>
 <body>
-  <header class="header">
-    <div>
-      <p class="header-intro">Hi, I'm</p>
-      <h1 class="header-name">entitybtw</h1>
-    </div>
-  </header>
+<header class="header">
+<div>
+  <p class="header-intro">Hi, I'm</p>
+<h1 class="header-name">entitybtw</h1> <!-- Перемещено в начало секции header --> <!-- Перемещено в начало секции header -->
+</div>
+</header>
 
-  <section class="about">
-    <h2>Introduction</h2>
-    <p> Hi, I'm a technofreak, designer, currently learing python</p>
+<section class="about">
+<h2>Introduction</h2>
+<p> Hi, I'm a technofreak, designer, currently learing python</p>
 
-  </section>
+</section>
 
-  <section class="questions">
-    <h2>More about me</h2>
-    <h3>Where am I from?</h3>
-    <p>I'm from Russia, Penza</p>
+<section class="questions">
+<h2>More about me</h2>
+<h3>Where am I from?</h3>
+<p>I'm from Russia, Penza</p>
 
-    <h3>Your hobby?</h3>
-    <p>Coding.</p>
+<h3>Your hobby?</h3>
+<p>Coding.</p>
 
-    <h3>What music have you been listening to?</h3>
-    <p>breakcore</p>
-  </section>
+<h3>What music have you been listening to?</h3>
+<p>breakcore</p>
+</section>
 
-  <footer class="footer">
-    <p>You can find out a bit more about me in these places</p>
-    <ul class="social">>
-      <li><a href="https://github.com/entitybtw" target="_blank">Github</li>
-      <li><a href="https://steamcommunity.com/id/entitybtw" target="_blank">Steam</li>
-    </ul>
-  </footer>
+<footer class="footer">
+<p>You can find out a bit more about me in these places</p>
+<ul class="social">
+<li><a href="https://github.com/entitybtw" target="_blank">Github</a></li> <!-- Закрытие тега a добавлено -->
+<li><a href="https://steamcommunity.com/id/entitybtw" target="_blank">Steam</a></li> <!-- Закрытие тега a добавлено -->
+</ul>
+</footer>
 </body>
 </html>
