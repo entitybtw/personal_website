@@ -2,64 +2,131 @@
 <html>
 <head>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+        padding:0;
+        margin:0;
+    }
+
     body {
-      background-color: #383838;
-      color: #ffffff;
+      color: #2c3e50;
+      font-size: 1em;
+      font-family: 'Source Serif Pro', 'Helvetica Neue', serif;
     }
-    p { 
-      font-size: 100px;
-      float: right;
-      position: absolute;
-      top: 20px;
-      right: 500px;
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Source Sans Pro', sans-serif;
     }
-    h1.itsnotme {
-      font-size: 7px;
-      font-family: arial;
+
+    a {
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: bold;
     }
-    img {
-      width: 500px;
-      height: auto;
-      border-radius: 30px;
+
+    a:hover {
+      text-decoration: underline;
     }
-    img.ep {
-      float: right;
+
+    .header {
+      padding: 8.5em 0;
+      background-image: url('https://dl.dropboxusercontent.com/u/18570019/header-image.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
     }
-    h2.right {
-      top: 200px;
-      position: absolute;
-      right: 500px;
-      font-size: 20px;
+
+    .footer,
+    .header-intro,
+    .header-name {
+      text-align: center;
     }
-    h2.right2 {
-      top: 220px;
-      position: absolute;
-      right: 500px;
-      font-size: 20px;
+
+    .header-intro {
+      margin-bottom: 0em;
+      color: #e67e22;
+      font-size: 2.25em;
+      text-shadow: 0px 1px 0px #d35400;
     }
-    h2.right3 {
-      top: 240px;
-      position: absolute;
-      right: 500px;
-      font-size: 20px;
+
+    .header-name {
+      margin-top: -0.2em;
+      color: #e67e22;
+      font-size: 6.0em;
+      text-shadow: 0px 3px 0px #d35400;
+      font-weight: 700;
     }
-    a.github {
-      float: left;
-      width: 35px;
-      height: auto;
-      border-radius: 20px;
-      position: absolute;
-      top: 485px;
+
+    .about,
+    .questions {
+      max-width: 37.5em;
+      margin: 0 auto;
+      margin-top: 3em;
+      line-height: 1.5em;
+    }
+
+    .questions h3 {
+      color: #e67e22;
+    }
+
+    .footer {
+      padding: 4em 0;
+      color: #fff;
+      background: #e67e22;
+      margin-top: 3em;
+    }
+
+    .footer p {
+      text-align: center;
+    }
+
+    .social {
+      text-align: center;
+      margin-left: -2em;
+    }
+
+    .social > li {
+      list-style: none;
+      display: inline-block;
+      margin: 0 1.0em;
     }
   </style>
 </head>
 <body>
-  <p>обо мне.</p>
-  <img src="https://i.imgur.com/sy08mXh.png">
-  <h2 class="right">Меня зовут Иван</h2>
-  <h2 class="right2">живу в Пензе</h2>
-  <h2 class="right3">Увлекаюсь монтированием видео и кодингом</h2>
-  <h1 class="itsnotme"> </h1>
-  <a class="github" href="https://github.com/entitybtw"><img src="https://i.imgur.com/GNGZltH.png" alt="my github" style="width:35px;height:auto;"></a>
+  <header class="header">
+    <div>
+      <p class="header-intro">Hi, I'm</p>
+      <h1 class="header-name">entitybtw</h1>
+    </div>
+  </header>
+
+  <section class="about">
+    <h2>Introduction</h2>
+    <p> Hi, I'm a technofreak, designer, currently learing python</p>
+
+  </section>
+
+  <section class="questions">
+    <h2>More about me</h2>
+    <h3>Where am I from?</h3>
+    <p>I'm from Russia, Penza town</p>
+
+    <h3>My hobby</h3>
+    <p>Coding.</p>
+
+    <h3>What music have you been listening to?</h3>
+    <p>breakcore</p>
+  </section>
+
+  <footer class="footer">
+    <p>You can find out a bit more about me in these places</p>
+    <ul class="social">>
+      <li><a href="https://github.com/entitybtw" target="_blank">Github</li>
+    </ul>
+  </footer>
 </body>
 </html>
