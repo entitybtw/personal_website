@@ -2,251 +2,271 @@
 <html>
 <head>
   <style>
-
-
-    /* fontawesome */
-    [class*="fontawesome-"]:before {
-      font-family: 'FontAwesome', sans-serif;
-    }
-
-    /* BASE HTML ======================== */
-
+    /* ENTIRE DOCUMENT */
+    /* Styling for the whole page */
     body {
-      margin:0;
-      padding:0;
-      font-family: "Open Sans", "Helvetica Neue", sans-serif;
+      /* Layout declarations */
+      margin: 0 auto;
+      /* Typography declarations */
+      font-size: 62.5%;
+      font-family: "Muli", "Helvetica Neue", "Arial", "sans-serif";
+      font-weight: 300;
+      color: #EDEDED;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* HEADER */
+    .masthead {
+      /* Layout declarations */
+      background: url("https://i.imgur.com/fcjkUuH.png") no-repeat fixed center;
+      background-size: cover;
+      padding: 1em 2em;
+      border-top: 8px solid #EDEDED;
+      text-align: center;
+      text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                   0px 8px 13px rgba(0,0,0,0.1),
+                   0px 18px 23px rgba(0,0,0,0.1);
+      /* Typography declarations */
+      font-size: 4em;
+    }
+
+    .masthead-intro {
+      margin: 2em 0 0 0;
+    }
+
+    .masthead-heading {
+      /* Typography declarations */
+      font-size: 10rem;
+      /* Layout declarations */
+      padding: 0;
+      margin: 0 0 1em;
+    }
+
+    /* BODY */
+    /* General styling for the three sections of the body */
+    section {
+      /* Layout declarations */
+      max-width: 50em;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 3em;
+    }
+
+    /* Gradient that runs through the body */
+    .gradient {
+      padding: 10em;
+      /* can be treated like a fallback */
+      background-color: #000000;;
+      /* will be "on top", if browser supports it */
+      background-image: linear-gradient(#000000, #262626);
+    }
+
+    /* The h2 tags are the main categories */
+    h2 {
+      /* Typography declarations */
+      font-size: 4em;
+    }
+
+    /* The h3 tags are the additional questions */
+    h3 {
+      /* Typography declarations */
+      font-style: italic;
+      font-size: 2.5em;
+    }
+
+    /* The p tags that are descendants of the section tags are the answers */
+    section p {
+      /* Typography declarations */
+      font-size: 2em;
+      line-height: 1.3em;
+    }
+
+    /* This class is included in the last p tag of each section to create more space */
+    .space-maker {
+      /* Layout declarations */
+      margin-bottom: 3em;
+    }
+
+    /* FOOTER */
+    .content-footer {
+      /* Layout declarations */
+      background: #000000;
+      padding: 10em;
+      border-bottom: 8px solid #EDEDED;
+    }
+
+    .content-footer > p {
+      /* Layout declarations */
+      line-height: 1.3em;
+      text-align: center;
+      /* Typography declarations */
+      font-size: 2em;
+    }
+
+    .social {
+      /* Layout declarations */
+      text-align: center;
+      padding: 0;
+    }
+
+    .social > li {
+      /* Layout declarations */
+      display: inline-block;
+      line-height: 1.3em;
+      margin-right: 2em;
+      /* Typography declarations */
+      font-size: 2em;
+    }
 
     a {
-      color:#1e6184;
-      text-decoration:none;
+      /* Typography declarations */
+      color: #EDEDED;
+      text-decoration: none;
     }
 
     a:hover {
-      color:#108fd1;
+      /* Layout declarations */
+      color: #262626;
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      -ms-transition: all 0.2s ease;
+      -o-transition: all 0.2s ease;
+      transition: all 0.2s ease;
     }
 
-    h2 {
-      font-size:2.1rem;
-      margin:0 0 1rem 0;
-      padding:0;
-      line-height:1em;  
+    .social li:last-child {
+      /* Layout declarations */
+      margin-right: 0;
     }
 
-    h3 {
-      font-size:1.5rem;
-      margin:0 0 .3rem 0;
-      padding:0;
-      line-height:1em;  
+    /* Responsive design */
+    @media only screen and (max-width: 500px) {
+      /* HEADER */
+      .masthead {
+        padding: 1em;
+      }
+
+      .masthead-intro {
+        font-size: 1.5rem;
+      }
+
+      .masthead-heading {
+        font-size: 4rem;
+      }
+
+      /* BODY */
+      .gradient {
+        padding: 5em;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      section p {
+        font-size: 1rem;
+      }
+
+      /* FOOTER */
+      .content-footer {
+        padding: 4em;
+      }
+
+      .social > li {
+      /* Layout declarations */
+      display: block;
+      margin-right: 0;
+      }
+
+      a {
+        line-height: 3em;
+      }
+
+      .content-footer p a {
+        line-height: 0;
+      } 
     }
 
-    p {
-      margin:0 0 1.8rem 0;
-      font-size:1.3rem;
-      color:#666;
-      font-weight:200;
+      /* FOOTER */
+    @media only screen and (max-width: 344px) {
+      .content-footer p a {
+        line-height: 3em;
+      }
     }
-
-
-    .lead {
-      font-size:1.9rem;
-      font-weight:100;
-    }
-
-    ol, ul {
-      margin-bottom:1.9rem;
-    }
-
-    ol ol, ul ul{
-      margin-bottom:1rem;
-    }
-
-    ol li,
-    ul li {
-      font-size:1.3rem;
-      color:#666;
-      font-weight:200;
-    }
-
-    li li {
-      font-size: 1rem;
-    }
-
-
-    /* HEADER HTML ======================== */
-    header {
-      margin:0;
-      padding:.1rem;
-      text-align:left;
-      height:25rem;
-      position: relative;
-
-      background: #ba711e;
-      border-bottom:.7rem solid rgba(10,12,23, 1); 
-
-    }
-
-
-    h1 {
-       /*Fall hex back colors */
-       background:#000;
-       border-top:.1rem solid #000;
-       border-bottom:.1rem solid #000;
-       color:#fff;
-       font-size:1.1rem;
-       font-weight:300;
-       line-height:1.1rem;
-       background:rgba(10,12,23, .5);
-       padding:1.2rem 0;
-       text-shadow: 0 .1rem .4rem rgba(10,12,23, 1);
-       text-indent: .35rem;
-       border-top:.1rem solid rgba(10,12,23,.5);
-       border-bottom:.1rem solid rgba(10,12,23,.5);
-       position: absolute; 
-       bottom: -1rem;
-       left:0;
-       right: 0; 
-       padding-left:3rem;
-       padding-right:0;
-    }
-
-    h1 span.masthead-heading {
-      display:block;
-    }
-
-    h1 em {
-      display:block;
-      text-indent: 0;
-      font-style: inherit;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-size:4.6rem;
-      font-weight:800;
-      line-height:.9em;
-      padding:0rem;
-    }
-
-    section {
-      padding:3rem 3.5rem 1rem;
-      border-bottom:1px dotted #ddd;
-    }
-
-
-    .introduction-section,
-    .location-section,
-    .questions-section,
-    .masthead-heading {
-      max-width: 38em;
-      margin-left: auto;
-      margin-right: auto;
-      display:block;
-    }
-
-
-    footer {
-      padding:.8rem 3.5rem 4rem 3.5rem;
-      max-width: 38rem;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-
-    footer p {
-      font-size:.8em;
-      line-height:1.4em;
-    }
-
-    footer .social {
-      display:inline;
-      text-transform:uppercase;
-    }
-
-    footer ul {
-      display:inline;
-      font-size:.8rem;
-      list-style:none;
-      padding:0;
-      text-transform:uppercase;
-    }
-
-    footer ul li {
-      font-size:1em;
-      display:inline;
-      padding:0 .5rem;
-    }
-
-
-    @media only screen and (max-width: 768px) {
-
-        header {
-          height:600px;
+        ol li,
+        ul li {
+          font-size:1.3rem;
+          color:#666;
+          font-weight:200;
         }
 
-        .masthead {
-            padding: 3em 0;
+        li li {
+          font-size: 1rem;
         }
-
-        h1 {
-           text-indent: 0;
-        }
-
-        h1 span.masthead-heading {
-          font-size:1.2rem;
-          line-height:1.2rem;
-        }
-
-        h1 span.masthead-heading em {
-          font-size:3rem;
-          text-indent:-.1rem;
-        }
-    }
   </style>
 </head>
 <body>
-  <header>
-    <h1><span class="masthead-heading">Hi! I am <em>entitybtw</em></span></h1>
+  <!-- Header (SECTION 1/3) -->
+  <header class="masthead">
+    <p class="masthead-intro">Hi, I'm</p>
+    <h1 class="masthead-heading">entitybtw</h1>
   </header>
-  <section class="introduction-section">  
-    <p class="lead">Editor and technofreak.</p>
+
+  <!-- the div is used to apply the gradient -->
+  <div class="gradient">
+  <!-- Body (SECTION 2/3) -->
+  <section>
+    <h2>editor and technofreak.</h2>
   </section>
-  <section class="location-section">  
-    <h2>Where are you from?</h2>
-    <p>I am from Russia, Penza.</p>
+
+  <section>
+    <h2>Where I'm From</h2>
+      <p class="space-maker">I'm from Russia, Penza.</p>
   </section>
-  <section class="questions-section">  
+
+  <section>
     <h2>More About Me</h2>
-
     <h3>What are your favorite hobbies?</h3>
-    <ul>
-      <li>Designing.</li>
-      <li>Editing.</li>
-      <li>Coding.</li>
-    </ul>
-
-    <h3>What music have you been listening to lately?</h3>
-    <ul>
-      <li>breakcore
-        <ul>
-          <li><a href="https://www.youtube.com/watch?v=7Pio2igbPC8&t=254s" target="_blank">rush da planet</a></li>
-          <li><a href="https://www.youtube.com/watch?v=28bf2bSSmuU" target="_blank">White Out - 1080° Snowboarding </a></li>
-        </ul>
-      </li>
-      <li>femtanyl
-        <ul>
-          <li><a href="https://www.youtube.com/watch?v=62RGOaAL-UI" target="_blank">LOVESICK, CANNIBAL!</a></li>
-          <li><a href="https://www.youtube.com/watch?v=B3w7rF0rSn4" target="_blank">DINNER!</a></li>
-        </ul>        
-      </li>       
-      </li>
-    <ul>
-
+    <p>
+      Designing.</p>
+    <p>
+      Editing.</p>
+      <p>
+      Coding.</p>
+          <h3>Pc specs:</h3>
+      <p>CPU: Intel(R) Core(TM) i9-10850k CPU @ 3.60Ghz (after overclock 4.90Ghz)</p>
+      <p>GPU: Geforce RTX 3060 (overclocked by me)</p>
+    <p>RAM: 16 GB Model: F4-3600C16-16GTZNC, 16 GB Model: F4-3600C16-16GTZNC (total - 32 gb ram)</p>
+      <h3>What music have you been listening to lately?</h3>
+      <ul>
+        <li>breakcore
+          <ul>
+            <li><a href="https://www.youtube.com/watch?v=7Pio2igbPC8&t=254s" target="_blank">rush da planet</a></li>
+            <li><a href="https://www.youtube.com/watch?v=28bf2bSSmuU" target="_blank">White Out - 1080° Snowboarding </a></li>
+          </ul>
+        </li>
+        <li>femtanyl
+          <ul>
+            <li><a href="https://www.youtube.com/watch?v=62RGOaAL-UI" target="_blank">LOVESICK, CANNIBAL!</a></li>
+            <li><a href="https://www.youtube.com/watch?v=B3w7rF0rSn4" target="_blank">DINNER!</a></li>
+          </ul>        
+        </li>       
+        </li>
+      <ul>
   </section>
-  <footer>
-    <p class="social">my socials:</p>
+  </div>
+
+  <!-- Footer (SECTION 3/3) -->
+  <footer class="content-footer">
+    <p>my socials:</p>
     <ul class="social">
-      <li><a href="https://github.com/entitybtw" class="fontawesome-github-alt">&nbsp;&nbsp;GitHub</a></li>
-      <li><a href="https://steamcommunity.com/id/entitybtw/" class="fontawesome-Steam-alt">&nbsp;&nbsp;Steam</a></li>
-   </ul>
+      <li><a href="https://github.com/entitybtw" target=_Blank>Github</a></li>
+      <li><a href="https://steamcommunity.com/id/entitybtw/" id="check2" target=_Blank>Steam</a></li>
+    </ul>
+  </footer>
 </body>
 </html>
