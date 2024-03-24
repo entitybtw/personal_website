@@ -266,6 +266,27 @@
         li li {
           font-size: 1rem;
         }
+    /* Стили для кнопки */
+    button {
+      background-color: transparent;
+      border: 2px solid #EDEDED;
+      color: #EDEDED;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 2em;
+      font-family: "Muli", "Helvetica Neue", "Arial", "sans-serif";
+      font-weight: 300;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #EDEDED;
+      color: #1a1a1e;
+    }
+
   </style>
 </head>
 <body>
@@ -306,7 +327,9 @@
   <!-- Footer (SECTION 3/3) -->
   <footer class="content-footer">
     <ul class="social">
-      <li><a href="http://socials.entitybtw.ru" target=_Blank>my socials</a></li>
+      <a href="https://socials.entitybtw.ru" target="_blank">
+        <button>My socials</button>
+      </a>
     </ul>
   </footer>
 </body>
