@@ -286,48 +286,74 @@
       background-color: #EDEDED;
       color: #1a1a1e;
     }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
+    .fade-in {
+      animation: fadeIn 1s ease-out;
+    }
+    @keyframes fadein {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fade-in {
+      animation: fadeIn 1s ease-out;
+    }
   </style>
 </head>
-<body>
+<body class="fade-in">
   <!-- Header (SECTION 1/3) -->
   <header class="masthead">
-    <p class="masthead-intro">Hi, I'm</p>
-    <h1 class="masthead-heading">entitybtw</h1>
+    <p class="masthead-intro fade-in">Hi, I'm</p>
+    <h1 class="masthead-heading fade-in">entitybtw</h1>
   </header>
 
   <!-- the div is used to apply the gradient -->
   <div class="gradient">
   <!-- Body (SECTION 2/3) -->
   <section>
-    <h2>editor and technofreak.</h2>
+    <h2 class="fade-in">editor and technofreak.</h2>
   </section>
 
   <section>
-    <h2>🌎 where I'm from</h2>
-      <p class="space-maker">I'm from Russia, Penza.</p>
+    <h2 class="fade-in">🌎 where I'm from</h2>
+      <p class="space-maker fade-in">I'm from Russia, Penza.</p>
   </section>
 
   <section>
-    <h2>more about me .-.</h2>
-    <h3>📲 what are your favorite hobbies?</h3>
-    <p>
+    <h2 class="fade-in">more about me .-.</h2>
+    <h3 class="fade-in">📲 what are your favorite hobbies?</h3>
+    <p class="fade-in">
       Designing.</p>
-    <p>
+    <p class="fade-in">
       Editing.</p>
-      <p>
+      <p class="fade-in">
       Coding.</p>
-          <h3>💻 pc specs:</h3>
-      <p>CPU: Intel(R) Core(TM) i9-10850k CPU @ 3.60Ghz (after overclock 4.90Ghz)</p>
-      <p>GPU: Geforce RTX 3060 (overclocked by me)</p>
-    <p>RAM: 16 GB Model: F4-3600C16-16GTZNC, 16 GB Model: F4-3600C16-16GTZNC (total - 32 gb ram)</p>
+          <h3 class="fade-in">💻 pc specs:</h3>
+      <p class="fade-in">CPU: Intel(R) Core(TM) i9-10850k CPU @ 3.60Ghz (after overclock 4.90Ghz)</p>
+      <p class="fade-in">GPU: Geforce RTX 3060 (overclocked by me)</p>
+    <p class="fade-in">RAM: 16 GB Model: F4-3600C16-16GTZNC, 16 GB Model: F4-3600C16-16GTZNC (total - 32 gb ram)</p>
   </section>
   </div>
 
   <!-- Footer (SECTION 3/3) -->
   <footer class="content-footer">
     <ul class="social">
-      <a href="https://socials.entitybtw.ru" target="_blank">
+      <a class="fade-in" href="https://socials.entitybtw.ru" target="_blank">
         <button>My socials</button>
       </a>
     </ul>
