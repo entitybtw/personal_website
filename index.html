@@ -23,15 +23,7 @@
 </style>
 </head>
 <body>
-<div id="content"></div>
-
-<script>
-  // Проверяем User-Agent
-  const userAgent = navigator.userAgent;
-
-  if (/curl/i.test(userAgent)) {
-      // Контент для CURL
-      document.getElementById('content').innerHTML = `
+<noscript>
 <pre>
 ╔════════════════════════════════════════════════════╗
 ║                      entitybtw                    ║
@@ -49,13 +41,10 @@
 ║ Roblox: @ejrjmjjj                                 ║
 ║ Website: entitybtw.ru                             ║
 ╚════════════════════════════════════════════════════╝
-</pre>`;
-  } else {
-      // Встроенный iframe для браузеров
-      document.getElementById('content').innerHTML = `
-          <iframe src="https://bento.me/entitybtw" id="ifr" frameborder="0"></iframe>
-      `;
-  }
-</script>
+</pre>
+</noscript>
+<div id="content">
+  <iframe src="https://bento.me/entitybtw" id="ifr" frameborder="0"></iframe>
+</div>
 </body>
 </html>
