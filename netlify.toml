@@ -1,7 +1,7 @@
 [build]
-  functions = "functions"  # Убедитесь, что эта папка правильно указана
+  functions = "functions"  # Папка для функций
 
 [[redirects]]
-  from = "/*"
+  from = "/"
   to = "/.netlify/functions/entitybtw"
   status = 200
