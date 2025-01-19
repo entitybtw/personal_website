@@ -1,10 +1,6 @@
 exports.handler = async (event) => {
-    // Получаем заголовок User-Agent
     const userAgent = event.headers['user-agent'] || '';
-
-    // Проверяем, содержит ли User-Agent слово "curl"
-    if (userAgent.toLowerCase().includes('curl')) {
-        // Возвращаем ASCII-арт для клиентов вроде curl
+    if (userAgent.toLowerCase().includes('curl') || userAgent.toLowerCase().includes('wget')) {
         return {
             statusCode: 200,
             headers: { 'Content-Type': 'text/plain; charset=utf-8' },
@@ -25,10 +21,9 @@ exports.handler = async (event) => {
 ║ Roblox:              @ejrjmjjj                     ║
 ║ Website:             entitybtw.ru                  ║
 ╚════════════════════════════════════════════════════╝
-            ` + '\n'  // добавляем символ новой строки в конце
+            ` + '\n',
         };
     } else {
-        // Для всех остальных делаем редирект на блог
         return {
             statusCode: 301,
             headers: {
