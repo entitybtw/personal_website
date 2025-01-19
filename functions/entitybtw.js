@@ -13,7 +13,7 @@ exports.handler = async (event) => {
                        :+-.==-=-        github: @entitybtw                   
          .-=-          *-    :**..     	twitch: @entitybtw_                  
          +###=        -* .    -#:.      youtube: @entitybtw                    
-	      -==.        *#-::::.-#+.      last fm: @entitybtw                  
+          -==.        *#-::::.-#+.      last fm: @entitybtw                  
           :=-.       :%#=---::*%%-      discord: @entitybtw                   
         .     ..      ::-:::.=+*=       minecraft: @entitybtw                  	
         -.....-:.      ... .:.:+.       steam: @entitybtw              
