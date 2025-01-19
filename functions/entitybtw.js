@@ -5,23 +5,31 @@ exports.handler = async (event) => {
             statusCode: 200,
             headers: { 'Content-Type': 'text/plain; charset=utf-8' },
             body: `
-╔════════════════════════════════════════════════════╗
-║                  entitybtw                         ║
-╠════════════════════════════════════════════════════╣
-║             psp-dev, technofreak                   ║
-╠════════════════════════════════════════════════════╣
-║ Telegram:            @entitybtw                    ║
-║ Github:              @entitybtw                    ║
-║ Twitch:              @entitybtw_                   ║
-║ Youtube:             @entitybtw                    ║
-║ Last FM:             @entitybtw                    ║
-║ Discord:             @entitybtw                    ║
-║ Minecraft:           @entitybtw                    ║
-║ Steam:               @entitybtw                    ║
-║ Roblox:              @ejrjmjjj                     ║
-║ Website:             entitybtw.ru                  ║
-╚════════════════════════════════════════════════════╝
-            ` + '\n',
+                            . ­       	              	      	      	    
+                          -#*#*.       	entitybtw | psp-dev & technofreak                    
+                         :#*+*#=       	──────────────────────────────────             	
+                          =++*=         os: gentoo linux                                      
+                         .:*#+         	telegram: @entitybtw                  	
+                       :+-.==-=-        github: @entitybtw                   
+         .-=-          *-    :**..     	twitch: @entitybtw_                  
+         +###=        -* .    -#:.      youtube: @entitybtw                    
+	      -==.        *#-::::.-#+.      last fm: @entitybtw                  
+          :=-.       :%#=---::*%%-      discord: @entitybtw                   
+        .     ..      ::-:::.=+*=       minecraft: @entitybtw                  	
+        -.....-:.      ... .:.:+.       steam: @entitybtw              
+        =.....:+:     .==----+%@#.      roblox: @ejrjmjjj                     
+       .=....:.--     :+###%####.       website: entitybtw.ru   	      	     
+       .:...:::::     +***##****.       blog: blog.entitybtw.ru                               
+       .=:*****=:    .***####***
+         =@@%%%%*    +*### -###*
+         =@@: *@%    +###:  ###+
+         +@*  :%@.   =##=   ###:
+        .@@.   #@.  :#%#    ##+
+        -@%    #@=  *##+   :##*.
+       =%=     -@=.+==-     :*#
+                =:..         .=.
+                              ..
+            `,
         };
     } else {
         return {
