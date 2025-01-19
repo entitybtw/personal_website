@@ -1,0 +1,7 @@
+[build]
+  functions = "functions"  # Убедитесь, что эта папка правильно указана
+
+[[redirects]]
+  from = "/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
