@@ -5,9 +5,3 @@
   from = "/"
   to = "/.netlify/functions/entitybtw"
   status = 200
-
-[[redirects]]
-  from = "/:splat"
-  to = "https://redirect.entitybtw.ru/:splat"
-  status = 301
-  force = true
