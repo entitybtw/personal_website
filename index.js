@@ -10,13 +10,20 @@ exports.handler = async (event) => {
             headers: { 'Content-Type': 'text/plain; charset=utf-8' },
             body: `
 ╔════════════════════════════════════════════════════╗
-║                  Pavel V. Zhovner                  ║
+║                  entitybtw                         ║
 ╠════════════════════════════════════════════════════╣
-║ Email:               pavel@zhovner.com             ║
-║ Phone:               +1 510 972-83-59              ║
-║ Telegram:            @zhovner                      ║
-║ SSH key:             https://zhovner.com/pub.txt   ║
-║ PGP key:             https://zhovner.com/pgpkey.txt║
+║             editor and technofreak                 ║
+╠════════════════════════════════════════════════════╣
+║ Telegram:            @entitybtw                    ║
+║ Github:              @entitybtw                    ║
+║ Twitch:              @entitybtw_                   ║
+║ Youtube:             @entitybtw                    ║
+║ Last FM:             @entitybtw                    ║
+║ Discord:             @entitybtw                    ║
+║ Minecraft:           @entitybtw                    ║
+║ Steam:               @entitybtw                    ║
+║ Roblox:              @ejrjmjjj                     ║
+║ Website:             entitybtw.ru                  ║
 ╚════════════════════════════════════════════════════╝
             `,
         };
@@ -25,7 +32,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 301,
             headers: {
-                Location: 'https://blog.zhovner.com',
+                Location: 'https://slat.cc/entitybtw',
             },
         };
     }
