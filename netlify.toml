@@ -2,6 +2,6 @@
   functions = "functions"
 
 [[redirects]]
-  from = "/*"
+  from = "/"
   to = "/.netlify/functions/entitybtw"
   status = 200
