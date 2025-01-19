@@ -12,7 +12,7 @@ exports.handler = async (event) => {
 ╔════════════════════════════════════════════════════╗
 ║                  entitybtw                         ║
 ╠════════════════════════════════════════════════════╣
-║             editor and technofreak                 ║
+║             psp-dev, technofreak                   ║
 ╠════════════════════════════════════════════════════╣
 ║ Telegram:            @entitybtw                    ║
 ║ Github:              @entitybtw                    ║
