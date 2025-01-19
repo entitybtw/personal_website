@@ -29,7 +29,7 @@ exports.handler = async (event) => {
        =%=     -@=.+==-     :*#
                 =:..         .=.
                               ..
-            `,
+            ` + '\n',
         };
     } else {
         return {
