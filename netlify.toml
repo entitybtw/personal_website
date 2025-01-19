@@ -2,6 +2,6 @@
   functions = "functions"  # Убедитесь, что эта папка правильно указана
 
 [[redirects]]
-  from = "/functions/*"
-  to = "/.netlify/functions/:splat"
+  from = "/"
+  to = "/.netlify/functions/entitybtw"
   status = 200
