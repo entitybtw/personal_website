@@ -8,7 +8,7 @@ exports.handler = async (event) => {
                             . ­       	              	      	      	    
                           -#*#*.       	entitybtw | psp-dev & technofreak                    
                          :#*+*#=       	──────────────────────────────────             	
-                          =++*=         os: gentoo linux                                      
+                          =++*=         os: bedrock linux                                      
                          .:*#+         	telegram: @entitybtw                  	
                        :+-.==-=-        github: @entitybtw                   
          .-=-          *-    :**..     	twitch: @entitybtw_                  
@@ -20,7 +20,7 @@ exports.handler = async (event) => {
         =.....:+:     .==----+%@#.      roblox: @ejrjmjjj                     
        .=....:.--     :+###%####.       website: entitybtw.ru   	      	     
        .:...:::::     +***##****.       blog: blog.entitybtw.ru                               
-       .=:*****=:    .***####***
+       .=:*****=:    .***####***        donate: donate.entitybtw.ru
          =@@%%%%*    +*### -###*
          =@@: *@%    +###:  ###+
          +@*  :%@.   =##=   ###:
