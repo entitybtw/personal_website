@@ -1,9 +1,0 @@
-{
-  "name": "entitybtw's website",
-  "dependencies": {
-    "express": "^4.18.2"
-  },
-  "engines": {
-    "node": ">=18.x"
-  }
-}
