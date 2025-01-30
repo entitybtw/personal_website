@@ -1,0 +1,7 @@
+[build]
+  functions = "functions"
+
+[[redirects]]
+  from = "/"
+  to = "/.netlify/functions/entitybtw"
+  status = 200
