@@ -4,50 +4,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>w4ssup ch4t</title>
     <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --header-bg: #f0f0f0;
+            --border-color: #ccc;
+            --link-color: #0000ff;
+        }
+
+        body.dark {
+            --bg-color: #1e1e1e;
+            --text-color: #f5f5f5;
+            --header-bg: #2c2c2c;
+            --border-color: #444;
+            --link-color: #00bfff;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #333333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
         }
+
         header {
             text-align: center;
             padding: 20px;
-            background-color: #f0f0f0;
-            border-bottom: 2px solid #ccc;
+            background-color: var(--header-bg);
+            border-bottom: 2px solid var(--border-color);
         }
+
         h1 {
             font-size: 2em;
-            color: #0000ff;
+            color: var(--link-color);
         }
+
         main {
             max-width: 800px;
             margin: 20px auto;
             padding: 10px;
         }
+
         section {
             margin-bottom: 20px;
         }
+
         a {
-            color: #0000ff;
+            color: var(--link-color);
             text-decoration: none;
         }
+
         footer {
             text-align: center;
             padding: 10px;
-            background-color: #f0f0f0;
-            border-top: 2px solid #ccc;
+            background-color: var(--header-bg);
+            border-top: 2px solid var(--border-color);
         }
+
         .lang-switcher {
             margin-top: 10px;
             text-align: center;
         }
-        .lang-link {
+
+        .lang-link, .theme-toggle {
             font-family: "Courier New", monospace;
             font-size: 14px;
             margin: 0 5px;
             cursor: pointer;
+        }
+
+        .theme-toggle {
+            color: var(--link-color);
         }
     </style>
 </head>
@@ -57,7 +85,8 @@
         <h1 data-lang="en" style="display:none;">welcome to entitybtw's website o_O</h1>
         <div class="lang-switcher">
             <a class="lang-link" onclick="switchLang('ru')">rus</a> | 
-            <a class="lang-link" onclick="switchLang('en')">eng</a>
+            <a class="lang-link" onclick="switchLang('en')">eng</a> |
+            <a class="theme-toggle" onclick="toggleTheme()">theme</a>
         </div>
     </header>
     <main>
@@ -125,6 +154,10 @@
             elements.forEach(el => {
                 el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
             });
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
         }
     </script>
 </body>
