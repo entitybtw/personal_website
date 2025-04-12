@@ -1,96 +1,161 @@
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>w4ssup ch4t</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #ffffff;
             color: #333333;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
+
         header {
             text-align: center;
             padding: 20px;
             background-color: #f0f0f0;
             border-bottom: 2px solid #ccc;
         }
+
         h1 {
             font-size: 2em;
             color: #0000ff;
         }
+
         main {
-            max-width: 800px;
+            width: 800px;
             margin: 20px auto;
             padding: 10px;
         }
+
         section {
             margin-bottom: 20px;
         }
+
         a {
             color: #0000ff;
             text-decoration: none;
         }
+
         footer {
             text-align: center;
             padding: 10px;
             background-color: #f0f0f0;
             border-top: 2px solid #ccc;
         }
+
+        .lang-switcher {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .lang-link {
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        img {
+            image-rendering: crisp-edges;
+        }
+
+        section img {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 850px) {
+            body {
+                zoom: 100%;
+            }
+            main {
+                width: 800px;
+                overflow-x: auto;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>добро пожаловать на сайт энтитибтв o_O</h1>
+        <h1 data-lang="ru">добро пожаловать на сайт энтитибтв o_O</h1>
+        <h1 data-lang="en" style="display:none;">welcome to entitybtw's website o_O</h1>
+        <div class="lang-switcher">
+            <a class="lang-link" onclick="switchLang('ru')">rus</a> | 
+            <a class="lang-link" onclick="switchLang('en')">eng</a>
+        </div>
     </header>
     <main>
-          <a href="https://limppumpo.bandcamp.com/album/limp-pumpo-full-discography">
-        <img src="/images/limppumpo.webp" align="right" width="250" height="300"  />
-    </a>
+        <a href="https://limppumpo.bandcamp.com/album/limp-pumpo-full-discography">
+            <img src="/images/limppumpo.webp" align="right" width="250" height="300" style="object-fit: cover;" />
+        </a>
         <section>
-        <a href="https://www.youtube.com/@entitybtw">
-        <img src="/images/youtube.png" width="35" height="35" >
-        </a>
-        <a href="https://www.last.fm/user/entitybtw">
-        <img src="/images/lastfm.png" width="35" height="35" >
-        </a>
-        <a href="https://github.com/entitybtw">
-        <img src="/images/github.png" width="35" height="35" >
-        </a>
-        <a href="https://pay.cloudtips.ru/p/91e08124">
-        <img src="/images/cloudtips.webp" width="35" height="35" >
-        </a>
-        <a href="https://www.roblox.com/users/1507038183/profile">
-        <img src="/images/roblox.png" width="35" height="35" >
-        </a>
-        <a href="https://steamcommunity.com/id/entitybtw/">
-        <img src="/images/steam.webp" width="35" height="35" >
-        </a>
-        <a href="https://ru.namemc.com/profile/entitybtw.1">
-        <img src="/images/namemc.webp" width="35" height="35" >
-        </a>
-      </section>
-        <section>
-            <h2>обо мне</h2>
-            <p>> меня зовут ваня, никнейм entitybtw</p>
-            <p>> мне 13 лет</p>
-            <p>> занимаюсь разработкой различных хомбрюшек</p>
-            <p>> я технофрик, линукс юзер</p>
+            <a href="https://www.youtube.com/@entitybtw">
+                <img src="/images/youtube.png">
+            </a>
+            <a href="https://www.last.fm/user/entitybtw">
+                <img src="/images/lastfm.png">
+            </a>
+            <a href="https://github.com/entitybtw">
+                <img src="/images/github.png">
+            </a>
+            <a href="https://pay.cloudtips.ru/p/91e08124">
+                <img src="/images/cloudtips.webp">
+            </a>
+            <a href="https://www.roblox.com/users/1507038183/profile">
+                <img src="/images/roblox.png">
+            </a>
+            <a href="https://steamcommunity.com/id/entitybtw/">
+                <img src="/images/steam.webp">
+            </a>
+            <a href="https://ru.namemc.com/profile/entitybtw.1">
+                <img src="/images/namemc.webp">
+            </a>
         </section>
         <section>
-            <h2>мои крутые проекты</h2>
-            <p><a href="https://github.com/entitybtw/pspfetch">pspfetch</a> -> фетч программка для псп на луа</p>
-            <p><a href="https://github.com/entitybtw/mcsm_portable">mcsm_portable</a> -> порт игры minecraft story mode на псп основанный на netflix версии игры (разработкой которого занимаюсь в данный момент)</p>
+            <h2 data-lang="ru">обо мне</h2>
+            <h2 data-lang="en" style="display:none;">about me</h2>
+            <p data-lang="ru">> меня зовут ваня, никнейм entitybtw</p>
+            <p data-lang="en" style="display:none;">> my name is vanya, nickname entitybtw</p>
+            <p data-lang="ru">> мне 13 лет</p>
+            <p data-lang="en" style="display:none;">> i’m 13 years old</p>
+            <p data-lang="ru">> занимаюсь разработкой различных хомбрюшек</p>
+            <p data-lang="en" style="display:none;">> i make various homebrew stuff</p>
+            <p data-lang="ru">> я технофрик, линукс юзер</p>
+            <p data-lang="en" style="display:none;">> i’m a technofreak, linux user</p>
+        </section>
+        <section>
+            <h2 data-lang="ru">мои крутые проекты</h2>
+            <h2 data-lang="en" style="display:none;">my cool projects</h2>
+            <p data-lang="ru"><a href="https://github.com/entitybtw/pspfetch">pspfetch</a> -> фетч программка для псп на луа</p>
+            <p data-lang="en" style="display:none;"><a href="https://github.com/entitybtw/pspfetch">pspfetch</a> -> fetch app for psp written in lua</p>
+            <p data-lang="ru"><a href="https://github.com/entitybtw/mcsm_portable">mcsm_portable</a> -> порт игры minecraft story mode на псп основанный на netflix версии игры (разработкой которого занимаюсь в данный момент)</p>
+            <p data-lang="en" style="display:none;"><a href="https://github.com/entitybtw/mcsm_portable">mcsm_portable</a> -> port of minecraft story mode to psp based on the netflix version (currently working on it)</p>
         </section>
     </main>
     <footer>
         <p>&copy; 2025 entitybtw website</p>
-      <img src="/images/madeon.gif">
-      <img src="/images/anybrowser.png">
-      <img src="/images/computer.gif">
-      <img src="/images/eyes.gif">
+        <img src="/images/madeon.gif">
+        <img src="/images/anybrowser.png">
+        <img src="/images/computer.gif">
+        <img src="/images/eyes.gif">
     </footer>
+
+    <script>
+        function switchLang(lang) {
+            const elements = document.querySelectorAll('[data-lang]');
+            elements.forEach(el => {
+                el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+            });
+        }
+    </script>
 </body>
 </html>
