@@ -152,9 +152,30 @@
         </section>
     </main>
     <footer>
-        <a class="webring" href="https://webring.otomir23.me/32/prev">&lt; prev</a> 
-        <a class="webring" href="https://webring.otomir23.me/">webring</a> 
-        <a class="webring" href="https://webring.otomir23.me/32/next"> next &gt;</a> 
+<a class="webring" id="prev-link" href="#">← prev</a>
+<a class="webring" href="https://webring.otomir23.me/">webring</a>
+<a class="webring" id="next-link" href="#">next →</a>
+
+<script>
+
+  fetch(`https://webring.otomir23.me/32/data`)
+    .then(res => res.json())
+    .then(data => {
+      const prev = data.prev;
+      const next = data.next;
+
+      const prevLink = document.getElementById('prev-link');
+      const nextLink = document.getElementById('next-link');
+
+      prevLink.href = prev.url;
+      prevLink.innerHTML = `← ${prev.name}`;
+
+      nextLink.href = next.url;
+      nextLink.innerHTML = `${next.name} →`;
+    })
+    .catch(err => console.error('Webring fetch error:', err));
+</script>
+        
         <p>&copy; 2025 entitybtw website</p>
         <img src="/images/madeon.gif">
         <img src="/images/anybrowser.png">
