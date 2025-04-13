@@ -152,12 +152,13 @@
         </section>
     </main>
     <footer>
-<a class="webring" id="prev-link" href="#">&lt; prev</a> &nbsp; | &nbsp;
-<a class="webring" href="https://webring.otomir23.me/">[webring]</a> &nbsp; | &nbsp;
-<a class="webring" id="next-link" href="#">next &gt;</a>
+<div class="webring-wrapper">
+  <a class="webring" id="prev-link" href="#">&lt; prev</a>&nbsp;|&nbsp;
+  <a class="webring" href="https://webring.otomir23.me/">[webring]</a>&nbsp;|&nbsp;
+  <a class="webring" id="next-link" href="#">next &gt;</a>
+</div>
 
 <script>
-
   fetch(`https://webring.otomir23.me/32/data`)
     .then(res => res.json())
     .then(data => {
@@ -168,10 +169,10 @@
       const nextLink = document.getElementById('next-link');
 
       prevLink.href = prev.url;
-      prevLink.innerHTML = `< ${prev.name}`;
+      prevLink.innerHTML = `&lt; ${prev.name}`;
 
       nextLink.href = next.url;
-      nextLink.innerHTML = `${next.name} >`;
+      nextLink.innerHTML = `${next.name} &gt;`;
     })
     .catch(err => console.error('webring fetch error:', err));
 </script>
