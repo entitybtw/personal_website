@@ -168,10 +168,10 @@
       const nextLink = document.getElementById('next-link');
 
       prevLink.href = prev.url;
-      prevLink.innerHTML = `← ${prev.name}`;
+      prevLink.innerHTML = `< ${prev.name}`;
 
       nextLink.href = next.url;
-      nextLink.innerHTML = `${next.name} →`;
+      nextLink.innerHTML = `${next.name} >`;
     })
     .catch(err => console.error('webring fetch error:', err));
 </script>
