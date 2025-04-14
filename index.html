@@ -83,6 +83,16 @@
             cursor: pointer;
         }
 
+        .webring-wrapper {
+          display: flex;
+          justify-content: center; /* центр по горизонтали */
+          gap: 1rem; /* отступ между ссылками */
+          margin: 2rem 0; /* отступ сверху и снизу */
+          flex-wrap: wrap; /* если экран узкий — переносим */
+          text-align: center;
+        }
+
+
         .theme-toggle {
             color: var(--link-color);
         }
@@ -153,10 +163,12 @@
         </section>
     </main>
     <footer>
+<div class="webring-wrapper">
 <a class="webring" id="prev-link" href="https://webring.otomir23.me/32/prev">&lt; prev</a>
 <a class="webring" href="https://webring.otomir23.me/">[webring]</a>
 <a class="webring" id="next-link" href="https://webring.otomir23.me/32/next">next &gt;</a>
-
+</div>
+        
  <script>
  
    fetch(`https://webring.otomir23.me/32/data`)
