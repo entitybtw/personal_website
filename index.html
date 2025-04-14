@@ -85,6 +85,11 @@
         .theme-toggle {
             color: var(--link-color);
         }
+        footer .webring-container {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
     </style>
 </head>
 <body>
@@ -152,10 +157,12 @@
         </section>
     </main>
     <footer>
- <a class="webring" id="prev-link" href="#">&lt; prev</a>
- <a class="webring" href="https://webring.otomir23.me/">[webring]</a> 
- <a class="webring" id="next-link" href="#">next &gt;</a>
- 
+<div class="webring-container">
+<a class="webring" id="prev-link" href="#">&lt; prev</a>
+<a class="webring" href="https://webring.otomir23.me/">[webring]</a> 
+<a class="webring" id="next-link" href="#">next &gt;</a>
+</div>
+        
  <script>
  
    fetch(`https://webring.otomir23.me/32/data`)
