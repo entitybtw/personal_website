@@ -77,16 +77,21 @@
 
         .webring {
             display: inline-block;
-            justify-content: center;
-            text-align: center;
-            flex-wrap: wrap;
             font-family: "Courier New", monospace;
             font-size: 14px;
-            margin: 0 auto;
+            margin: 0;
             cursor: pointer;
         }
 
-
+        .webring-wrapper {
+          display: flex;
+          justify-content: center;
+          gap: 0.5rem;
+          margin: 2rem 0;
+          flex-wrap: wrap;
+          text-align: center;
+        }
+        
         .theme-toggle {
             color: var(--link-color);
         }
