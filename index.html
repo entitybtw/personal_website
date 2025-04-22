@@ -212,17 +212,14 @@
         document.body.classList.toggle('dark');
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('load', () => {
         const userLang = navigator.language || navigator.userLanguage;
-        if (userLang.startsWith('ru')) {
-            switchLang('ru');
-        } else {
-            switchLang('en');
-        }
-
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        const detectedLang = userLang.startsWith('ru') ? 'ru' : 'en';
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDark) {
             document.body.classList.add('dark');
         }
+        switchLang(detectedLang);
     });
 </script>
 </body>
