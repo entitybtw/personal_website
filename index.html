@@ -218,8 +218,7 @@
         const savedTheme = localStorage.getItem('theme');
 
         const lang = savedLang || ((navigator.language || navigator.userLanguage).startsWith('ru') ? 'ru' : 'en');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        const theme = savedTheme || 'light';
 
         if (theme === 'dark') document.body.classList.add('dark');
         switchLang(lang);
