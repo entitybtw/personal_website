@@ -5,151 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wassup chat</title>
     <style>
-:root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --header-bg: #f0f0f0;
-    --border-color: #ccc;
-    --link-color: #0000ff;
-    --accent1: #ff00cc;
-    --accent2: #00fff7;
-    --shadow: none;
-}
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --header-bg: #f0f0f0;
+            --border-color: #ccc;
+            --link-color: #0000ff;
+        }
 
-body.dark {
-    --bg-color: #181824;
-    --text-color: #f2f2f2;
-    --header-bg: #232336;
-    --border-color: #3d3d5c;
-    --link-color: #00fff7;
-    --accent1: #ff00cc;
-    --accent2: #00fff7;
-    --shadow: 0 0 8px #00fff7, 0 0 2px #ff00cc;
-}
+        body.dark {
+            --bg-color: #1e1e1e;
+            --text-color: #f5f5f5;
+            --header-bg: #2c2c2c;
+            --border-color: #444;
+            --link-color: #00bfff;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    background-image: repeating-linear-gradient(135deg, rgba(0,255,247,0.04) 0 2px, transparent 2px 40px),
-                      repeating-linear-gradient(225deg, rgba(255,0,204,0.04) 0 2px, transparent 2px 40px);
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
 
-header {
-    text-align: center;
-    padding: 20px;
-    background-color: var(--header-bg);
-    border-bottom: 2px solid var(--border-color);
-    box-shadow: var(--shadow);
-    border-radius: 0 0 12px 12px;
-}
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--header-bg);
+            border-bottom: 2px solid var(--border-color);
+        }
 
-h1 {
-    font-size: 2em;
-    color: var(--link-color);
-    text-shadow: 0 0 6px var(--accent2), 0 0 2px var(--accent1);
-    font-family: "Courier New", monospace;
-    letter-spacing: 2px;
-}
+        h1 {
+            font-size: 2em;
+            color: var(--link-color);
+        }
 
-main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 10px;
-    background: rgba(30,30,50,0.8);
-    border-radius: 12px;
-    border: 1.5px solid var(--border-color);
-    box-shadow: 0 0 16px 2px #18182466;
-}
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 10px;
+        }
 
-section {
-    margin-bottom: 20px;
-}
+        section {
+            margin-bottom: 20px;
+        }
 
-a {
-    color: var(--link-color);
-    text-decoration: underline;
-    transition: color 0.2s, text-shadow 0.2s;
-}
-a:hover, .theme-toggle:hover, .lang-link:hover {
-    color: var(--accent1);
-    text-shadow: 0 0 6px var(--accent2), 0 0 2px var(--accent1);
-}
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
 
-.lang-link, .theme-toggle {
-    font-family: "Courier New", monospace;
-    font-size: 14px;
-    margin: 0 5px;
-    cursor: pointer;
-    color: var(--link-color);
-    background: transparent;
-    border: none;
-    padding: 2px 6px;
-    border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
-}
-.lang-link:hover, .theme-toggle:hover {
-    background: var(--accent1);
-    color: #fff;
-}
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--header-bg);
+            border-top: 2px solid var(--border-color);
+        }
 
-.webring-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    text-align: center;
-    font-family: "Courier New", monospace;
-}
+        .lang-switcher {
+            margin-top: 10px;
+            text-align: center;
+        }
 
-.webring {
-    font-family: "Courier New", monospace;
-    font-size: 14px;
-    padding: 4px 8px;
-    text-align: center;
-    min-width: 80px;
-    background: rgba(30,30,50,0.85);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    box-shadow: var(--shadow);
-    color: var(--link-color);
-    transition: background 0.2s, color 0.2s;
-}
-.webring:hover {
-    background: var(--accent2);
-    color: #181824;
-}
+        .lang-link, .theme-toggle {
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
 
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: var(--header-bg);
-    border-top: 2px solid var(--border-color);
-    box-shadow: var(--shadow);
-    border-radius: 12px 12px 0 0;
-}
-footer img {
-    margin: 4px 2px;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 0 4px #00fff799;
-    background: #222;
-}
+        .webring-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+            font-family: "Courier New", monospace;
+        }
 
-section img, main img {
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    background: #232336;
-    box-shadow: 0 0 8px #ff00cc33;
-    margin: 4px;
-    transition: box-shadow 0.2s;
-}
-section img:hover, main img:hover {
-    box-shadow: 0 0 16px #00fff7, 0 0 8px #ff00cc;
-}
 
+        .webring {
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            padding: 4px 8px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+
+
+        .theme-toggle {
+            color: var(--link-color);
+        }
     </style>
 </head>
 <body>
