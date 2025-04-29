@@ -2,8 +2,8 @@
 <head>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="7b7ea54f-0e7d-4d1a-a7e7-cf0c910569f6"></script>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wassup chat</title>
     <style>
         :root {
@@ -69,13 +69,11 @@
             text-align: center;
         }
 
-        .lang-link,
-        .theme-toggle {
+        .lang-link, .theme-toggle {
             font-family: "Courier New", monospace;
             font-size: 14px;
             margin: 0 5px;
             cursor: pointer;
-            color: var(--link-color);
         }
 
         .webring-wrapper {
@@ -94,6 +92,10 @@
             text-align: center;
             min-width: 80px;
         }
+
+        .theme-toggle {
+            color: var(--link-color);
+        }
     </style>
 </head>
 <body>
@@ -101,7 +103,7 @@
         <h1 data-lang="ru">добро пожаловать на сайт энтитибтв o_O</h1>
         <h1 data-lang="en" style="display:none;">welcome to entitybtw's website o_O</h1>
         <div class="lang-switcher">
-            <a class="lang-link" onclick="switchLang('ru')">rus</a> |
+            <a class="lang-link" onclick="switchLang('ru')">rus</a> | 
             <a class="lang-link" onclick="switchLang('en')">eng</a> |
             <a class="theme-toggle" onclick="toggleTheme()">theme</a>
         </div>
@@ -112,31 +114,31 @@
         </a>
         <section>
             <a href="https://www.youtube.com/@entitybtw">
-                <img src="/images/youtube.png" width="35" height="35" />
+                <img src="/images/youtube.png" width="35" height="35">
             </a>
             <a href="https://www.last.fm/user/entitybtw">
-                <img src="/images/lastfm.png" width="35" height="35" />
+                <img src="/images/lastfm.png" width="35" height="35">
             </a>
             <a href="https://github.com/entitybtw">
-                <img src="/images/github.webp" width="35" height="35" />
+                <img class="themechanging" data-src-light="/images/github.webp" data-src-dark="/images/github_dark.webp" src="/images/github.webp" width="35" height="35">
             </a>
             <a href="https://pay.cloudtips.ru/p/91e08124">
-                <img src="/images/cloudtips.png" width="35" height="35" />
+                <img src="/images/cloudtips.png" width="35" height="35">
             </a>
             <a href="https://www.roblox.com/users/1507038183/profile">
-                <img src="/images/roblox.png" width="35" height="35" />
+                <img src="/images/roblox.png" width="35" height="35">
             </a>
             <a href="https://steamcommunity.com/id/entitybtw/">
-                <img src="/images/steam.webp" width="35" height="35" />
+                <img src="/images/steam.webp" width="35" height="35">
             </a>
             <a href="https://ru.namemc.com/profile/entitybtw.1">
-                <img src="/images/namemc.png" width="35" height="35" />
+                <img src="/images/namemc.png" width="35" height="35">
             </a>
             <a href="https://t.me/entitybtw">
-                <img src="/images/telegram.png" width="35" height="35" />
+                <img src="/images/telegram.png" width="35" height="35">
             </a>
             <a href="https://blog.entitybtw.ru">
-                <img src="/images/teletype.webp" width="35" height="35" />
+                <img src="/images/teletype.webp" width="35" height="35">
             </a>
         </section>
         <section>
@@ -167,39 +169,17 @@
             <a class="webring" id="next-link" href="https://webring.otomir23.me/32/next">next &gt;</a>
         </div>
 
-        <script>
-            fetch(`https://webring.otomir23.me/32/data`)
-                .then(res => res.json())
-                .then(data => {
-                    const prev = data.prev;
-                    const next = data.next;
-                    const prevLink = document.getElementById('prev-link');
-                    const nextLink = document.getElementById('next-link');
-
-                    prevLink.href = prev.url;
-                    prevLink.innerHTML = `< ${prev.name}`;
-
-                    nextLink.href = next.url;
-                    nextLink.innerHTML = `${next.name} >`;
-                })
-                .catch(err => console.error('webring fetch error:', err));
-        </script>
-
         <p>&copy; 2025 entitybtw website</p>
 
-        <picture>
-            <img id="madeon-badge" src="/images/madeon_light.gif" alt="madeon badge" />
-        </picture>
-
-        <img src="/images/anybrowser.png" />
-        <img src="/images/computer.gif" />
-        <img src="/images/eyes.gif" />
-        <img src="/images/web1.png" />
-        <a href="https://fckn.rocks" target="_blank"><img src="https://fckn.rocks/fcknrocks.png" /></a>
+        <img class="themechanging" data-src-light="/images/madeon_light.gif" data-src-dark="/images/madeon_dark.gif" src="/images/madeon.gif">
+        <img src="/images/anybrowser.png">
+        <img src="/images/computer.gif">
+        <img src="/images/eyes.gif">
+        <img src="/images/web1.png">
+        <a href="https://fckn.rocks" target="_blank"><img src="https://fckn.rocks/fcknrocks.png"></a>
     </footer>
 
     <script>
-        // Функция переключения языка
         function switchLang(lang) {
             localStorage.setItem('lang', lang);
             document.querySelectorAll('[data-lang]').forEach(el => {
@@ -207,36 +187,46 @@
             });
         }
 
+        function updateThemeImages(isDark) {
+            document.querySelectorAll('.themechanging').forEach(img => {
+                const lightSrc = img.getAttribute('data-src-light');
+                const darkSrc = img.getAttribute('data-src-dark');
+                img.src = isDark ? darkSrc : lightSrc;
+            });
+        }
+
         function toggleTheme() {
             const isDark = document.body.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
-
-            const badgeImg = document.getElementById('madeon-badge');
-            if (badgeImg) {
-                badgeImg.src = isDark ? '/images/madeon_dark.gif' : '/images/madeon_light.gif';
-            }
+            updateThemeImages(isDark);
         }
+
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('lang');
             const savedTheme = localStorage.getItem('theme');
-
             const lang = savedLang || ((navigator.language || navigator.userLanguage).startsWith('ru') ? 'ru' : 'en');
             const theme = savedTheme || 'light';
-
-            if (theme === 'dark') {
-                document.body.classList.add('dark');
-            } else {
-                document.body.classList.remove('dark');
-            }
-
+            const isDark = theme === 'dark';
+            if (isDark) document.body.classList.add('dark');
             switchLang(lang);
-
-            // Устанавливаем бейдж в зависимости от темы
-            const badgeImg = document.getElementById('madeon-badge');
-            if (badgeImg) {
-                badgeImg.src = (theme === 'dark') ? '/images/madeon_dark.gif' : '/images/madeon_light.gif';
-            }
+            updateThemeImages(isDark);
         });
+    </script>
+
+    <script>
+        fetch(`https://webring.otomir23.me/32/data`)
+            .then(res => res.json())
+            .then(data => {
+                const prev = data.prev;
+                const next = data.next;
+                const prevLink = document.getElementById('prev-link');
+                const nextLink = document.getElementById('next-link');
+                prevLink.href = prev.url;
+                prevLink.innerHTML = `< ${prev.name}`;
+                nextLink.href = next.url;
+                nextLink.innerHTML = `${next.name} >`;
+            })
+            .catch(err => console.error('webring fetch error:', err));
     </script>
 </body>
 </html>
