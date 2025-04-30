@@ -202,27 +202,29 @@
         }
 
 document.addEventListener('DOMContentLoaded', () => {
-    let savedLang = localStorage.getItem('lang');
-    let savedTheme = localStorage.getItem('theme');
+    let lang = localStorage.getItem('lang');
+    let theme = localStorage.getItem('theme');
 
-    if (!savedLang) {
-        const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
-        savedLang = browserLang.startsWith('ru') ? 'ru' : 'en';
-        localStorage.setItem('lang', savedLang);
+    if (!lang) {
+        const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        lang = browserLang.startsWith('ru') ? 'ru' : (browserLang.startsWith('en') ? 'en' : 'en');
+        localStorage.setItem('lang', lang);
     }
 
-    if (!savedTheme) {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        savedTheme = prefersDark ? 'dark' : 'light';
-        localStorage.setItem('theme', savedTheme);
+    if (!theme) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        theme = prefersDark ? 'dark' : 'light';
+        localStorage.setItem('theme', theme);
     }
 
-    const isDark = savedTheme === 'dark';
-    if (isDark) document.body.classList.add('dark');
+    if (theme === 'dark') {
+        document.body.classList.add('dark');
+    }
 
-    switchLang(savedLang);
-    updateThemeImages(isDark);
+    switchLang(lang);
+    updateThemeImages(theme === 'dark');
 });
+
     </script>
 
     <script>
