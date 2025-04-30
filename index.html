@@ -180,12 +180,18 @@
     </footer>
 
     <script>
-        function switchLang(lang) {
-            localStorage.setItem('lang', lang);
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
-            });
+function switchLang(lang) {
+    localStorage.setItem('lang', lang);
+    document.querySelectorAll('[data-lang]').forEach(el => {
+        if (el.getAttribute('data-lang') === lang) {
+            el.style.display = '';
+        } else {
+            el.style.display = 'none';
         }
+    });
+
+    document.documentElement.setAttribute('lang', lang);
+}
 
         function updateThemeImages(isDark) {
             document.querySelectorAll('.themechanging').forEach(img => {
