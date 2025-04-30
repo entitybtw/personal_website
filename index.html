@@ -179,54 +179,39 @@
         <a href="https://fckn.rocks" target="_blank"><img class="themechanging" data-src-light="/images/fcknrocks_light.png" data-src-dark="https://fckn.rocks/fcknrocks.png" src="https://fckn.rocks/fcknrocks.png"></a>
     </footer>
 
-<script>
-function switchLang(lang) {
-    localStorage.setItem('lang', lang);
-    document.querySelectorAll('[data-lang]').forEach(el => {
-        el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
-    });
-}
+    <script>
+        function switchLang(lang) {
+            localStorage.setItem('lang', lang);
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+            });
+        }
 
-function updateThemeImages(isDark) {
-    document.querySelectorAll('.themechanging').forEach(img => {
-        const lightSrc = img.getAttribute('data-src-light');
-        const darkSrc = img.getAttribute('data-src-dark');
-        img.src = isDark ? darkSrc : lightSrc;
-    });
-}
+        function updateThemeImages(isDark) {
+            document.querySelectorAll('.themechanging').forEach(img => {
+                const lightSrc = img.getAttribute('data-src-light');
+                const darkSrc = img.getAttribute('data-src-dark');
+                img.src = isDark ? darkSrc : lightSrc;
+            });
+        }
 
-function toggleTheme() {
-    const isDark = document.body.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    updateThemeImages(isDark);
-}
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeImages(isDark);
+        }
 
-document.addEventListener('DOMContentLoaded', () => {
-    let lang = localStorage.getItem('lang');
-    let theme = localStorage.getItem('theme');
-
-    if (!lang) {
-        const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
-        lang = browserLang.startsWith('ru') ? 'ru' : 'en';
-        localStorage.setItem('lang', lang);
-    }
-
-    if (!theme) {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        theme = prefersDark ? 'dark' : 'light';
-        localStorage.setItem('theme', theme);
-    }
-
-    if (theme === 'dark') {
-        document.body.classList.add('dark');
-    }
-
-    switchLang(lang);
-    updateThemeImages(theme === 'dark');
-});
-</script>
-
-
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('lang');
+            const savedTheme = localStorage.getItem('theme');
+            const lang = savedLang || ((navigator.language || navigator.userLanguage).startsWith('ru') ? 'ru' : 'en');
+            const theme = savedTheme || 'light';
+            const isDark = theme === 'dark';
+            if (isDark) document.body.classList.add('dark');
+            switchLang(lang);
+            updateThemeImages(isDark);
+        });
+    </script>
 
     <script>
         fetch(`https://webring.otomir23.me/32/data`)
