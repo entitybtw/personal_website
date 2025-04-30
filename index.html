@@ -201,16 +201,28 @@
             updateThemeImages(isDark);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('lang');
-            const savedTheme = localStorage.getItem('theme');
-            const lang = savedLang || ((navigator.language || navigator.userLanguage).startsWith('ru') ? 'ru' : 'en');
-            const theme = savedTheme || 'light';
-            const isDark = theme === 'dark';
-            if (isDark) document.body.classList.add('dark');
-            switchLang(lang);
-            updateThemeImages(isDark);
-        });
+document.addEventListener('DOMContentLoaded', () => {
+    let savedLang = localStorage.getItem('lang');
+    let savedTheme = localStorage.getItem('theme');
+
+    if (!savedLang) {
+        const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
+        savedLang = browserLang.startsWith('ru') ? 'ru' : 'en';
+        localStorage.setItem('lang', savedLang);
+    }
+
+    if (!savedTheme) {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        savedTheme = prefersDark ? 'dark' : 'light';
+        localStorage.setItem('theme', savedTheme);
+    }
+
+    const isDark = savedTheme === 'dark';
+    if (isDark) document.body.classList.add('dark');
+
+    switchLang(savedLang);
+    updateThemeImages(isDark);
+});
     </script>
 
     <script>
