@@ -200,6 +200,17 @@
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateThemeImages(isDark);
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('lang');
+            const savedTheme = localStorage.getItem('theme');
+            const lang = savedLang || ((navigator.language || navigator.userLanguage).startsWith('ru') ? 'ru' : 'en');
+            const theme = savedTheme || 'light';
+            const isDark = theme === 'dark';
+            if (isDark) document.body.classList.add('dark');
+            switchLang(lang);
+            updateThemeImages(isDark);
+        });
     </script>
 
     <script>
