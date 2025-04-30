@@ -179,59 +179,66 @@
         <a href="https://fckn.rocks" target="_blank"><img class="themechanging" data-src-light="/images/fcknrocks_light.png" data-src-dark="https://fckn.rocks/fcknrocks.png" src="https://fckn.rocks/fcknrocks.png"></a>
     </footer>
 
-    <script>
-function switchLang(lang) {
-    localStorage.setItem('lang', lang);
-    document.querySelectorAll('[data-lang]').forEach(el => {
-        if (el.getAttribute('data-lang') === lang) {
-            el.style.display = '';
+<script>
+    function switchLang(lang) {
+        localStorage.setItem('lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        document.querySelectorAll('[data-lang]').forEach(el => {
+            el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+        });
+    }
+
+    function updateThemeImages(isDark) {
+        document.querySelectorAll('.themechanging').forEach(img => {
+            const lightSrc = img.getAttribute('data-src-light');
+            const darkSrc = img.getAttribute('data-src-dark');
+            img.src = isDark ? darkSrc : lightSrc;
+        });
+    }
+
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.body.classList.add('dark');
+            updateThemeImages(true);
         } else {
-            el.style.display = 'none';
+            document.body.classList.remove('dark');
+            updateThemeImages(false);
         }
-    });
+    }
 
-    document.documentElement.setAttribute('lang', lang);
-}
+    function toggleTheme() {
+        const isDark = document.body.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateThemeImages(isDark);
+    }
 
-        function updateThemeImages(isDark) {
-            document.querySelectorAll('.themechanging').forEach(img => {
-                const lightSrc = img.getAttribute('data-src-light');
-                const darkSrc = img.getAttribute('data-src-dark');
-                img.src = isDark ? darkSrc : lightSrc;
+    document.addEventListener('DOMContentLoaded', () => {
+        let savedLang = localStorage.getItem('lang');
+        if (!savedLang) {
+            const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+            savedLang = browserLang.startsWith('ru') ? 'ru' : (browserLang.startsWith('en') ? 'en' : 'en');
+            localStorage.setItem('lang', savedLang);
+        }
+        switchLang(savedLang);
+
+        let savedTheme = localStorage.getItem('theme');
+        if (!savedTheme) {
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            savedTheme = prefersDark ? 'dark' : 'light';
+            localStorage.setItem('theme', savedTheme);
+        }
+        applyTheme(savedTheme);
+
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                const newTheme = event.matches ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
             });
         }
+    });
+</script>
 
-        function toggleTheme() {
-            const isDark = document.body.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateThemeImages(isDark);
-        }
-
-document.addEventListener('DOMContentLoaded', () => {
-    let lang = localStorage.getItem('lang');
-    let theme = localStorage.getItem('theme');
-
-    if (!lang) {
-        const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-        lang = browserLang.startsWith('ru') ? 'ru' : (browserLang.startsWith('en') ? 'en' : 'en');
-        localStorage.setItem('lang', lang);
-    }
-
-    if (!theme) {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        theme = prefersDark ? 'dark' : 'light';
-        localStorage.setItem('theme', theme);
-    }
-
-    if (theme === 'dark') {
-        document.body.classList.add('dark');
-    }
-
-    switchLang(lang);
-    updateThemeImages(theme === 'dark');
-});
-
-    </script>
 
     <script>
         fetch(`https://webring.otomir23.me/32/data`)
