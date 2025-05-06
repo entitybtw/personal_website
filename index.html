@@ -97,34 +97,23 @@
             color: var(--link-color);
         }
 
-        .icon-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .icons {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .profile-pic {
-            width: 100%;
-            max-width: 450px;
-            height: auto;
-            object-fit: cover;
-        }
-
-        @media (max-width: 768px) {
-            .icon-content {
+        @media (max-width: 600px) {
+            main {
+                display: flex;
                 flex-direction: column;
                 align-items: center;
             }
 
-            .profile-pic {
-                max-width: 100%;
+            main > img[alt="me"] {
+                order: -1;
+                width: 100% !important;
+                height: auto !important;
+                max-width: 90vw;
+                margin-bottom: 15px;
+            }
+
+            main > section:first-of-type {
+                text-align: center;
             }
         }
     </style>
@@ -140,27 +129,42 @@
         </div>
     </header>
     <main>
-        <section class="icon-section">
-            <div class="icon-content">
-                <div class="icons">
-                    <a href="https://www.youtube.com/@entitybtw" target="_blank">
-                        <img class="themechanging" data-src-light="/images/youtube_light.png" data-src-dark="/images/youtube_dark.png" src="/images/youtube_light.png" width="35" height="35">
-                    </a>
-                    <a href="https://www.last.fm/user/entitybtw" target="_blank"><img src="/images/lastfm.png" width="35" height="35"></a>
-                    <a href="https://github.com/entitybtw" target="_blank"><img src="/images/github.webp" width="35" height="35"></a>
-                    <a href="https://pay.cloudtips.ru/p/91e08124" target="_blank"><img src="/images/cloudtips.png" width="35" height="35"></a>
-                    <a href="https://www.roblox.com/users/1507038183/profile" target="_blank"><img src="/images/roblox.png" width="35" height="35"></a>
-                    <a href="https://steamcommunity.com/id/entitybtw/" target="_blank"><img src="/images/steam.webp" width="35" height="35"></a>
-                    <a href="https://ru.namemc.com/profile/entitybtw.1" target="_blank"><img src="/images/minecraft.png" width="35" height="35"></a>
-                    <a href="https://t.me/entitybtw" target="_blank"><img src="/images/telegram.png" width="35" height="35"></a>
-                    <a href="https://blog.entitybtw.ru" target="_blank"><img src="/images/teletype.png" width="35" height="35"></a>
-                    <a href="https://ovk.to/id21967" target="_blank"><img src="/images/ovk.png" width="35" height="35"></a>
-                    <a href="https://status.entitybtw.ru" target="_blank"><img src="/images/status.png" width="35" height="35"></a>
-                </div>
-                <img src="/images/me.png" alt="me" class="profile-pic">
-            </div>
+        <img src="/images/me.png" style="width:450px; height:290px; object-fit:cover;" alt="me" align="right">
+        <section>
+            <a href="https://www.youtube.com/@entitybtw" target="_blank">
+                <img class="themechanging" data-src-light="/images/youtube_light.png" data-src-dark="/images/youtube_dark.png" src="/images/youtube_light.png" width="35" height="35">
+            </a>
+            <a href="https://www.last.fm/user/entitybtw" target="_blank">
+                <img src="/images/lastfm.png" width="35" height="35">
+            </a>
+            <a href="https://github.com/entitybtw" target="_blank">
+                <img src="/images/github.webp" width="35" height="35">
+            </a>
+            <a href="https://pay.cloudtips.ru/p/91e08124" target="_blank">
+                <img src="/images/cloudtips.png" width="35" height="35">
+            </a>
+            <a href="https://www.roblox.com/users/1507038183/profile" target="_blank">
+                <img src="/images/roblox.png" width="35" height="35">
+            </a>
+            <a href="https://steamcommunity.com/id/entitybtw/" target="_blank">
+                <img src="/images/steam.webp" width="35" height="35">
+            </a>
+            <a href="https://ru.namemc.com/profile/entitybtw.1" target="_blank">
+                <img src="/images/minecraft.png" width="35" height="35">
+            </a>
+            <a href="https://t.me/entitybtw" target="_blank">
+                <img src="/images/telegram.png" width="35" height="35">
+            </a>
+            <a href="https://blog.entitybtw.ru" target="_blank">
+                <img src="/images/teletype.png" width="35" height="35">
+            </a>
+            <a href="https://ovk.to/id21967" target="_blank">
+                <img src="/images/ovk.png" width="35" height="35">
+            </a>
+            <a href="https://status.entitybtw.ru" target="_blank">
+                <img src="/images/status.png" width="35" height="35">
+            </a>
         </section>
-
         <section>
             <h2 data-lang="ru">обо мне</h2>
             <h2 data-lang="en" style="display:none;">about me</h2>
@@ -173,7 +177,6 @@
             <p data-lang="ru">> я технофрик, линукс юзер(i use bedrock btw)</p>
             <p data-lang="en" style="display:none;">> i’m a technofreak, linux user(i use bedrock btw)</p>
         </section>
-
         <section>
             <h2 data-lang="ru">мои крутые проекты</h2>
             <h2 data-lang="en" style="display:none;">my cool projects</h2>
@@ -189,9 +192,7 @@
             <a class="webring" href="https://webring.otomir23.me/">[webring]</a>
             <a class="webring" id="next-link" href="https://webring.otomir23.me/32/next">next &gt;</a>
         </div>
-
         <p>&copy; 2025 entitybtw website | <a href="https://github.com/entitybtw/personal_website">src code</a></p>
-
         <img class="themechanging" data-src-light="/images/madeon_light.png" data-src-dark="/images/madeon_dark.png" src="/images/madeon.gif">
         <img class="themechanging" data-src-light="/images/anybrowser_light.png" data-src-dark="/images/anybrowser_dark.png" src="/images/anybrowser.png">
         <img class="themechanging" data-src-light="/images/computer_light.gif" data-src-dark="/images/computer_dark.gif" src="/images/computer.gif">
@@ -239,7 +240,9 @@
             switchLang(lang);
             updateThemeImages(isDark);
         });
+    </script>
 
+    <script>
         fetch(`https://webring.otomir23.me/32/data`)
             .then(res => res.json())
             .then(data => {
