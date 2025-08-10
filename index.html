@@ -1,9 +1,8 @@
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="7b7ea54f-0e7d-4d1a-a7e7-cf0c910569f6"></script>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>wassup chat</title>
     <style>
         :root {
@@ -13,7 +12,6 @@
             --border-color: #b0b8d9;
             --link-color: #3a5fff;
         }
-
         body.dark {
             --bg-color: #12182B;
             --text-color: #E6E9FF;
@@ -21,7 +19,6 @@
             --border-color: #2E3C5E;
             --link-color: #768DFF;
         }
-
         body {
             font-family: Arial, sans-serif;
             background-color: var(--bg-color);
@@ -29,53 +26,44 @@
             margin: 0;
             padding: 0;
         }
-
         header {
             text-align: center;
             padding: 20px;
             background-color: var(--header-bg);
             border-bottom: 2px solid var(--border-color);
         }
-
         h1 {
             font-size: 2em;
             color: var(--link-color);
         }
-
         main {
             max-width: 800px;
             margin: 20px auto;
             padding: 10px;
         }
-
         section {
             margin-bottom: 20px;
         }
-
         a {
             color: var(--link-color);
             text-decoration: none;
         }
-
         footer {
             text-align: center;
             padding: 10px;
             background-color: var(--header-bg);
             border-top: 2px solid var(--border-color);
         }
-
         .lang-switcher {
             margin-top: 10px;
             text-align: center;
         }
-
         .lang-link, .theme-toggle {
             font-family: "Courier New", monospace;
             font-size: 14px;
             margin: 0 5px;
             cursor: pointer;
         }
-
         .webring-wrapper {
             display: flex;
             justify-content: center;
@@ -84,7 +72,6 @@
             text-align: center;
             font-family: "Courier New", monospace;
         }
-
         .webring {
             font-family: "Courier New", monospace;
             font-size: 14px;
@@ -92,18 +79,15 @@
             text-align: center;
             min-width: 80px;
         }
-
         .theme-toggle {
             color: var(--link-color);
         }
-
         @media (max-width: 600px) {
             main {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
             }
-
             main > img[alt="me"] {
                 order: -1;
                 width: 100% !important;
@@ -111,10 +95,33 @@
                 max-width: 90vw;
                 margin-bottom: 15px;
             }
-
             main > section:first-of-type {
                 text-align: center;
             }
+        }
+        .badge-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+        .badge-wrapper img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 8px;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            font-family: monospace;
+            padding: 12px 16px;
+            border-radius: 6px;
+            user-select: all;
+            white-space: pre-wrap;
+            max-width: 600px;
+            overflow-x: auto;
         }
     </style>
 </head>
@@ -134,56 +141,20 @@
             <a href="https://www.youtube.com/@entitybtw" target="_blank">
                 <img class="themechanging" data-src-light="/images/youtube_light.png" data-src-dark="/images/youtube_dark.png" src="/images/youtube_light.png">
             </a>
-            <a href="https://www.last.fm/user/entitybtw" target="_blank">
-                <img src="/images/lastfm.png">
-            </a>
-            <a href="https://github.com/entitybtw" target="_blank">
-                <img src="/images/github.png">
-            </a>
-            <a href="https://pay.cloudtips.ru/p/91e08124" target="_blank">
-                <img src="/images/cloudtips.png">
-            </a>
-            <a href="https://www.roblox.com/users/1507038183/profile" target="_blank">
-                <img src="/images/roblox.png">
-            </a>
-            <a href="https://steamcommunity.com/id/entitybtw/" target="_blank">
-                <img src="/images/steam.png">
-            </a>
-            <a href="https://ru.namemc.com/profile/entitybtw.1" target="_blank">
-                <img src="/images/minecraft.png">
-            </a>
-            <a href="https://t.me/entitybtw" target="_blank">
-                <img src="/images/telegram.png">
-            </a>
-            <a href="https://blog.entitybtw.ru" target="_blank">
-                <img src="/images/teletype.png">
-            </a>
-            <a href="https://ovk.to/id21967" target="_blank">
-                <img src="/images/ovk.png">
-            </a>
-            <a href="https://status.entitybtw.ru" target="_blank">
-                <img src="/images/status.png">
-            </a>
         </section>
         <section>
             <h2 data-lang="ru">обо мне</h2>
             <h2 data-lang="en" style="display:none;">about me</h2>
             <p data-lang="ru">> меня зовут ваня, никнейм entitybtw</p>
             <p data-lang="en" style="display:none;">> my name is vanya, nickname entitybtw</p>
-            <p data-lang="ru">> мне 13 лет</p>
-            <p data-lang="en" style="display:none;">> i’m 13 years old</p>
-            <p data-lang="ru">> занимаюсь разработкой различных хомбрюшек</p>
-            <p data-lang="en" style="display:none;">> i make various homebrew stuff</p>
-            <p data-lang="ru">> я технофрик, линукс юзер(i use bedrock btw)</p>
-            <p data-lang="en" style="display:none;">> i’m a technofreak, linux user(i use bedrock btw)</p>
         </section>
         <section>
-            <h2 data-lang="ru">мои крутые проекты</h2>
-            <h2 data-lang="en" style="display:none;">my cool projects</h2>
-            <p data-lang="ru"><a href="https://github.com/entitybtw/pspfetch">pspfetch</a> -> фетч программка для псп на луа</p>
-            <p data-lang="en" style="display:none;"><a href="https://github.com/entitybtw/pspfetch">pspfetch</a> -> fetch app for psp written in lua</p>
-            <p data-lang="ru"><a href="https://github.com/entitybtw/mcsm_portable">mcsm_portable</a> -> порт игры minecraft story mode на псп основанный на netflix версии игры (разработкой которого занимаюсь в данный момент)</p>
-            <p data-lang="en" style="display:none;"><a href="https://github.com/entitybtw/mcsm_portable">mcsm_portable</a> -> port of minecraft story mode to psp based on the netflix version (currently working on it)</p>
+            <div class="badge-wrapper">
+                <a href="https://entitybtw.ru" target="_blank">
+                    <img src="https://entitybtw.ru/images/entitybtw.gif" alt="entitybtw badge">
+                </a>
+                <pre class="code-block">&lt;a href="https://entitybtw.ru" target="_blank"&gt;&lt;img src="https://entitybtw.ru/images/entitybtw.gif"&gt;&lt;/a&gt;</pre>
+            </div>
         </section>
     </main>
     <footer>
@@ -204,12 +175,9 @@
                 <img src="https://entitybtw.ru/images/entitybtw.gif" alt="entitybtw" style="vertical-align: middle;">
             </a>
             &nbsp;
-            <pre>
             &lt;a href="https://entitybtw.ru" target="_blank"&gt;&lt;img src="https://entitybtw.ru/images/entitybtw.gif"&gt;&lt;/a&gt;
-            </pre>
         </p>
     </footer>
-
     <script>
         function switchLang(lang) {
             localStorage.setItem('lang', lang);
@@ -217,7 +185,6 @@
                 el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
             });
         }
-
         function updateThemeImages(isDark) {
             document.querySelectorAll('.themechanging').forEach(img => {
                 const lightSrc = img.getAttribute('data-src-light');
@@ -225,13 +192,11 @@
                 img.src = isDark ? darkSrc : lightSrc;
             });
         }
-
         function toggleTheme() {
             const isDark = document.body.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateThemeImages(isDark);
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('lang');
             const savedTheme = localStorage.getItem('theme');
@@ -243,7 +208,6 @@
             updateThemeImages(isDark);
         });
     </script>
-
     <script>
         fetch(`https://webring.otomir23.me/32/data`)
             .then(res => res.json())
