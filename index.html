@@ -161,6 +161,20 @@
             <a href="https://ovk.to/id21967" target="_blank">
                 <img src="/images/ovk.png">
             </a>
+            <a href="#" onclick="chooseVKPage(event)">
+                <img src="/images/vk.png" alt="VK">
+            </a>
+            <script>
+            function chooseVKPage(event) {
+                event.preventDefault();
+                let choice = confirm("main account or second account (cancel)?");
+                if(choice) {
+                    window.open("https://vk.com/entbtw", "_blank");
+                } else {
+                    window.open("https://vk.com/entitybtw", "_blank");
+                }
+            }
+            </script>            
             <a href="https://status.entitybtw.ru" target="_blank">
                 <img src="/images/status.png">
             </a>
