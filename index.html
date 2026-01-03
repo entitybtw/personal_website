@@ -116,6 +116,23 @@
                 text-align: center;
             }
         }
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 1em;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
     </style>
 </head>
 <body>
@@ -281,6 +298,22 @@
                 nextLink.innerHTML = `${next.name} >`;
             })
             .catch(err => console.error('webring fetch error:', err));
+
+        const snowCount = 50
+
+function createSnowflake() {
+    const snow = document.createElement("div")
+    snow.className = "snowflake"
+    snow.textContent = "❄"
+    snow.style.left = Math.random() * 100 + "vw"
+    snow.style.fontSize = Math.random() * 10 + 10 + "px"
+    snow.style.animationDuration = Math.random() * 5 + 5 + "s"
+    snow.style.opacity = Math.random()
+    document.body.appendChild(snow)
+    setTimeout(() => snow.remove(), 10000)
+}
+
+setInterval(createSnowflake, 200)
     </script>
 </body>
 </html>
