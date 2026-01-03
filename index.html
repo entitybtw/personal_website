@@ -298,22 +298,25 @@
                 nextLink.innerHTML = `${next.name} >`;
             })
             .catch(err => console.error('webring fetch error:', err));
+        
+const month = new Date().getMonth()
+const isWinter = month === 11 || month === 0 || month === 1
 
-        const snowCount = 50
+if (isWinter) {
+    function createSnowflake() {
+        const snow = document.createElement("div")
+        snow.className = "snowflake"
+        snow.textContent = "❄"
+        snow.style.left = Math.random() * 100 + "vw"
+        snow.style.fontSize = Math.random() * 10 + 10 + "px"
+        snow.style.animationDuration = Math.random() * 5 + 5 + "s"
+        snow.style.opacity = Math.random()
+        document.body.appendChild(snow)
+        setTimeout(() => snow.remove(), 10000)
+    }
 
-function createSnowflake() {
-    const snow = document.createElement("div")
-    snow.className = "snowflake"
-    snow.textContent = "❄"
-    snow.style.left = Math.random() * 100 + "vw"
-    snow.style.fontSize = Math.random() * 10 + 10 + "px"
-    snow.style.animationDuration = Math.random() * 5 + 5 + "s"
-    snow.style.opacity = Math.random()
-    document.body.appendChild(snow)
-    setTimeout(() => snow.remove(), 10000)
+    setInterval(createSnowflake, 200)
 }
-
-setInterval(createSnowflake, 200)
     </script>
 </body>
 </html>
