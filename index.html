@@ -1,11 +1,139 @@
 <html lang="ru">
 <head>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="7b7ea54f-0e7d-4d1a-a7e7-cf0c910569f6"></script>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wassup chat</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="/index.css">
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="7b7ea54f-0e7d-4d1a-a7e7-cf0c910569f6"></script>
+    <style>
+        :root {
+            --bg-color: #f9fbff;
+            --text-color: #2a2a3a;
+            --header-bg: #e6ecff;
+            --border-color: #b0b8d9;
+            --link-color: #3a5fff;
+        }
+
+        body.dark {
+            --bg-color: #12182B;
+            --text-color: #E6E9FF;
+            --header-bg: #1A233A;
+            --border-color: #2E3C5E;
+            --link-color: #768DFF;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--header-bg);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2em;
+            color: var(--link-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 10px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--header-bg);
+            border-top: 2px solid var(--border-color);
+        }
+
+        .lang-switcher {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .lang-link, .theme-toggle {
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .webring-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+            font-family: "Courier New", monospace;
+        }
+
+        .webring {
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            padding: 4px 8px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .theme-toggle {
+            color: var(--link-color);
+        }
+
+        @media (max-width: 600px) {
+            main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            main > img[alt="me"] {
+                order: -1;
+                width: 100% !important;
+                height: auto !important;
+                max-width: 90vw;
+                margin-bottom: 15px;
+            }
+
+            main > section:first-of-type {
+                text-align: center;
+            }
+        }
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 1em;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+    </style>
 </head>
 <body>
     <header>
