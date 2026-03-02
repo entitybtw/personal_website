@@ -1,13 +1,3 @@
-function chooseVKPage(event) {
-    event.preventDefault();
-    let choice = confirm("main account or second account (cancel)?");
-    if(choice) {
-        window.open("https://vk.com/entbtw", "_blank");
-    } else {
-        window.open("https://vk.com/entitybtw", "_blank");
-    }
-}
-
 function switchLang(lang) {
     localStorage.setItem('lang', lang);
     document.querySelectorAll('[data-lang]').forEach(el => {
