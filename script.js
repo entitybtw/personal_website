@@ -70,6 +70,7 @@ class LastFmIntegration {
         this.updateInterval = null;
         this.retryCount = 0;
         this.maxRetries = 3;
+        this.failed = false;
     }
 
     async fetchCurrentTrack() {
@@ -82,12 +83,12 @@ class LastFmIntegration {
             
             const data = await response.json();
             
-            if (data?.track?.name && data?.track?.artist) {
+            if (data?.track) {
                 return {
                     name: data.track.name,
                     artist: data.track.artist['#text'],
                     url: data.track.url,
-                    nowPlaying: data.track['@attr']?.nowplaying || false
+                    nowPlaying: data.track['@attr']?.nowplaying === "true" || false
                 };
             }
             
@@ -99,25 +100,26 @@ class LastFmIntegration {
     }
 
     formatTrackDisplay(track) {
+        const currentLang = localStorage.getItem('lang') || 'ru';
+        
         if (!track) {
-            const currentLang = localStorage.getItem('lang') || 'ru';
-            return currentLang === 'ru' ? '🎵 сейчас не играет' : '🎵 nothing playing now';
+            return currentLang === 'ru' ? 'нет треков' : 'no tracks';
         }
         
-        return `${track.name} — ${track.artist}`;
+        if (track.nowPlaying) {
+            return `🎵 ${track.name} — ${track.artist}`;
+        } else {
+            if (currentLang === 'ru') {
+                return `последний: ${track.name} — ${track.artist}`;
+            } else {
+                return `last: ${track.name} — ${track.artist}`;
+            }
+        }
     }
 
-    updateSongDisplay(text, isUpdating = true) {
+    updateSongDisplay(text) {
         if (this.songElement) {
-            if (isUpdating) {
-                this.songElement.classList.add('updating');
-            }
-            
             this.songElement.textContent = text;
-            
-            setTimeout(() => {
-                this.songElement.classList.remove('updating');
-            }, 300);
         }
     }
 
@@ -128,20 +130,26 @@ class LastFmIntegration {
             this.updateSongDisplay(displayText);
             
             this.retryCount = 0;
+            if (this.failed) {
+                this.failed = false;
+                this.scheduleUpdate(30000); 
+            }
             
         } catch (error) {
             console.error('Failed to update Last.fm track:', error);
             
             this.retryCount++;
+            this.failed = true;
             
             const currentLang = localStorage.getItem('lang') || 'ru';
-            const errorText = this.retryCount <= this.maxRetries 
-                ? (currentLang === 'ru' ? '⏳ повторная попытка...' : '⏳ retrying...')
-                : (currentLang === 'ru' ? '⚠️ ошибка загрузки' : '⚠️ load error');
             
-            this.updateSongDisplay(errorText);
-            
-            if (this.retryCount > this.maxRetries) {
+            if (this.retryCount <= this.maxRetries) {
+                const errorMsg = currentLang === 'ru' ? 'обновляю (^_^)' : 'updating (^_^)';
+                this.updateSongDisplay(errorMsg);
+            } else {
+                const errorMsg = currentLang === 'ru' ? 'ошибка last.fm :c' : 'last.fm error :c';
+                this.updateSongDisplay(errorMsg);
+                
                 this.scheduleUpdate(60000);
             }
         }
@@ -156,6 +164,7 @@ class LastFmIntegration {
 
     start() {
         this.updateTrack();
+        
         this.scheduleUpdate();
         
         document.addEventListener('languageChanged', () => {
