@@ -68,9 +68,6 @@ class LastFmIntegration {
         this.url = `https://lastfm-last-played.biancarosa.com.br/${user}/latest-song`;
         this.songElement = document.getElementById('song');
         this.updateInterval = null;
-        this.retryCount = 0;
-        this.maxRetries = 3;
-        this.failed = false;
     }
 
     async fetchCurrentTrack() {
@@ -87,7 +84,6 @@ class LastFmIntegration {
                 return {
                     name: data.track.name,
                     artist: data.track.artist['#text'],
-                    url: data.track.url,
                     nowPlaying: data.track['@attr']?.nowplaying === "true" || false
                 };
             }
@@ -107,13 +103,9 @@ class LastFmIntegration {
         }
         
         if (track.nowPlaying) {
-            return `🎵 ${track.name} — ${track.artist}`;
+            return ` (^_^) ${track.name} — ${track.artist}`;
         } else {
-            if (currentLang === 'ru') {
-                return `последний: ${track.name} — ${track.artist}`;
-            } else {
-                return `last: ${track.name} — ${track.artist}`;
-            }
+            return ` (^_^) ${track.name} — ${track.artist}`;
         }
     }
 
@@ -129,29 +121,10 @@ class LastFmIntegration {
             const displayText = this.formatTrackDisplay(track);
             this.updateSongDisplay(displayText);
             
-            this.retryCount = 0;
-            if (this.failed) {
-                this.failed = false;
-                this.scheduleUpdate(30000); 
-            }
-            
         } catch (error) {
-            console.error('Failed to update Last.fm track:', error);
-            
-            this.retryCount++;
-            this.failed = true;
-            
             const currentLang = localStorage.getItem('lang') || 'ru';
-            
-            if (this.retryCount <= this.maxRetries) {
-                const errorMsg = currentLang === 'ru' ? 'обновляю (^_^)' : 'updating (^_^)';
-                this.updateSongDisplay(errorMsg);
-            } else {
-                const errorMsg = currentLang === 'ru' ? 'ошибка last.fm :c' : 'last.fm error :c';
-                this.updateSongDisplay(errorMsg);
-                
-                this.scheduleUpdate(60000);
-            }
+            const errorMsg = currentLang === 'ru' ? 'ошибка загрузки :/' : 'load error :/';
+            this.updateSongDisplay(errorMsg);
         }
     }
 
@@ -164,7 +137,6 @@ class LastFmIntegration {
 
     start() {
         this.updateTrack();
-        
         this.scheduleUpdate();
         
         document.addEventListener('languageChanged', () => {
