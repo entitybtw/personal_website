@@ -11,7 +11,6 @@
             --header-bg: #e6ecff;
             --border-color: #b0b8d9;
             --link-color: #3a5fff;
-            font-family: 'TrixieCyr', Arial, sans-serif;
         }
 
         body.dark {
@@ -40,6 +39,7 @@
         h1 {
             font-size: 2.3em;
             color: var(--link-color);
+            font-family: 'TrixieCyr', Arial, sans-serif;
         }
 
         main {
@@ -55,6 +55,10 @@
         a {
             color: var(--link-color);
             text-decoration: none;
+        }
+
+        p {
+            font-family: 'TrixieCyr', Arial, sans-serif;
         }
 
         footer {
