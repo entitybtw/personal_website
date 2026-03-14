@@ -103,9 +103,13 @@ class LastFmIntegration {
         }
         
         if (track.nowPlaying) {
-            return ` (^_^) ${track.name} — ${track.artist}`;
+            return `${track.name} — ${track.artist}`;
         } else {
-            return ` (^_^) ${track.name} — ${track.artist}`;
+            if (currentLang === 'ru') {
+                return `последний: ${track.name} — ${track.artist}`;
+            } else {
+                return `last: ${track.name} — ${track.artist}`;
+            }
         }
     }
 
