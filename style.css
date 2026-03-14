@@ -1,3 +1,10 @@
+        @font-face {
+            font-family: 'TrixieCyr';
+            src: url('/fonts/trixiecyr_plain.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
         :root {
             --bg-color: #f9fbff;
             --text-color: #2a2a3a;
@@ -32,6 +39,7 @@
         h1 {
             font-size: 2em;
             color: var(--link-color);
+            font-family: 'TrixieCyr', Arial, sans-serif;
         }
 
         main {
