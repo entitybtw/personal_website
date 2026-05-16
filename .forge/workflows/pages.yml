@@ -1,0 +1,17 @@
+name: Deploy to Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: websites-lxc
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to web server
+        run: |
+          cp -r . /var/www/personal_website/
