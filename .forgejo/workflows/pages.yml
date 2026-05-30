@@ -14,4 +14,4 @@ jobs:
 
       - name: Deploy to web server
         run: |
-          cp -r . /var/www/personal_website/
+          cp -r . /var/www/personal-website/
