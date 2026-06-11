@@ -63,109 +63,73 @@ if (month === 11 || month === 0 || month === 1) {
 }
 
 class LastFmIntegration {
-    constructor(user = 'entitybtw') {
-        this.user = user;
-        this.url = `https://lastfm-last-played.biancarosa.com.br/${user}/latest-song`;
+    constructor() {
+        this.base = 'https://koito.entitybtw.ru/apis/web/v1';
         this.songElement = document.getElementById('song');
         this.updateInterval = null;
     }
 
     async fetchCurrentTrack() {
-        try {
-            const response = await fetch(this.url);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            
-            if (data?.track) {
-                return {
-                    name: data.track.name,
-                    artist: data.track.artist['#text'],
-                    nowPlaying: data.track['@attr']?.nowplaying === "true" || false
-                };
-            }
-            
-            return null;
-        } catch (error) {
-            console.error('Last.fm fetch error:', error);
-            throw error;
+        const [npRes, listensRes] = await Promise.all([
+            fetch(`${this.base}/now-playing`),
+            fetch(`${this.base}/listens?limit=1`)
+        ]);
+        const np = await npRes.json();
+        if (np.currently_playing && np.track?.title) {
+            const artist = np.track.artists?.[0]?.name || '';
+            return { name: np.track.title, artist, nowPlaying: true };
         }
+        const listens = await listensRes.json();
+        const last = listens.items?.[0];
+        if (last?.track?.title) {
+            return { name: last.track.title, artist: last.track.artists?.[0]?.name || '', nowPlaying: false };
+        }
+        // fallback: top track of all time
+        const topRes = await fetch(`${this.base}/top/tracks?period=overall&limit=1`);
+        const top = await topRes.json();
+        const topTrack = top.items?.[0]?.item;
+        if (topTrack?.title) {
+            return { name: topTrack.title, artist: topTrack.artists?.[0]?.name || '', nowPlaying: false };
+        }
+        return null;
     }
 
     formatTrackDisplay(track) {
-        const currentLang = localStorage.getItem('lang') || 'ru';
-        
-        if (!track) {
-            return currentLang === 'ru' ? 'нет треков' : 'no tracks';
-        }
-        
-        if (track.nowPlaying) {
-            return `${track.name} — ${track.artist}`;
-        } else {
-            if (currentLang === 'ru') {
-                return `последний: ${track.name} — ${track.artist}`;
-            } else {
-                return `last: ${track.name} — ${track.artist}`;
-            }
-        }
-    }
-
-    updateSongDisplay(text) {
-        if (this.songElement) {
-            this.songElement.textContent = text;
-        }
+        const lang = localStorage.getItem('lang') || 'ru';
+        if (!track) return lang === 'ru' ? 'нет треков' : 'no tracks';
+        if (track.nowPlaying) return `${track.name} — ${track.artist}`;
+        return lang === 'ru'
+            ? `последний: ${track.name} — ${track.artist}`
+            : `last: ${track.name} — ${track.artist}`;
     }
 
     async updateTrack() {
         try {
             const track = await this.fetchCurrentTrack();
-            const displayText = this.formatTrackDisplay(track);
-            this.updateSongDisplay(displayText);
-            
-        } catch (error) {
-            const currentLang = localStorage.getItem('lang') || 'ru';
-            const errorMsg = currentLang === 'ru' ? 'ошибка загрузки :/' : 'load error :/';
-            this.updateSongDisplay(errorMsg);
+            if (this.songElement) this.songElement.textContent = this.formatTrackDisplay(track);
+        } catch {
+            const lang = localStorage.getItem('lang') || 'ru';
+            if (this.songElement) this.songElement.textContent = lang === 'ru' ? 'ошибка загрузки :/' : 'load error :/';
         }
-    }
-
-    scheduleUpdate(interval = 30000) {
-        if (this.updateInterval) {
-            clearInterval(this.updateInterval);
-        }
-        this.updateInterval = setInterval(() => this.updateTrack(), interval);
     }
 
     start() {
         this.updateTrack();
-        this.scheduleUpdate();
-        
-        document.addEventListener('languageChanged', () => {
-            this.updateTrack();
-        });
+        this.updateInterval = setInterval(() => this.updateTrack(), 30000);
+        document.addEventListener('languageChanged', () => this.updateTrack());
     }
 
     stop() {
-        if (this.updateInterval) {
-            clearInterval(this.updateInterval);
-            this.updateInterval = null;
-        }
+        clearInterval(this.updateInterval);
+        this.updateInterval = null;
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('song')) {
-        const lastfm = new LastFmIntegration('entitybtw');
+        const lastfm = new LastFmIntegration();
         lastfm.start();
         window.lastfmIntegration = lastfm;
     }
 });
 
-document.addEventListener('themeChanged', () => {
-    if (window.lastfmIntegration) {
-        window.lastfmIntegration.updateTrack();
-    }
-});
