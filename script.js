@@ -76,20 +76,12 @@ class LastFmIntegration {
         ]);
         const np = await npRes.json();
         if (np.currently_playing && np.track?.title) {
-            const artist = np.track.artists?.[0]?.name || '';
-            return { name: np.track.title, artist, nowPlaying: true };
+            return { name: np.track.title, artist: np.track.artists?.[0]?.name || '', nowPlaying: true };
         }
         const listens = await listensRes.json();
         const last = listens.items?.[0];
         if (last?.track?.title) {
             return { name: last.track.title, artist: last.track.artists?.[0]?.name || '', nowPlaying: false };
-        }
-        // fallback: top track of all time
-        const topRes = await fetch(`${this.base}/top/tracks?period=overall&limit=1`);
-        const top = await topRes.json();
-        const topTrack = top.items?.[0]?.item;
-        if (topTrack?.title) {
-            return { name: topTrack.title, artist: topTrack.artists?.[0]?.name || '', nowPlaying: false };
         }
         return null;
     }
