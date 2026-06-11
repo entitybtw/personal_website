@@ -72,7 +72,7 @@ class LastFmIntegration {
     async fetchCurrentTrack() {
         const [npRes, listensRes] = await Promise.all([
             fetch(`${this.base}/now-playing`),
-            fetch(`${this.base}/listens?limit=1`)
+            fetch(`${this.base}/listens?limit=1&period=all_time`)
         ]);
         const np = await npRes.json();
         if (np.currently_playing && np.track?.title) {
