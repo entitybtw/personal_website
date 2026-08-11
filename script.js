@@ -9,6 +9,8 @@ function switchLang(l) {
   document.querySelectorAll('[data-lang]').forEach(el => {
     el.style.display = (el.getAttribute('data-lang') === l) ? '' : 'none';
   });
+  document.documentElement.lang = l;
+  document.title = l === 'ru' ? 'entitybtw — привет, я entitybtw' : 'entitybtw — hello, i\'m entitybtw';
   document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: l } }));
   if (window.lastfmIntegration) window.lastfmIntegration.updateTrack();
   $('#langBtn').textContent = l;
@@ -124,7 +126,48 @@ document.addEventListener('DOMContentLoaded', () => {
   switchLang(lang);
   renderAccentPresets();
   applyAccent(currentAccent());
+  initAge();
+  initBirthday();
+  initSounds();
+  initVolume();
+  initSnowflakes();
 });
+
+/* ── dynamic age ── */
+function calcAge() {
+  const birth = new Date(2012, 2, 2);
+  const now = new Date();
+  let age = now.getFullYear() - birth.getFullYear();
+  if (now.getMonth() < birth.getMonth() || (now.getMonth() === birth.getMonth() && now.getDate() < birth.getDate())) age--;
+  return age;
+}
+
+function ageWord(n) {
+  const last2 = n % 100;
+  const last1 = n % 10;
+  if (last2 >= 11 && last2 <= 19) return 'лет';
+  if (last1 === 1) return 'год';
+  if (last1 >= 2 && last1 <= 4) return 'года';
+  return 'лет';
+}
+
+function initAge() {
+  const age = calcAge();
+  const ageEl = document.getElementById('age');
+  const ageElEn = document.getElementById('ageEn');
+  if (ageEl) ageEl.textContent = `${age} ${ageWord(age)}`;
+  if (ageElEn) ageElEn.textContent = `${age} years old`;
+}
+
+/* ── birthday ── */
+function initBirthday() {
+  const now = new Date();
+  const isBD = now.getMonth() === 2 && now.getDate() === 2;
+  const banner = document.getElementById('birthdayBanner');
+  if (isBD && banner) {
+    banner.style.display = '';
+  }
+}
 
 /* ── webring ── */
 fetch('https://webring.otomir23.me/32/data')
@@ -138,20 +181,36 @@ fetch('https://webring.otomir23.me/32/data')
   .catch(err => console.error('webring fetch error:', err));
 
 /* ── snowflakes ── */
-const month = new Date().getMonth();
-if (month === 11 || month === 0 || month === 1) {
+function initSnowflakes() {
+  const month = new Date().getMonth();
+  if (month !== 11 && month !== 0 && month !== 1) return;
+
+  const chars = ['❄', '❅', '❆', '✦', '•'];
+
   function createSnowflake() {
-    const snow = document.createElement("div");
-    snow.className = "snowflake";
-    snow.textContent = "❄";
-    snow.style.left = Math.random() * 100 + "vw";
-    snow.style.fontSize = Math.random() * 10 + 10 + "px";
-    snow.style.animationDuration = Math.random() * 5 + 5 + "s";
-    snow.style.opacity = Math.random();
+    const snow = document.createElement('div');
+    snow.className = 'snowflake';
+    snow.textContent = chars[Math.floor(Math.random() * chars.length)];
+    const size = Math.random() * 12 + 6;
+    const drift = (Math.random() - 0.5) * 150;
+    const rot = Math.random() * 720 - 360;
+    const dur = Math.random() * 6 + 6;
+    const delay = Math.random() * 2;
+    Object.assign(snow.style, {
+      left: Math.random() * 100 + 'vw',
+      fontSize: size + 'px',
+      color: `rgba(255,255,255,${Math.random() * 0.5 + 0.3})`,
+      '--drift': drift + 'px',
+      '--rot': rot + 'deg',
+      animationDuration: dur + 's',
+      animationDelay: delay + 's',
+    });
     document.body.appendChild(snow);
-    setTimeout(() => snow.remove(), 10000);
+    setTimeout(() => snow.remove(), (dur + delay) * 1000 + 500);
   }
-  setInterval(createSnowflake, 200);
+
+  for (let i = 0; i < 3; i++) setTimeout(createSnowflake, i * 400);
+  setInterval(createSnowflake, 450);
 }
 
 /* ── Last.fm ── */
@@ -212,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ── sounds ── */
-(() => {
+function initSounds() {
   if (matchMedia('(max-width: 768px)').matches) return;
 
   const CLICK_URL = '/sounds/click.mp3';
@@ -223,43 +282,43 @@ document.addEventListener('DOMContentLoaded', () => {
   let ctx = null;
   let masterGain = null;
   let clickBuf = null, hoverBuf = null, selectBuf = null, rightClickBuf = null;
-  let unlocked = false, initialized = false, lastHovered = null;
+  let unlocked = false, lastHovered = null;
 
   function getCtx() {
     if (!ctx) {
       ctx = new (window.AudioContext || window.webkitAudioContext)();
       masterGain = ctx.createGain();
-      masterGain.gain.value = 1;
+      masterGain.gain.value = (parseInt(localStorage.getItem('volume')) || 80) / 100;
       masterGain.connect(ctx.destination);
     }
     return ctx;
   }
 
+  function setVolume(v) {
+    if (masterGain) masterGain.gain.value = v;
+  }
+
+  window.setSoundVolume = setVolume;
+
   async function loadBuffer(url) {
     try {
       const c = getCtx();
-      const data = await (await fetch(url)).arrayBuffer();
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      const data = await res.arrayBuffer();
       return await c.decodeAudioData(data);
     } catch { return null; }
   }
 
   function unlock() {
     if (unlocked) return;
-    if (!initialized) {
-      initialized = true;
-      loadBuffer(CLICK_URL).then(b => clickBuf = b);
-      loadBuffer(HOVER_URL).then(b => hoverBuf = b);
-      loadBuffer(SELECT_URL).then(b => selectBuf = b);
-      loadBuffer(RIGHTCLICK_URL).then(b => rightClickBuf = b);
-    }
     unlocked = true;
     const c = getCtx();
     if (c.state === 'suspended') c.resume();
-    const buff = c.createBuffer(1, 1, 22050);
-    const src = c.createBufferSource();
-    src.buffer = buff;
-    masterGain ? src.connect(masterGain) : src.connect(c.destination);
-    src.start(0);
+    loadBuffer(CLICK_URL).then(b => clickBuf = b);
+    loadBuffer(HOVER_URL).then(b => hoverBuf = b);
+    loadBuffer(SELECT_URL).then(b => selectBuf = b);
+    loadBuffer(RIGHTCLICK_URL).then(b => rightClickBuf = b);
   }
 
   function play(buf) {
@@ -268,25 +327,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (c.state === 'suspended') c.resume();
     const src = c.createBufferSource();
     src.buffer = buf;
-    masterGain ? src.connect(masterGain) : src.connect(c.destination);
+    src.connect(masterGain || c.destination);
     src.start(0);
   }
 
   document.addEventListener('click', e => {
     unlock();
-    const link = e.target.closest('a');
-    if (link && link.href && !link.target && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
-      setTimeout(() => { window.location.href = link.href; }, 100);
-      e.preventDefault();
-    }
     play(clickBuf);
   }, true);
 
   document.addEventListener('mouseover', e => {
+    unlock();
     const el = e.target.closest('a, [data-hoversound]');
     if (el === lastHovered) return;
     lastHovered = el || null;
-    if (el && unlocked) play(hoverBuf);
+    if (el) play(hoverBuf);
   });
 
   let selecting = false, lastSelectTime = 0;
@@ -302,5 +357,47 @@ document.addEventListener('DOMContentLoaded', () => {
     play(selectBuf);
   });
 
-  document.addEventListener('contextmenu', () => play(rightClickBuf));
-})();
+  document.addEventListener('contextmenu', () => { unlock(); play(rightClickBuf); });
+}
+
+/* ── volume ── */
+function initVolume() {
+  const slider = document.getElementById('volumeSlider');
+  const val = document.getElementById('volumeVal');
+  const icon = document.getElementById('volumeIcon');
+  if (!slider) return;
+
+  const saved = parseInt(localStorage.getItem('volume')) || 80;
+  let lastNonZero = saved || 80;
+  slider.value = saved;
+  val.textContent = saved + '%';
+  icon.textContent = saved === 0 ? '🔇' : saved < 33 ? '🔈' : saved < 66 ? '🔉' : '🔊';
+
+  if (window.setSoundVolume) window.setSoundVolume(saved / 100);
+
+  slider.addEventListener('input', () => {
+    const v = parseInt(slider.value);
+    val.textContent = v + '%';
+    icon.textContent = v === 0 ? '🔇' : v < 33 ? '🔈' : v < 66 ? '🔉' : '🔊';
+    if (v > 0) lastNonZero = v;
+    localStorage.setItem('volume', v);
+    if (window.setSoundVolume) window.setSoundVolume(v / 100);
+  });
+
+  icon.addEventListener('click', () => {
+    if (parseInt(slider.value) > 0) {
+      lastNonZero = parseInt(slider.value);
+      slider.value = 0;
+      val.textContent = '0%';
+      icon.textContent = '🔇';
+      localStorage.setItem('volume', 0);
+      if (window.setSoundVolume) window.setSoundVolume(0);
+    } else {
+      slider.value = lastNonZero;
+      val.textContent = lastNonZero + '%';
+      icon.textContent = '🔊';
+      localStorage.setItem('volume', lastNonZero);
+      if (window.setSoundVolume) window.setSoundVolume(lastNonZero / 100);
+    }
+  });
+}
