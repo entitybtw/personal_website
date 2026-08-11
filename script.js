@@ -317,9 +317,20 @@ function initSounds() {
     if (c.state === 'suspended') c.resume();
     loadBuffer(CLICK_URL).then(b => clickBuf = b);
     loadBuffer(HOVER_URL).then(b => hoverBuf = b);
-    loadBuffer(SELECT_URL).then(b => selectBuf = b);
+    loadBuffer(SELECT_URL).then(b => { selectBuf = b; window._selectBuf = b; });
     loadBuffer(RIGHTCLICK_URL).then(b => rightClickBuf = b);
   }
+
+  window.playTick = function() {
+    if (!selectBuf && !window._selectBuf) return;
+    const buf = selectBuf || window._selectBuf;
+    const c = getCtx();
+    if (c.state === 'suspended') c.resume();
+    const src = c.createBufferSource();
+    src.buffer = buf;
+    src.connect(masterGain || c.destination);
+    src.start(0);
+  };
 
   function play(buf) {
     if (!buf) return;
@@ -390,6 +401,7 @@ function initVolume() {
     if (v > 0) lastNonZero = v;
     localStorage.setItem('volume', v);
     if (window.setSoundVolume) window.setSoundVolume(v / 100);
+    if (window.playTick) window.playTick();
   });
 
   icon.addEventListener('click', () => {
