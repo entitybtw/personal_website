@@ -462,7 +462,7 @@ button {
 * { scrollbar-width: thin; scrollbar-color: var(--border-2) var(--bg-0); }
 ::selection { background: var(--border-acc); color: var(--text-0); }
 
-/* ── snowflakes (keep from original) ── */
+/* ── snowflakes ── */
 .snowflake {
   position: fixed;
   top: -10px;
@@ -470,9 +470,79 @@ button {
   user-select: none;
   pointer-events: none;
   z-index: 9999;
-  font-size: 1em;
-  animation: fall linear forwards;
+  opacity: 0;
+  animation: snowfall linear forwards;
 }
-@keyframes fall {
-  to { transform: translateY(110vh); opacity: 0; }
+@keyframes snowfall {
+  0% { opacity: 0; transform: translateX(0) translateY(0) rotate(0deg); }
+  10% { opacity: 1; }
+  90% { opacity: 0.8; }
+  100% { opacity: 0; transform: translateX(var(--drift)) translateY(110vh) rotate(var(--rot)); }
+}
+
+/* ── birthday banner ── */
+.birthday-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-glow);
+  border: 1px solid var(--border-acc);
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  font-size: .85rem;
+  color: var(--text-0);
+  border-radius: 20px;
+  animation: bannerPulse 3s ease-in-out infinite;
+}
+.birthday-banner .banner-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: #000;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.birthday-banner a { color: var(--accent); font-weight: 600; }
+.birthday-banner a:hover { text-decoration: underline; }
+@keyframes bannerPulse {
+  0%, 100% { border-color: var(--border-acc); }
+  50% { border-color: var(--accent); }
+}
+
+/* ── volume ── */
+.volume-section { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-1); }
+.volume-section h3 { font-family: var(--font-display); font-weight: 600; font-size: 1rem; margin-bottom: 8px; }
+.volume-row { display: flex; align-items: center; gap: 8px; }
+.volume-icon { font-size: 1rem; cursor: pointer; user-select: none; }
+.volume-val { font-family: var(--font-mono); font-size: .75rem; color: var(--text-1); min-width: 32px; text-align: right; }
+.volume-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--border-2);
+  outline: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" id="themeColor" content="#0f0f0f">
-  <title>entitybtw</title>
+  <title>entitybtw — привет, я entitybtw</title>
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +27,13 @@
   </nav>
 
   <div class="wrap">
+    <div id="birthdayBanner" class="birthday-banner" style="display:none;">
+      <span class="banner-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+      <span data-lang="ru">поддержать меня — <a href="https://donate.entitybtw.ru" target="_blank">donate.entitybtw.ru</a></span>
+      <span data-lang="en" style="display:none;">support me — <a href="https://donate.entitybtw.ru" target="_blank">donate.entitybtw.ru</a></span>
+    </div>
     <div class="welcome">
-      <h1>привет, я <span class="d">entitybtw</span></h1>
+      <h1><span data-lang="ru">привет, я</span><span data-lang="en" style="display:none;">hello, i'm</span> <span class="d">entitybtw</span></h1>
     </div>
 
     <!-- Profile -->
@@ -39,8 +44,8 @@
           <div class="profile-info">
             <p data-lang="ru">меня зовут ваня, никнейм entitybtw</p>
             <p data-lang="en" style="display:none;">my name is vanya, nickname entitybtw</p>
-            <p data-lang="ru">мне 14 лет</p>
-            <p data-lang="en" style="display:none;">i'm 14 years old</p>
+            <p data-lang="ru">мне <span id="age"></span></p>
+            <p data-lang="en" style="display:none;">i'm <span id="ageEn"></span></p>
             <p data-lang="ru">обожаю селфхостинг</p>
             <p data-lang="en" style="display:none;">i love self-hosting</p>
             <p data-lang="ru">я дев-опс инженер</p>
@@ -185,6 +190,15 @@
         <button class="btn-sm" id="accentReset">сбросить</button>
       </div>
       <p style="color:var(--text-2);font-size:.75rem;margin-top:8px;">акцент сохраняется в этом браузере</p>
+      <div class="volume-section">
+        <h3>звук</h3>
+        <div class="volume-row">
+          <span class="volume-icon" id="volumeIcon">🔊</span>
+          <input type="range" id="volumeSlider" min="0" max="100" value="80" class="volume-slider">
+          <span class="volume-val" id="volumeVal">80%</span>
+        </div>
+        <p style="color:var(--text-2);font-size:.75rem;margin-top:4px;">громкость звуков (сохраняется)</p>
+      </div>
     </div>
   </div>
 
