@@ -131,12 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const CLICK_URL = '/sounds/click.mp3';
     const HOVER_URL = '/sounds/hover.mp3';
     const SELECT_URL = '/sounds/pop.mp3';
+    const RIGHTCLICK_URL = '/sounds/rightclick.mp3';
 
     let ctx = null;
     let masterGain = null;
     let clickBuf = null;
     let hoverBuf = null;
     let selectBuf = null;
+    let rightClickBuf = null;
     let unlocked = false;
     let initialized = false;
     let lastHovered = null;
@@ -168,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loadBuffer(CLICK_URL).then(b => clickBuf = b);
             loadBuffer(HOVER_URL).then(b => hoverBuf = b);
             loadBuffer(SELECT_URL).then(b => selectBuf = b);
+            loadBuffer(RIGHTCLICK_URL).then(b => rightClickBuf = b);
         }
         unlocked = true;
         const c = getCtx();
@@ -218,6 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (now - lastSelectTime < 45) return;
         lastSelectTime = now;
         play(selectBuf);
+    });
+
+    document.addEventListener('contextmenu', () => {
+        play(rightClickBuf);
     });
 })();
 
