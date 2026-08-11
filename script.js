@@ -207,16 +207,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     let selecting = false;
-    let lastSelectTime = 0;
+    let selectPlayed = false;
     document.addEventListener('mousedown', () => { selecting = true; });
-    document.addEventListener('mouseup', () => { selecting = false; });
+    document.addEventListener('mouseup', () => {
+        selecting = false;
+        selectPlayed = false;
+    });
     document.addEventListener('selectionchange', () => {
-        if (!selecting) return;
+        if (!selecting || selectPlayed) return;
         const sel = window.getSelection();
         if (!sel || sel.isCollapsed) return;
-        const now = Date.now();
-        if (now - lastSelectTime < 180) return;
-        lastSelectTime = now;
+        selectPlayed = true;
         play(selectBuf);
     });
 })();
