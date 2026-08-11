@@ -125,3 +125,82 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+(() => {
+    if (matchMedia('(max-width: 768px)').matches) return;
+
+    const CLICK_URL = '/sounds/click.mp3';
+    const HOVER_URL = '/sounds/hover.mp3';
+
+    let ctx = null;
+    let masterGain = null;
+    let clickBuf = null;
+    let hoverBuf = null;
+    let unlocked = false;
+    let initialized = false;
+    let lastHovered = null;
+
+    function getCtx() {
+        if (!ctx) {
+            ctx = new (window.AudioContext || window.webkitAudioContext)();
+            masterGain = ctx.createGain();
+            masterGain.gain.value = 1;
+            masterGain.connect(ctx.destination);
+        }
+        return ctx;
+    }
+
+    async function loadBuffer(url) {
+        try {
+            const c = getCtx();
+            const data = await (await fetch(url)).arrayBuffer();
+            return await c.decodeAudioData(data);
+        } catch {
+            return null;
+        }
+    }
+
+    function unlock() {
+        if (unlocked) return;
+        if (!initialized) {
+            initialized = true;
+            loadBuffer(CLICK_URL).then(b => clickBuf = b);
+            loadBuffer(HOVER_URL).then(b => hoverBuf = b);
+        }
+        unlocked = true;
+        const c = getCtx();
+        if (c.state === 'suspended') c.resume();
+        const buff = c.createBuffer(1, 1, 22050);
+        const src = c.createBufferSource();
+        src.buffer = buff;
+        masterGain ? src.connect(masterGain) : src.connect(c.destination);
+        src.start(0);
+    }
+
+    function play(buf) {
+        if (!buf) return;
+        const c = getCtx();
+        if (c.state === 'suspended') c.resume();
+        const src = c.createBufferSource();
+        src.buffer = buf;
+        masterGain ? src.connect(masterGain) : src.connect(c.destination);
+        src.start(0);
+    }
+
+    document.addEventListener('click', e => {
+        unlock();
+        const link = e.target.closest('a');
+        if (link && link.href && !link.target && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
+            setTimeout(() => { window.location.href = link.href; }, 100);
+            e.preventDefault();
+        }
+        play(clickBuf);
+    }, true);
+
+    document.addEventListener('mouseover', e => {
+        const el = e.target.closest('a, [data-hoversound]');
+        if (el === lastHovered) return;
+        lastHovered = el || null;
+        if (el && unlocked) play(hoverBuf);
+    });
+})();
+
