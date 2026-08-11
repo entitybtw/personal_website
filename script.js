@@ -403,7 +403,7 @@ function initVolume() {
     localStorage.setItem('volume', v);
     if (window.setSoundVolume) window.setSoundVolume(v / 100);
     const now = Date.now();
-    if (window.playTick && now - lastTick > 100) {
+    if (window.playTick && now - lastTick > 50) {
       lastTick = now;
       window.playTick();
     }
