@@ -322,20 +322,14 @@ function initSounds() {
   }
 
   window.playTick = function() {
+    const buf = selectBuf;
+    if (!buf) return;
     const c = getCtx();
     if (c.state === 'suspended') c.resume();
-    const now = c.currentTime;
-    const osc = c.createOscillator();
-    const gain = c.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(1200, now);
-    osc.frequency.exponentialRampToValueAtTime(600, now + 0.04);
-    gain.gain.setValueAtTime(0.15, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-    osc.connect(gain);
-    gain.connect(masterGain || c.destination);
-    osc.start(now);
-    osc.stop(now + 0.05);
+    const src = c.createBufferSource();
+    src.buffer = buf;
+    src.connect(masterGain || c.destination);
+    src.start(0);
   };
 
   function play(buf) {
@@ -400,6 +394,7 @@ function initVolume() {
 
   icon.innerHTML = volIcon(saved);
 
+  let lastTick = 0;
   slider.addEventListener('input', () => {
     const v = parseInt(slider.value);
     val.textContent = v + '%';
@@ -407,7 +402,11 @@ function initVolume() {
     if (v > 0) lastNonZero = v;
     localStorage.setItem('volume', v);
     if (window.setSoundVolume) window.setSoundVolume(v / 100);
-    if (window.playTick) window.playTick();
+    const now = Date.now();
+    if (window.playTick && now - lastTick > 100) {
+      lastTick = now;
+      window.playTick();
+    }
   });
 
   icon.addEventListener('click', () => {
