@@ -1,173 +1,255 @@
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wassup chat</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="/style.css">
-    <script defer src="https://umami.entitybtw.ru/script.js" data-website-id="89687f7a-ea1f-4551-9f05-08b071e72f56"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" id="themeColor" content="#0f0f0f">
+  <title>entitybtw</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="https://umami.entitybtw.ru/script.js" data-website-id="89687f7a-ea1f-4551-9f05-08b071e72f56"></script>
 </head>
 <body>
-    <header>
-        <h1 data-lang="ru">добро пожаловать на сайт энтитибтв o_O</h1>
-        <h1 data-lang="en" style="display:none;">welcome to entitybtw's website o_O</h1>
-        <div class="lang-switcher">
-            <a class="lang-link" onclick="switchLang('ru')">rus</a> | 
-            <a class="lang-link" onclick="switchLang('en')">eng</a> |
-            <a class="theme-toggle" onclick="toggleTheme()">theme</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">entitybtw<span class="logo-dot">.</span></a>
+      <div class="nav-controls">
+        <button class="btn-icon" id="langBtn" title="language">ru</button>
+        <button class="btn-icon" id="themeBtn" title="theme"></button>
+        <button class="btn-icon" id="settingsBtn" title="settings">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="welcome">
+      <h1>привет, я <span class="d">entitybtw</span></h1>
+      <p data-lang="ru">разработчик-энтузиаст, линукс юзер, делаю хомбрюшки</p>
+      <p data-lang="en" style="display:none;">dev-enthusiast, linux user, i make homebrew stuff</p>
+    </div>
+
+    <!-- Profile -->
+    <section class="section">
+      <div class="card">
+        <div class="profile-section">
+          <img src="/images/me.jpg" class="profile-photo" alt="me">
+          <div class="profile-info">
+            <p data-lang="ru">меня зовут ваня, никнейм entitybtw</p>
+            <p data-lang="en" style="display:none;">my name is vanya, nickname entitybtw</p>
+            <p data-lang="ru">мне 14 лет</p>
+            <p data-lang="en" style="display:none;">i'm 14 years old</p>
+            <p data-lang="ru">занимаюсь разработкой различных хомбрюшек</p>
+            <p data-lang="en" style="display:none;">i make various homebrew stuff</p>
+            <p data-lang="ru">я разработчик-энтузиаст, линукс юзер(i use cachyos btw)</p>
+            <p data-lang="en" style="display:none;">i'm a dev-enthusiast, linux user(i use cachyos btw)</p>
+            <div class="music-line" style="margin-top: 8px;">
+              <span>🎵</span>
+              <span id="song">⏳</span>
+            </div>
+          </div>
         </div>
-    </header>
-    <main>
-        <img src="/images/me.jpg" style="width:450px; height:290px; object-fit:cover;" alt="me" align="right">
-        <section>
-            <a href="https://www.youtube.com/@entitybtw" target="_blank">
-                <img class="themechanging" data-src-light="/images/youtube_light.png" data-src-dark="/images/youtube_dark.png" src="/images/youtube_light.png">
-            </a>
-            <a href="https://www.last.fm/user/entitybtw" target="_blank">
-                <img src="/images/lastfm.png">
-            </a>
-            <a href="https://koito.entitybtw.ru" target="_blank">
-                <img src="https://koito.entitybtw.ru/favicon.ico" width="31" height="35" alt="koito">
-            </a>
-            <a href="https://github.com/entitybtw" target="_blank">
-                <img src="/images/github.png">
-            </a>
-            <a href="https://pay.cloudtips.ru/p/91e08124" target="_blank">
-                <img src="/images/cloudtips.png">
-            </a>
-            <a href="https://www.roblox.com/users/1507038183/profile" target="_blank">
-                <img src="/images/roblox.png">
-            </a>
-            <a href="https://steamcommunity.com/id/entitybtw/" target="_blank">
-                <img src="/images/steam.png">
-            </a>
-            <a href="https://ru.namemc.com/profile/entitybtw.1" target="_blank">
-                <img src="/images/minecraft.png">
-            </a>
-            <a href="https://t.me/entitybtw" target="_blank">
-                <img src="/images/telegram.png">
-            </a>
-            <a href="https://blog.entitybtw.ru" target="_blank">
-                <img src="/images/teletype.png">
-            </a>
-            <a href="https://openvk.org/id21967" target="_blank">
-                <img src="/images/ovk.png">
-            </a>
-            <a href="https://vk.com/entbtw" target="_blank">
-                <img src="/images/vk.png" alt="VK">
-            </a>
-            <a href="https://status.entitybtw.ru" target="_blank">
-                <img src="/images/status.png">
-            </a>
-            <a href="https://monkeytype.com/profile/entitybtw" target="_blank">
-                <img src="/images/monkeytype.png">
-            </a>
-        </section>
-        <section>
-          <img
-            src="https://skillicons.dev/icons?i=html,css,linux,ps,ae,lua,cpp,c"
-            width="340"
-            height="auto"
-        >
-        </section>
+      </div>
+    </section>
 
-        <section>
-            <h2 data-lang="ru">обо мне</h2>
-            <h2 data-lang="en" style="display:none;">about me</h2>
-            <p data-lang="ru">> меня зовут ваня, никнейм entitybtw</p>
-            <p data-lang="en" style="display:none;">> my name is vanya, nickname entitybtw</p>
-            <p data-lang="ru">> мне 14 лет</p>
-            <p data-lang="en" style="display:none;">> i’m 14 years old</p>
-            <p data-lang="ru">> занимаюсь разработкой различных хомбрюшек</p>
-            <p data-lang="en" style="display:none;">> i make various homebrew stuff</p>
-            <p data-lang="ru">> я разработчик-энтузиаст, линукс юзер(i use cachyos btw)</p>
-            <p data-lang="en" style="display:none;">> i’m a dev-enthusiast, linux user(i use cachyos btw)</p>
-
-            <p>🎵 <span id="song">⏳</span></p>
-        </section>
-        <section>
-            <h2 data-lang="ru">мои крутые проекты</h2>
-            <h2 data-lang="en" style="display:none;">my cool projects</h2>
-
-            <p data-lang="ru"><a href="https://git.entitybtw.ru/entitybtw/pspfetch">pspfetch</a> -> фетч программка для псп на луа</p>
-            <p data-lang="en" style="display:none;"><a href="https://git.entitybtw.ru/entitybtw/pspfetch">pspfetch</a> -> fetch app for psp written in lua</p>
-
-            <p data-lang="ru"><a href="https://git.entitybtw.ru/entitybtw/widgets_portable">widgets_portable</a> — многофункциональное приложение для PSP для отображения информации с компьютера</p>
-            <p data-lang="en"><a href="https://git.entitybtw.ru/entitybtw/widgets_portable">widgets_portable</a> — a multifunctional PSP app for displaying information from a PC</p>
-
-
-            <p data-lang="ru"><a href="https://git.entitybtw.ru/entitybtw/mcsm_portable">mcsm_portable</a> -> порт игры minecraft story mode на псп основанный на netflix версии игры (разработкой которого занимаюсь в данный момент)</p>
-            <p data-lang="en"><a href="https://git.entitybtw.ru/entitybtw/mcsm_portable">mcsm_portable</a> -> port of minecraft story mode to psp based on the netflix version (currently working on it)</p>
-
-            <p data-lang="ru"><a href="https://git.entitybtw.ru/entitybtw/arduino-nano-morse-keyboard">arduino-nano-morse-keyboard</a> -> USB адаптер для телеграфного ключа основанный на Arduino Nano</p>
-            <p data-lang="en"><a href="https://git.entitybtw.ru/entitybtw/arduino-nano-morse-keyboard">arduino-nano-morse-keyboard</a> -> USB adapter for a Morse telegraph key based on Arduino Nano</p>
-
-            <p data-lang="ru"><a href="https://git.entitybtw.ru/entitybtw/morse-trainer">morse-trainer</a> -> многофункциональный веб-тренажёр азбуки Морзе, созданный в рамках проекта arduino-nano-morse-keyboard</p>
-            <p data-lang="en"><a href="https://git.entitybtw.ru/entitybtw/morse-trainer">morse-trainer</a> -> a multifunctional web-based Morse code training tool, created as part of the arduino-nano-morse-keyboard project</p>
-
-            <p data-lang="ru"><a href="https://v1.luaplayeryt.ru">lpyt-docs</a> — веб-документация для движка LuaPlayerYT (PSP)</p>
-            <p data-lang="en"><a href="https://v1.luaplayeryt.ru">lpyt-docs</a> — web documentation for the LuaPlayerYT PSP engine</p>
-            
-        </section>
-        <section>
-            <h2 data-lang="ru">дополнительные ссылки</h2>
-            <h2 data-lang="en" style="display:none;">additional links</h2>
-            <p data-lang="ru"><a href="https://t.me/devblogentbtw">devblogentbtw</a> -> мой девблог телеграм канал</p>
-            <p data-lang="en"><a href="https://t.me/devblogentbtw">devblogentbtw</a> -> my devblog telegram channel</p>
-
-            <p data-lang="ru"><a href="https://t.me/entbtw">entbtw</a> -> телеграм канал entbtw.</p>
-            <p data-lang="en"><a href="https://t.me/entbtw">entbtw</a> -> entbtw. telegram channel</p>
-        </section>
-    </main>
-    <footer>
-        <div class="webring-wrapper">
-            <a class="webring" id="prev-link" href="https://webring.otomir23.me/32/prev">&lt; prev</a>
-            <a class="webring" href="https://webring.otomir23.me/">[webring]</a>
-            <a class="webring" id="next-link" href="https://webring.otomir23.me/32/next">next &gt;</a>
+    <!-- Links -->
+    <section class="section">
+      <div class="card">
+        <div class="card-head">
+          <h3 data-lang="ru">ссылки</h3>
+          <h3 data-lang="en" style="display:none;">links</h3>
         </div>
-        <p>&copy; 2026 entitybtw website | <a href="https://git.entitybtw.ru/entitybtw/personal_website">src code</a></p>
+        <div class="links-grid">
+          <a class="link-item" href="https://www.youtube.com/@entitybtw" target="_blank">
+            <img class="themechanging" data-src-light="/images/youtube_light.png" data-src-dark="/images/youtube_dark.png" src="/images/youtube_light.png">
+            <span>youtube</span>
+          </a>
+          <a class="link-item" href="https://www.last.fm/user/entitybtw" target="_blank">
+            <img src="/images/lastfm.png">
+            <span>last.fm</span>
+          </a>
+          <a class="link-item" href="https://koito.entitybtw.ru" target="_blank">
+            <img src="https://koito.entitybtw.ru/favicon.ico" width="18" height="18" alt="koito">
+            <span>koito</span>
+          </a>
+          <a class="link-item" href="https://github.com/entitybtw" target="_blank">
+            <img src="/images/github.png">
+            <span>github</span>
+          </a>
+          <a class="link-item" href="https://pay.cloudtips.ru/p/91e08124" target="_blank">
+            <img src="/images/cloudtips.png">
+            <span>donate</span>
+          </a>
+          <a class="link-item" href="https://www.roblox.com/users/1507038183/profile" target="_blank">
+            <img src="/images/roblox.png">
+            <span>roblox</span>
+          </a>
+          <a class="link-item" href="https://steamcommunity.com/id/entitybtw/" target="_blank">
+            <img src="/images/steam.png">
+            <span>steam</span>
+          </a>
+          <a class="link-item" href="https://ru.namemc.com/profile/entitybtw.1" target="_blank">
+            <img src="/images/minecraft.png">
+            <span>minecraft</span>
+          </a>
+          <a class="link-item" href="https://t.me/entitybtw" target="_blank">
+            <img src="/images/telegram.png">
+            <span>telegram</span>
+          </a>
+          <a class="link-item" href="https://blog.entitybtw.ru" target="_blank">
+            <img src="/images/teletype.png">
+            <span>blog</span>
+          </a>
+          <a class="link-item" href="https://openvk.org/id21967" target="_blank">
+            <img src="/images/ovk.png">
+            <span>openvk</span>
+          </a>
+          <a class="link-item" href="https://vk.com/entbtw" target="_blank">
+            <img src="/images/vk.png">
+            <span>vk</span>
+          </a>
+          <a class="link-item" href="https://status.entitybtw.ru" target="_blank">
+            <img src="/images/status.png">
+            <span>status</span>
+          </a>
+          <a class="link-item" href="https://monkeytype.com/profile/entitybtw" target="_blank">
+            <img src="/images/monkeytype.png">
+            <span>monkeytype</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section">
+      <div class="card">
+        <div class="card-head">
+          <h3 data-lang="ru">скиллы</h3>
+          <h3 data-lang="en" style="display:none;">skills</h3>
+        </div>
+        <img class="skills-img" src="https://skillicons.dev/icons?i=html,css,linux,ps,ae,lua,cpp,c" width="340" height="auto">
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section">
+      <div class="card">
+        <div class="card-head">
+          <h3 data-lang="ru">проекты</h3>
+          <h3 data-lang="en" style="display:none;">projects</h3>
+        </div>
+        <div class="projects-list">
+          <div class="project-item">
+            <a href="https://git.entitybtw.ru/entitybtw/pspfetch" target="_blank">pspfetch</a>
+            <p data-lang="ru">фетч программка для псп на луа</p>
+            <p data-lang="en" style="display:none;">fetch app for psp written in lua</p>
+          </div>
+          <div class="project-item">
+            <a href="https://git.entitybtw.ru/entitybtw/widgets_portable" target="_blank">widgets_portable</a>
+            <p data-lang="ru">многофункциональное приложение для PSP для отображения информации с компьютера</p>
+            <p data-lang="en" style="display:none;">a multifunctional PSP app for displaying information from a PC</p>
+          </div>
+          <div class="project-item">
+            <a href="https://git.entitybtw.ru/entitybtw/mcsm_portable" target="_blank">mcsm_portable</a>
+            <p data-lang="ru">порт игры minecraft story mode на псп основанный на netflix версии игры (в разработке)</p>
+            <p data-lang="en" style="display:none;">port of minecraft story mode to psp based on the netflix version (currently working on it)</p>
+          </div>
+          <div class="project-item">
+            <a href="https://git.entitybtw.ru/entitybtw/arduino-nano-morse-keyboard" target="_blank">arduino-nano-morse-keyboard</a>
+            <p data-lang="ru">USB адаптер для телеграфного ключа основанный на Arduino Nano</p>
+            <p data-lang="en" style="display:none;">USB adapter for a Morse telegraph key based on Arduino Nano</p>
+          </div>
+          <div class="project-item">
+            <a href="https://git.entitybtw.ru/entitybtw/morse-trainer" target="_blank">morse-trainer</a>
+            <p data-lang="ru">многофункциональный веб-тренажёр азбуки Морзе</p>
+            <p data-lang="en" style="display:none;">a multifunctional web-based Morse code training tool</p>
+          </div>
+          <div class="project-item">
+            <a href="https://v1.luaplayeryt.ru" target="_blank">lpyt-docs</a>
+            <p data-lang="ru">веб-документация для движка LuaPlayerYT (PSP)</p>
+            <p data-lang="en" style="display:none;">web documentation for the LuaPlayerYT PSP engine</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional links -->
+    <section class="section">
+      <div class="card">
+        <div class="card-head">
+          <h3 data-lang="ru">ещё</h3>
+          <h3 data-lang="en" style="display:none;">more</h3>
+        </div>
+        <div class="projects-list">
+          <div class="project-item">
+            <a href="https://t.me/devblogentbtw" target="_blank">devblogentbtw</a>
+            <p data-lang="ru">мой девблог телеграм канал</p>
+            <p data-lang="en" style="display:none;">my devblog telegram channel</p>
+          </div>
+          <div class="project-item">
+            <a href="https://t.me/entbtw" target="_blank">entbtw</a>
+            <p data-lang="ru">телеграм канал entbtw</p>
+            <p data-lang="en" style="display:none;">entbtw telegram channel</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="webring-wrapper">
+        <a class="webring" id="prev-link" href="https://webring.otomir23.me/32/prev">&lt; prev</a>
+        <a class="webring" href="https://webring.otomir23.me/">[webring]</a>
+        <a class="webring" id="next-link" href="https://webring.otomir23.me/32/next">next &gt;</a>
+      </div>
+      <div class="badges-row">
         <img class="themechanging" data-src-light="/images/madeon_light.png" data-src-dark="/images/madeon_dark.png" src="/images/madeon.gif">
         <img class="themechanging" data-src-light="/images/anybrowser_light.png" data-src-dark="/images/anybrowser_dark.png" src="/images/anybrowser.png">
         <img class="themechanging" data-src-light="/images/computer_light.gif" data-src-dark="/images/computer_dark.gif" src="/images/computer.gif">
         <img class="themechanging" data-src-light="/images/eyes_light.gif" data-src-dark="/images/eyes_dark.gif" src="/images/eyes.gif">
         <img class="themechanging" data-src-light="/images/web1_light.png" data-src-dark="/images/web1_dark.png" src="/images/web1.png">
         <a href="https://fckn.rocks" target="_blank"><img class="themechanging" data-src-light="/images/fcknrocks_light.png" data-src-dark="https://fckn.rocks/fcknrocks.png" src="https://fckn.rocks/fcknrocks.png"></a>
-        <a href="https://flipper.net" target="_blank">
-            <img src="https://entitybtw.ru/images/flipperzero.gif" alt="flipperzero">
-        </a>
-        <a href="https://milkcool.ru" target="_blank" rel="noopener noreferrer">
-          <img src="https://milkcool.ru/buttons/mybutton.gif" alt="milkcool" width="88" height="31" loading="lazy">
-        </a>
-
-        <a href="https://glutesha.me" target="_blank" rel="noopener noreferrer">
-          <img src="https://glutesha.me/badges/interactive/glutesha.png" alt="glutesha" width="88" height="33" loading="lazy">
-        </a>
-
-        <a href="https://otomir23.me" target="_blank" rel="noopener noreferrer" style="image-rendering:pixelated;">
-          <img src="https://otomir23.me/88x31.png" alt="otomir23" width="88" height="31" loading="lazy">
-        </a>
-
-        <a href="https://asyasocute.online" target="_blank" rel="noopener noreferrer">
-          <img src="https://asyasocute.online/badges/cowl.png" alt="asyasocute - cowl" width="88" height="31" loading="lazy">
-        </a>
-
-        <a class="badge marquee-badge" href="https://laingame.net/" data-astro-cid-rkvert73=""> 
-            <img src="/images/lain_green.gif" alt="lain" width="88" height="33" loading="lazy"> 
-        </a>
-
+        <a href="https://flipper.net" target="_blank"><img src="https://entitybtw.ru/images/flipperzero.gif" alt="flipperzero"></a>
+        <a href="https://milkcool.ru" target="_blank" rel="noopener noreferrer"><img src="https://milkcool.ru/buttons/mybutton.gif" alt="milkcool" width="88" height="31" loading="lazy"></a>
+        <a href="https://glutesha.me" target="_blank" rel="noopener noreferrer"><img src="https://glutesha.me/badges/interactive/glutesha.png" alt="glutesha" width="88" height="33" loading="lazy"></a>
+        <a href="https://otomir23.me" target="_blank" rel="noopener noreferrer" style="image-rendering:pixelated;"><img src="https://otomir23.me/88x31.png" alt="otomir23" width="88" height="31" loading="lazy"></a>
+        <a href="https://asyasocute.online" target="_blank" rel="noopener noreferrer"><img src="https://asyasocute.online/badges/cowl.png" alt="asyasocute - cowl" width="88" height="31" loading="lazy"></a>
+        <a class="badge marquee-badge" href="https://laingame.net/" data-astro-cid-rkvert73=""><img src="/images/lain_green.gif" alt="lain" width="88" height="33" loading="lazy"></a>
         <img src="https://entitybtw.ru/images/server.gif" alt="server">
-        <p style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 10px; border-radius: 8px;">
-            <a href="https://entitybtw.ru" target="_blank">
-                <img src="https://entitybtw.ru/images/entitybtw.gif" alt="entitybtw" style="vertical-align: middle;">
-            </a>
-            <code style="display: block; background: var(--bg-color); color: var(--text-color); font-family: monospace; padding: 8px 12px; border-radius: 6px; white-space: normal; user-select: all;">
-            &lt;a href="https://entitybtw.ru" target="_blank"&gt;&lt;img src="https://entitybtw.ru/images/entitybtw.gif"&gt;&lt;/a&gt;
-            </code>
-        </p>
+      </div>
+      <p style="margin: 10px 0;">
+        <a href="https://entitybtw.ru" target="_blank">
+          <img src="https://entitybtw.ru/images/entitybtw.gif" alt="entitybtw" style="vertical-align: middle;">
+        </a>
+      </p>
+      <p>&copy; 2026 entitybtw | <a href="https://git.entitybtw.ru/entitybtw/personal_website">src</a></p>
+    </div>
+  </footer>
 
+  <!-- Settings overlay -->
+  <div class="settings-overlay" id="settingsOverlay">
+    <div class="settings-panel" onclick="event.stopPropagation()" style="position:relative">
+      <button class="settings-x" id="settingsClose">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+      <h3>accent цвет</h3>
+      <div class="accent-presets" id="accentPresets"></div>
+      <div class="accent-row">
+        <input type="color" id="accentColorPicker" value="#d4a574">
+        <input type="text" id="accentHex" placeholder="#d4a574" maxlength="7">
+        <span class="accent-current" id="accentCurrent"></span>
+        <button class="btn-sm accent" id="accentApply">применить</button>
+        <button class="btn-sm" id="accentReset">сбросить</button>
+      </div>
+      <p style="color:var(--text-2);font-size:.75rem;margin-top:8px;">акцент сохраняется в этом браузере</p>
+    </div>
+  </div>
 
-
-    </footer>
-<script defer src="/script.js"></script>
+  <script defer src="/script.js"></script>
 </body>
 </html>
