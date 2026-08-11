@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const CLICK_URL = '/sounds/click.mp3';
     const HOVER_URL = '/sounds/hover.mp3';
-    const SELECT_URL = '/sounds/select.mp3';
+    const SELECT_URL = '/sounds/pop.mp3';
 
     let ctx = null;
     let masterGain = null;
@@ -207,17 +207,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     let selecting = false;
-    let selectPlayed = false;
+    let lastSelectTime = 0;
     document.addEventListener('mousedown', () => { selecting = true; });
-    document.addEventListener('mouseup', () => {
-        selecting = false;
-        selectPlayed = false;
-    });
+    document.addEventListener('mouseup', () => { selecting = false; });
     document.addEventListener('selectionchange', () => {
-        if (!selecting || selectPlayed) return;
+        if (!selecting) return;
         const sel = window.getSelection();
         if (!sel || sel.isCollapsed) return;
-        selectPlayed = true;
+        const now = Date.now();
+        if (now - lastSelectTime < 45) return;
+        lastSelectTime = now;
         play(selectBuf);
     });
 })();
