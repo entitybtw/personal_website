@@ -317,19 +317,25 @@ function initSounds() {
     if (c.state === 'suspended') c.resume();
     loadBuffer(CLICK_URL).then(b => clickBuf = b);
     loadBuffer(HOVER_URL).then(b => hoverBuf = b);
-    loadBuffer(SELECT_URL).then(b => { selectBuf = b; window._selectBuf = b; });
+    loadBuffer(SELECT_URL).then(b => selectBuf = b);
     loadBuffer(RIGHTCLICK_URL).then(b => rightClickBuf = b);
   }
 
   window.playTick = function() {
-    if (!selectBuf && !window._selectBuf) return;
-    const buf = selectBuf || window._selectBuf;
     const c = getCtx();
     if (c.state === 'suspended') c.resume();
-    const src = c.createBufferSource();
-    src.buffer = buf;
-    src.connect(masterGain || c.destination);
-    src.start(0);
+    const now = c.currentTime;
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(1200, now);
+    osc.frequency.exponentialRampToValueAtTime(600, now + 0.04);
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+    osc.connect(gain);
+    gain.connect(masterGain || c.destination);
+    osc.start(now);
+    osc.stop(now + 0.05);
   };
 
   function play(buf) {
