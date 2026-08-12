@@ -270,6 +270,130 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+/* ── Hydra games ── */
+class HydraIntegration {
+  constructor() {
+    this.base = 'https://hydra.entitybtw.ru';
+    this.username = 'entbtw';
+    this.shop = 'steam';
+    this.games = [];
+    this.cgTitle = document.getElementById('cgTitle');
+    this.gameCount = document.getElementById('gameCount');
+    this.gameHours = document.getElementById('gameHours');
+    this.gamesList = document.getElementById('gamesList');
+    this.currentGameEl = document.getElementById('gameStatus');
+    this.updateInterval = null;
+    this.shops = null;
+  }
+
+  formatTime(ms) {
+    const h = Math.floor(ms / 3600000);
+    const m = Math.floor((ms % 3600000) / 60000);
+    if (h >= 100) return `${h}h`;
+    if (h > 0) return `${h}h ${m}m`;
+    if (m > 0) return `${m}m`;
+    return `${Math.floor(ms / 1000)}s`;
+  }
+
+  async fetchProfile() {
+    const res = await fetch(`${this.base}/api/users/${this.username}`);
+    if (!res.ok) throw new Error(`hydra ${res.status}`);
+    return res.json();
+  }
+
+  async fetchLibrary() {
+    const all = [];
+    let skip = 0;
+    while (true) {
+      const res = await fetch(`${this.base}/api/users/${this.username}/library?take=100&skip=${skip}&sortBy=playedRecently`);
+      if (!res.ok) throw new Error(`hydra ${res.status}`);
+      const data = await res.json();
+      all.push(...data.games);
+      if (all.length >= data.total || data.games.length === 0) break;
+      skip += data.games.length;
+    }
+    return all;
+  }
+
+  renderCurrentGame(profile) {
+    const cg = profile.currentGame;
+    if (cg) {
+      this.currentGameEl.classList.remove('off');
+      this.cgTitle.textContent = cg.title;
+    } else {
+      this.currentGameEl.classList.add('off');
+      const l = localStorage.getItem('lang') || 'ru';
+      this.cgTitle.textContent = l === 'ru' ? 'не играет' : 'not playing';
+    }
+  }
+
+  renderGames() {
+    const list = this.games.filter(g => g.shop === this.shop);
+    list.sort((a, b) => (b.isPinned - a.isPinned) || (b.lastTimePlayed || 0) - (a.lastTimePlayed || 0) || b.playTimeInMilliseconds - a.playTimeInMilliseconds);
+    this.gamesList.innerHTML = list.map(g => `
+      <div class="game-item${g.isPinned ? ' pinned' : ''}">
+        <span class="gi-title">${g.title}</span>
+        <span class="gi-time">${g.playTimeInMilliseconds ? this.formatTime(g.playTimeInMilliseconds) : ''}</span>
+      </div>
+    `).join('') || '<span class="muted">—</span>';
+  }
+
+  async update() {
+    try {
+      const [profile, library] = await Promise.all([this.fetchProfile(), this.fetchLibrary()]);
+      this.profile = profile;
+      this.games = library;
+      this.renderCurrentGame(profile);
+
+      const s = profile.stats || {};
+      this.shops = Object.keys(s.byShop || {}).filter(k => (s.byShop[k].games || 0) > 0);
+      const counts = {};
+      for (const g of library) counts[g.shop] = (counts[g.shop] || 0) + 1;
+      this.gameCount.textContent = counts[this.shop] ?? 0;
+      this.gameHours.textContent = s.byShop?.[this.shop] ? Math.round((s.byShop[this.shop].playtime || 0) / 3600) : '–';
+
+      this.renderShopButtons();
+      this.renderGames();
+    } catch (e) {
+      console.error('hydra error:', e);
+      const l = localStorage.getItem('lang') || 'ru';
+      this.cgTitle.textContent = l === 'ru' ? 'ошибка загрузки :/' : 'load error :/';
+      this.gamesList.innerHTML = '<span class="muted">—</span>';
+    }
+  }
+
+  renderShopButtons() {
+    const box = document.getElementById('shopToggle');
+    const shops = this.shops && this.shops.length ? this.shops : ['steam', 'hydra'];
+    box.innerHTML = shops.map(s => `<button class="shop-btn${s === this.shop ? ' active' : ''}" data-shop="${s}">${s}</button>`).join('');
+    box.querySelectorAll('.shop-btn').forEach(btn => {
+      btn.onclick = () => {
+        this.shop = btn.dataset.shop;
+        this.renderShopButtons();
+        this.renderGames();
+        this.gameCount.textContent = this.games.filter(g => g.shop === this.shop).length;
+      };
+    });
+  }
+
+  start() {
+    this.update();
+    this.updateInterval = setInterval(() => this.update(), 60000);
+    document.addEventListener('languageChanged', () => {
+      if (this.profile) this.renderCurrentGame(this.profile);
+      this.renderGames();
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('gamesList')) {
+    const hydra = new HydraIntegration();
+    hydra.start();
+    window.hydraIntegration = hydra;
+  }
+});
+
 /* ── sounds ── */
 function initSounds() {
   if (matchMedia('(max-width: 768px)').matches) return;

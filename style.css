@@ -284,6 +284,88 @@ button {
   margin: 0 auto;
 }
 
+/* ── games status ── */
+.shop-toggle {
+  display: flex;
+  gap: 4px;
+}
+.shop-btn {
+  padding: 3px 10px;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--text-1);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  cursor: pointer;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.shop-btn:hover { border-color: var(--border-acc); color: var(--text-0); }
+.shop-btn.active {
+  background: var(--accent-glow);
+  border-color: var(--border-acc);
+  color: var(--accent);
+}
+.game-status { font-size: .82rem; }
+.current-game {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.cg-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  flex-shrink: 0;
+}
+.current-game.off .cg-dot { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.cg-label { color: var(--text-2); font-family: var(--font-mono); }
+.cg-title {
+  color: var(--text-0);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.game-stats {
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-1);
+}
+.game-stats span { color: var(--text-1); }
+.games-list {
+  max-height: 260px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.game-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 4px;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--text-1);
+}
+.game-item:hover { background: var(--bg-hover); color: var(--text-0); }
+.game-item .gi-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.game-item .gi-time { color: var(--text-2); font-size: .7rem; flex-shrink: 0; }
+.game-item.pinned .gi-title { color: var(--accent); }
+.muted { color: var(--text-2); }
+
 /* ── music ── */
 .music-line {
   display: flex;
