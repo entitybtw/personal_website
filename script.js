@@ -327,7 +327,8 @@ class HydraIntegration {
   }
 
   renderGames() {
-    const list = this.games.filter(g => g.shop === this.shop);
+    const isSteam = this.shop === 'steam';
+    const list = this.games.filter(g => isSteam ? g.source === 'steam_sync' : g.source !== 'steam_sync');
     list.sort((a, b) => (b.isPinned - a.isPinned) || (b.lastTimePlayed || 0) - (a.lastTimePlayed || 0) || b.playTimeInMilliseconds - a.playTimeInMilliseconds);
     this.gamesList.innerHTML = list.map(g => `
       <div class="game-item${g.isPinned ? ' pinned' : ''}">
@@ -364,7 +365,8 @@ class HydraIntegration {
     const box = document.getElementById('shopToggle');
     const allShops = ['steam', 'hydra'];
     box.innerHTML = allShops.map(s => {
-      const count = this.games.filter(g => g.shop === s).length;
+      const isSteam = s === 'steam';
+      const count = this.games.filter(g => isSteam ? g.source === 'steam_sync' : g.source !== 'steam_sync').length;
       return `<button class="shop-btn${s === this.shop ? ' active' : ''}" data-shop="${s}">${s}${count ? ` (${count})` : ''}</button>`;
     }).join('');
     box.querySelectorAll('.shop-btn').forEach(btn => {
@@ -378,7 +380,8 @@ class HydraIntegration {
   }
 
   updateStats() {
-    const filtered = this.games.filter(g => g.shop === this.shop);
+    const isSteam = this.shop === 'steam';
+    const filtered = this.games.filter(g => isSteam ? g.source === 'steam_sync' : g.source !== 'steam_sync');
     this.gameCount.textContent = filtered.length;
     const totalMs = filtered.reduce((sum, g) => sum + (g.playTimeInMilliseconds || 0), 0);
     this.gameHours.textContent = Math.round(totalMs / 3600000) || '–';
