@@ -59,6 +59,36 @@
       </div>
     </section>
 
+    <!-- Games -->
+    <section class="section">
+      <div class="card">
+        <div class="card-head">
+          <h3 data-lang="ru">статус</h3>
+          <h3 data-lang="en" style="display:none;">status</h3>
+          <div class="spacer"></div>
+          <div class="shop-toggle" id="shopToggle">
+            <button class="shop-btn" data-shop="steam">steam</button>
+            <button class="shop-btn" data-shop="hydra">hydra</button>
+          </div>
+        </div>
+        <div id="gameStatus" class="game-status">
+          <div class="current-game">
+            <span class="cg-dot"></span>
+            <span class="cg-label" data-lang="ru">сейчас играет:</span>
+            <span class="cg-label" data-lang="en" style="display:none;">now playing:</span>
+            <span class="cg-title" id="cgTitle">⏳</span>
+          </div>
+          <div class="game-stats">
+            <span id="gameCount">–</span> <span data-lang="ru">игр</span><span data-lang="en" style="display:none;">games</span>
+            · <span id="gameHours">–</span> h
+          </div>
+          <div class="games-list" id="gamesList">
+            <span class="muted">⏳</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Links -->
     <section class="section">
       <div class="card">
