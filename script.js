@@ -305,7 +305,7 @@ class HydraIntegration {
     const all = [];
     let skip = 0;
     while (true) {
-      const res = await fetch(`${this.base}/api/users/${this.username}/library?take=100&skip=${skip}&sortBy=playedRecently`);
+      const res = await fetch(`${this.base}/api/users/${this.username}/library?take=100&skip=${skip}&sortBy=playedRecently&shop=${this.shop}`);
       if (!res.ok) throw new Error(`hydra ${res.status}`);
       const data = await res.json();
       all.push(...data.games);
@@ -367,11 +367,14 @@ class HydraIntegration {
       return `<button class="shop-btn${s === this.shop ? ' active' : ''}" data-shop="${s}"${disabled ? ' disabled' : ''}>${s}</button>`;
     }).join('');
     box.querySelectorAll('.shop-btn:not([disabled])').forEach(btn => {
-      btn.onclick = () => {
+      btn.onclick = async () => {
         this.shop = btn.dataset.shop;
         this.renderShopButtons();
-        this.renderGames();
+        try {
+          this.games = await this.fetchLibrary();
+        } catch {}
         this.updateStats();
+        this.renderGames();
       };
     });
   }
