@@ -317,13 +317,12 @@ class HydraIntegration {
 
   renderCurrentGame(profile) {
     const cg = profile.currentGame;
+    const row = this.currentGameEl.querySelector('.current-game');
     if (cg) {
-      this.currentGameEl.classList.remove('off');
+      row.style.display = '';
       this.cgTitle.textContent = cg.title;
     } else {
-      this.currentGameEl.classList.add('off');
-      const l = localStorage.getItem('lang') || 'ru';
-      this.cgTitle.textContent = l === 'ru' ? 'не играет' : 'not playing';
+      row.style.display = 'none';
     }
   }
 
@@ -347,12 +346,9 @@ class HydraIntegration {
 
       const s = profile.stats || {};
       this.shops = Object.keys(s.byShop || {}).filter(k => (s.byShop[k].games || 0) > 0);
-      const counts = {};
-      for (const g of library) counts[g.shop] = (counts[g.shop] || 0) + 1;
-      this.gameCount.textContent = counts[this.shop] ?? 0;
-      this.gameHours.textContent = s.byShop?.[this.shop] ? Math.round((s.byShop[this.shop].playtime || 0) / 3600) : '–';
 
       this.renderShopButtons();
+      this.updateStats();
       this.renderGames();
     } catch (e) {
       console.error('hydra error:', e);
@@ -364,16 +360,27 @@ class HydraIntegration {
 
   renderShopButtons() {
     const box = document.getElementById('shopToggle');
-    const shops = this.shops && this.shops.length ? this.shops : ['steam', 'hydra'];
-    box.innerHTML = shops.map(s => `<button class="shop-btn${s === this.shop ? ' active' : ''}" data-shop="${s}">${s}</button>`).join('');
-    box.querySelectorAll('.shop-btn').forEach(btn => {
+    const allShops = ['steam', 'hydra'];
+    const available = this.shops || [];
+    box.innerHTML = allShops.map(s => {
+      const disabled = !available.includes(s);
+      return `<button class="shop-btn${s === this.shop ? ' active' : ''}" data-shop="${s}"${disabled ? ' disabled' : ''}>${s}</button>`;
+    }).join('');
+    box.querySelectorAll('.shop-btn:not([disabled])').forEach(btn => {
       btn.onclick = () => {
         this.shop = btn.dataset.shop;
         this.renderShopButtons();
         this.renderGames();
-        this.gameCount.textContent = this.games.filter(g => g.shop === this.shop).length;
+        this.updateStats();
       };
     });
+  }
+
+  updateStats() {
+    const filtered = this.games.filter(g => g.shop === this.shop);
+    this.gameCount.textContent = filtered.length;
+    const s = this.profile?.stats || {};
+    this.gameHours.textContent = s.byShop?.[this.shop] ? Math.round((s.byShop[this.shop].playtime || 0) / 3600) : '–';
   }
 
   start() {
