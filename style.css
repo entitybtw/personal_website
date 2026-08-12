@@ -305,6 +305,11 @@ button {
   border-color: var(--border-acc);
   color: var(--accent);
 }
+.shop-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .game-status { font-size: .82rem; }
 .current-game {
   display: flex;
