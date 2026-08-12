@@ -305,7 +305,7 @@ class HydraIntegration {
     const all = [];
     let skip = 0;
     while (true) {
-      const res = await fetch(`${this.base}/api/users/${this.username}/library?take=100&skip=${skip}&sortBy=playedRecently&shop=${this.shop}`);
+      const res = await fetch(`${this.base}/api/users/${this.username}/library?take=100&skip=${skip}&sortBy=playedRecently`);
       if (!res.ok) throw new Error(`hydra ${res.status}`);
       const data = await res.json();
       all.push(...data.games);
@@ -345,7 +345,9 @@ class HydraIntegration {
       this.renderCurrentGame(profile);
 
       const s = profile.stats || {};
-      this.shops = Object.keys(s.byShop || {}).filter(k => (s.byShop[k].games || 0) > 0);
+      const shopCounts = {};
+      for (const g of library) shopCounts[g.shop] = (shopCounts[g.shop] || 0) + 1;
+      this.shops = Object.keys(shopCounts);
 
       this.renderShopButtons();
       this.updateStats();
@@ -363,16 +365,15 @@ class HydraIntegration {
     const allShops = ['steam', 'hydra'];
     const available = this.shops || [];
     box.innerHTML = allShops.map(s => {
+      const count = this.games.filter(g => g.shop === s).length;
       const disabled = !available.includes(s);
-      return `<button class="shop-btn${s === this.shop ? ' active' : ''}" data-shop="${s}"${disabled ? ' disabled' : ''}>${s}</button>`;
+      return `<button class="shop-btn${s === this.shop ? ' active' : ''}" data-shop="${s}"${disabled ? ' disabled' : ''}>${s}${count ? ` (${count})` : ''}</button>`;
     }).join('');
-    box.querySelectorAll('.shop-btn:not([disabled])').forEach(btn => {
-      btn.onclick = async () => {
+    box.querySelectorAll('.shop-btn').forEach(btn => {
+      btn.onclick = () => {
+        if (btn.disabled) return;
         this.shop = btn.dataset.shop;
         this.renderShopButtons();
-        try {
-          this.games = await this.fetchLibrary();
-        } catch {}
         this.updateStats();
         this.renderGames();
       };
@@ -382,8 +383,8 @@ class HydraIntegration {
   updateStats() {
     const filtered = this.games.filter(g => g.shop === this.shop);
     this.gameCount.textContent = filtered.length;
-    const s = this.profile?.stats || {};
-    this.gameHours.textContent = s.byShop?.[this.shop] ? Math.round((s.byShop[this.shop].playtime || 0) / 3600) : '–';
+    const totalMs = filtered.reduce((sum, g) => sum + (g.playTimeInMilliseconds || 0), 0);
+    this.gameHours.textContent = Math.round(totalMs / 3600000) || '–';
   }
 
   start() {
