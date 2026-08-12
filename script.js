@@ -363,15 +363,12 @@ class HydraIntegration {
   renderShopButtons() {
     const box = document.getElementById('shopToggle');
     const allShops = ['steam', 'hydra'];
-    const available = this.shops || [];
     box.innerHTML = allShops.map(s => {
       const count = this.games.filter(g => g.shop === s).length;
-      const disabled = !available.includes(s);
-      return `<button class="shop-btn${s === this.shop ? ' active' : ''}" data-shop="${s}"${disabled ? ' disabled' : ''}>${s}${count ? ` (${count})` : ''}</button>`;
+      return `<button class="shop-btn${s === this.shop ? ' active' : ''}" data-shop="${s}">${s}${count ? ` (${count})` : ''}</button>`;
     }).join('');
     box.querySelectorAll('.shop-btn').forEach(btn => {
       btn.onclick = () => {
-        if (btn.disabled) return;
         this.shop = btn.dataset.shop;
         this.renderShopButtons();
         this.updateStats();
