@@ -71,13 +71,23 @@ function isValidHex(h) {
   return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(h);
 }
 
+function luminance(hex) {
+  const [r, g, b] = hexToRgb(hex);
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+}
+function contrastText(hex) {
+  return luminance(hex) > 0.55 ? '#000' : '#fff';
+}
+
 function applyAccent(hex) {
   if (!isValidHex(hex)) return false;
   if (hex.length === 4) hex = '#' + hex.slice(1).split('').map(c => c + c).join('');
+  const tc = contrastText(hex);
   document.documentElement.style.setProperty('--accent', hex);
   document.documentElement.style.setProperty('--accent-bright', lightenHex(hex, 0.08));
   document.documentElement.style.setProperty('--border-acc', hexAlpha(hex, 0.25));
   document.documentElement.style.setProperty('--accent-glow', hexAlpha(hex, 0.10));
+  document.documentElement.style.setProperty('--accent-text', tc);
   $('#accentHex').value = hex.toUpperCase();
   $('#accentColorPicker').value = hex;
   $('#accentCurrent').style.background = hex;
