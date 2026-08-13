@@ -22,7 +22,7 @@
   --text-2: #666;
   --border-1: #2a2a2a;
   --border-2: #333;
-  --border-acc: rgba(212,165,116,0.25);
+  --border-acc: rgba(90, 167, 167,0.25);
   --accent-glow: #1c1a15;
   --shadow-sm: none;
   --shadow-md: none;
@@ -39,7 +39,7 @@
   --text-2: #999;
   --border-1: #ddd;
   --border-2: #ccc;
-  --border-acc: rgba(212,165,116,0.38);
+  --border-acc: rgba(90, 167, 167,0.38);
   --accent-glow: #f5f0ea;
   --shadow-sm: none;
   --shadow-md: none;
@@ -56,7 +56,7 @@
   --text-2: #666;
   --border-1: #222;
   --border-2: #2a2a2a;
-  --border-acc: rgba(212,165,116,0.19);
+  --border-acc: rgba(90, 167, 167,0.19);
   --accent-glow: #18150f;
   --shadow-sm: none;
   --shadow-md: none;
