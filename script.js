@@ -229,7 +229,7 @@ function initAlbum() {
 
   function show(i) {
     idx = (i + slides.length) % slides.length;
-    slides.forEach((s, n) => s.style.display = (n === idx) ? '' : 'none');
+    slides.forEach((s, n) => s.style.display = (n === idx) ? 'block' : 'none');
     if (counter) counter.textContent = `${idx + 1} / ${slides.length}`;
   }
   if (prevBtn) prevBtn.onclick = () => show(idx - 1);

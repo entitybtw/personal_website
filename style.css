@@ -313,7 +313,7 @@ button {
 /* ── homelab album ── */
 .album { margin-top: 4px; }
 .album-slide { display: none; }
-.album-slide:first-child { display: block; }
+.album-slide.is-active { display: block; }
 .album-slide img {
   width: 100%;
   max-height: 360px;
