@@ -141,7 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSounds();
   initVolume();
   initSnowflakes();
-  initHomelab();
+  initSpecs();
+  initAlbum();
+  initLightbox();
 });
 
 /* ── dynamic age ── */
@@ -191,9 +193,9 @@ fetch('https://webring.otomir23.me/32/data')
   })
   .catch(err => console.error('webring fetch error:', err));
 
-/* ── homelab fetch toggle ── */
-function initHomelab() {
-  const toggle = document.getElementById('homelabToggle');
+/* ── pc & laptop specs toggle ── */
+function initSpecs() {
+  const toggle = document.getElementById('specsToggle');
   if (!toggle) return;
   const blocks = document.querySelectorAll('.fetch-block');
   function select(host) {
@@ -204,6 +206,87 @@ function initHomelab() {
     btn.onclick = () => select(btn.dataset.host);
   });
   select((toggle.querySelector('.shop-btn') || {}).dataset?.host || 'laptop');
+}
+
+/* ── homelab album ── */
+function initAlbum() {
+  const album = document.getElementById('homelabAlbum');
+  if (!album) return;
+  const slides = Array.from(album.querySelectorAll('.album-slide'));
+  if (!slides.length) return;
+  const counter = document.getElementById('albumCounter');
+  const prevBtn = document.getElementById('albumPrev');
+  const nextBtn = document.getElementById('albumNext');
+  let idx = 0;
+
+  slides.forEach(s => {
+    const img = s.querySelector('img');
+    if (img) img.onerror = () => {
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='160'><rect width='100%' height='100%' fill='#222'/><text x='50%' y='50%' fill='#666' font-family='monospace' font-size='13' text-anchor='middle' dominant-baseline='middle'>нет фото / no image</text></svg>`;
+      img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    };
+  });
+
+  function show(i) {
+    idx = (i + slides.length) % slides.length;
+    slides.forEach((s, n) => s.style.display = (n === idx) ? '' : 'none');
+    if (counter) counter.textContent = `${idx + 1} / ${slides.length}`;
+  }
+  if (prevBtn) prevBtn.onclick = () => show(idx - 1);
+  if (nextBtn) nextBtn.onclick = () => show(idx + 1);
+  show(0);
+}
+
+/* ── lightbox ── */
+function initLightbox() {
+  const lb = document.getElementById('lightbox');
+  const album = document.getElementById('homelabAlbum');
+  if (!lb || !album) return;
+  const img = document.getElementById('lbImg');
+  const cap = document.getElementById('lbCaption');
+  const slides = Array.from(album.querySelectorAll('.album-slide'));
+  let items = slides;
+  let cur = 0;
+
+  function render() {
+    const slide = items[cur];
+    const im = slide.querySelector('img');
+    const date = slide.querySelector('.album-date');
+    const genNote = album.querySelector('.album-note');
+    img.src = im.getAttribute('src');
+    img.classList.remove('zoomed');
+    cap.innerHTML = '';
+    if (date) {
+      const d = document.createElement('div');
+      d.className = 'lb-date';
+      d.textContent = date.textContent;
+      cap.appendChild(d);
+    }
+    if (genNote) cap.appendChild(genNote.cloneNode(true));
+  }
+  function open(i) {
+    cur = i;
+    render();
+    lb.classList.add('show');
+  }
+  function close() { lb.classList.remove('show'); }
+
+  slides.forEach((s, i) => {
+    const im = s.querySelector('img');
+    if (im) im.addEventListener('click', () => open(i));
+  });
+
+  document.getElementById('lbClose').onclick = close;
+  document.getElementById('lbPrev').onclick = e => { e.stopPropagation(); cur = (cur - 1 + items.length) % items.length; render(); };
+  document.getElementById('lbNext').onclick = e => { e.stopPropagation(); cur = (cur + 1) % items.length; render(); };
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  img.addEventListener('click', e => { e.stopPropagation(); img.classList.toggle('zoomed'); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('show')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') { cur = (cur - 1 + items.length) % items.length; render(); }
+    else if (e.key === 'ArrowRight') { cur = (cur + 1) % items.length; render(); }
+  });
 }
 
 /* ── snowflakes ── */

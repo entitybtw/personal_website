@@ -310,6 +310,111 @@ button {
 }
 .fetch-block .d { color: var(--accent); }
 
+/* ── homelab album ── */
+.album { margin-top: 4px; }
+.album-slide { display: none; }
+.album-slide:first-child { display: block; }
+.album-slide img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border: 1px solid var(--border-1);
+  background: var(--bg-2);
+  display: block;
+  cursor: zoom-in;
+}
+.album-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+.album-date {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--accent);
+}
+.album-note {
+  color: var(--text-1);
+  font-size: .82rem;
+  margin: 0;
+}
+.album-nav .album-counter {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--text-2);
+  align-self: center;
+  padding: 0 4px;
+}
+
+/* ── lightbox ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0,0,0,.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+.lightbox.show { display: flex; }
+.lightbox-img {
+  max-width: 92vw;
+  max-height: 78vh;
+  border: 1px solid var(--border-2);
+  cursor: zoom-in;
+  transition: transform .15s ease;
+}
+.lightbox-img.zoomed {
+  transform: scale(1.9);
+  cursor: zoom-out;
+}
+.lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-2);
+  background: var(--bg-2);
+  color: var(--text-0);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-close:hover { border-color: var(--border-acc); color: var(--accent); }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 56px;
+  border: 1px solid var(--border-2);
+  background: var(--bg-2);
+  color: var(--text-0);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-nav:hover { border-color: var(--border-acc); color: var(--accent); }
+.lb-prev { left: 16px; }
+.lb-next { right: 16px; }
+.lightbox-caption {
+  margin-top: 14px;
+  color: var(--text-1);
+  font-size: .85rem;
+  text-align: center;
+  max-width: 92vw;
+}
+.lightbox-caption .lb-date {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: .72rem;
+  margin-bottom: 4px;
+}
+
 /* ── games status ── */
 .shop-toggle {
   display: flex;
@@ -323,6 +428,9 @@ button {
   font-family: var(--font-mono);
   font-size: .7rem;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
   transition: border-color .15s, color .15s, background .15s;
 }
 .shop-btn:hover { border-color: var(--border-acc); color: var(--text-0); }
@@ -565,12 +673,20 @@ button {
   .profile-photo { width: 100%; max-width: 300px; height: auto; }
   .links-grid { grid-template-columns: 1fr 1fr; }
   .card { padding: 12px; }
-  .columns { grid-template-columns: 1fr; }
+  .columns { grid-template-columns: 1fr; gap: 0; }
   .col .section:first-child { padding-top: 8px; }
+  .fetch-block { font-size: .68rem; }
+  .album-slide img { max-height: 260px; }
+  .lightbox-img { max-height: 70vh; }
+  .lightbox-nav { width: 38px; height: 50px; font-size: 1.4rem; }
+  .lb-prev { left: 6px; }
+  .lb-next { right: 6px; }
+  .lightbox-close { top: 10px; right: 10px; }
 }
 @media (max-width: 420px) {
   .wrap { padding: 0 8px; }
   .links-grid { grid-template-columns: 1fr; }
+  .card-head { flex-wrap: wrap; }
 }
 
 /* ── scrollbar ── */
