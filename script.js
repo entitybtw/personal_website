@@ -396,7 +396,7 @@ class HydraIntegration {
   }
 
   isSteamGame(g) {
-    return g.shop === 'steam' || g.source === 'steam_sync';
+    return g.source === 'steam_sync';
   }
 
   formatTime(ms) {
@@ -442,7 +442,11 @@ class HydraIntegration {
   renderGames() {
     const isSteam = this.shop === 'steam';
     const list = this.games.filter(g => isSteam === this.isSteamGame(g));
-    list.sort((a, b) => (b.isPinned - a.isPinned) || (b.lastTimePlayed || 0) - (a.lastTimePlayed || 0) || b.playTimeInMilliseconds - a.playTimeInMilliseconds);
+    list.sort((a, b) =>
+      (Number(b.isPinned) - Number(a.isPinned)) ||
+      (new Date(b.lastTimePlayed || 0) - new Date(a.lastTimePlayed || 0)) ||
+      (b.playTimeInMilliseconds - a.playTimeInMilliseconds)
+    );
     this.gamesList.innerHTML = list.map(g => `
       <div class="game-item${g.isPinned ? ' pinned' : ''}">
         <span class="gi-title">${g.title}</span>
