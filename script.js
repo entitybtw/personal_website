@@ -514,6 +514,93 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+/* ── Hackatime coding stats ── */
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+class HackatimeIntegration {
+  constructor() {
+    this.api = 'https://hackatime.hackclub.com/api/v1/users/6278/stats';
+    this.el = document.getElementById('codingStats');
+    this.maxVisible = 12;
+    this.lastData = null;
+    this.updateInterval = null;
+  }
+
+  async update() {
+    if (!this.el) return;
+    try {
+      const res = await fetch(this.api, { cache: 'no-store' });
+      if (!res.ok) throw new Error('hackatime ' + res.status);
+      const json = await res.json();
+      const d = json && json.data;
+      if (!d || d.status !== 'ok') throw new Error('bad payload');
+      this.lastData = d;
+      this.render(d);
+    } catch (e) {
+      console.error('hackatime error:', e);
+      const l = localStorage.getItem('lang') || 'ru';
+      if (this.el) this.el.innerHTML = `<div class="muted">${l === 'ru' ? 'не удалось загрузить стату :/' : 'failed to load stats :/'}</div>`;
+    }
+  }
+
+  render(d) {
+    const l = localStorage.getItem('lang') || 'ru';
+    const total = d.human_readable_total || '–';
+    const avg = d.human_readable_daily_average || '–';
+    const streak = (d.streak != null) ? d.streak : '–';
+
+    const summary = `
+      <div class="cs-summary">
+        <div class="cs-metric"><span class="cs-metric-val">${escapeHtml(total)}</span><span class="cs-metric-lbl">${l === 'ru' ? 'всего' : 'total'}</span></div>
+        <div class="cs-metric"><span class="cs-metric-val">${escapeHtml(avg)}</span><span class="cs-metric-lbl">${l === 'ru' ? 'в день' : 'per day'}</span></div>
+        <div class="cs-metric"><span class="cs-metric-val">🔥 ${escapeHtml(streak)}</span><span class="cs-metric-lbl">${l === 'ru' ? 'стрик' : 'streak'}</span></div>
+      </div>`;
+
+    const langs = (d.languages || []).slice().sort((a, b) => (b.total_seconds || 0) - (a.total_seconds || 0));
+    const rows = langs.map((lang, i) => {
+      const pct = Math.max(0, Math.min(100, Number(lang.percent) || 0));
+      const hidden = i >= this.maxVisible ? ' style="display:none;"' : '';
+      const color = lang.color || 'var(--accent)';
+      return `
+        <div class="cs-row"${hidden}>
+          <div class="cs-row-top">
+            <span class="cs-name">${escapeHtml(lang.name)}</span>
+            <span class="cs-time">${escapeHtml(lang.text)} <span class="cs-pct">${pct.toFixed(1)}%</span></span>
+          </div>
+          <div class="cs-bar"><div class="cs-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+        </div>`;
+    }).join('');
+
+    const showAllBtn = langs.length > this.maxVisible
+      ? `<button class="cs-more" id="csMore">${l === 'ru' ? 'показать все (' + langs.length + ')' : 'show all (' + langs.length + ')'}</button>`
+      : '';
+
+    this.el.innerHTML = summary + `<div class="cs-list">${rows}</div>` + showAllBtn;
+
+    const more = document.getElementById('csMore');
+    if (more) more.onclick = () => {
+      this.el.querySelectorAll('.cs-row[style]').forEach(r => { r.style.display = ''; });
+      more.remove();
+    };
+  }
+
+  start() {
+    this.update();
+    this.updateInterval = setInterval(() => this.update(), 600000);
+    document.addEventListener('languageChanged', () => { if (this.lastData) this.render(this.lastData); });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('codingStats')) {
+    const hackatime = new HackatimeIntegration();
+    hackatime.start();
+    window.hackatimeIntegration = hackatime;
+  }
+});
+
 /* ── sounds ── */
 function initSounds() {
   if (matchMedia('(max-width: 768px)').matches) return;

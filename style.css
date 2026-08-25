@@ -506,6 +506,75 @@ button {
 .game-item.pinned .gi-title { color: var(--accent); }
 .muted { color: var(--text-2); }
 
+/* ── hackatime coding stats ── */
+.coding-stats { font-size: .82rem; }
+.cs-loading { padding: 4px 0; }
+.cs-summary {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-1);
+}
+.cs-metric { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cs-metric-val {
+  font-family: var(--font-mono);
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--text-0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cs-metric-lbl { font-size: .68rem; color: var(--text-2); }
+.cs-list { display: flex; flex-direction: column; gap: 7px; }
+.cs-row { display: flex; flex-direction: column; gap: 4px; }
+.cs-row-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.cs-name {
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: var(--text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cs-time {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--text-2);
+  flex-shrink: 0;
+}
+.cs-pct { color: var(--text-1); }
+.cs-bar {
+  height: 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  overflow: hidden;
+}
+.cs-bar-fill {
+  height: 100%;
+  transition: width .4s ease;
+  min-width: 2px;
+}
+.cs-more {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--text-1);
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color .15s, color .15s;
+}
+.cs-more:hover { border-color: var(--border-acc); color: var(--accent); }
+
 /* ── music ── */
 .music-line {
   display: flex;
