@@ -604,6 +604,11 @@ document.addEventListener('DOMContentLoaded', () => {
     github.start();
     window.githubIntegration = github;
   }
+  if (document.getElementById('svcStats')) {
+    const services = new ServicesStats();
+    services.start();
+    window.servicesStats = services;
+  }
 });
 
 /* ── GitHub stats ── */
@@ -715,6 +720,134 @@ class GitHubIntegration {
     this.update();
     this.updateInterval = setInterval(() => this.update(), 600000);
     document.addEventListener('languageChanged', () => { if (this.lastData) this.render(this.lastData); });
+  }
+}
+
+/* ── Services stats (systemd-like) ── */
+class ServicesStats {
+  constructor() {
+    this.el = document.getElementById('svcStats');
+    this.clockEl = document.getElementById('svcClock');
+    this.timer = null;
+  }
+
+  get groups() {
+    return [
+      {
+        head: '1. infrastructure:',
+        items: [
+          { name: '', url: 'https://' },
+          { name: '', url: null },
+          { name: '', url: 'https://' },
+          { name: '', url: 'https://' },
+          { name: '', url: null },
+          { name: '', url: 'https://' },
+          { name: 'morse.entitybtw.ru', url: 'https://morse.entitybtw.ru' },
+          { name: 'penzapeople.entitybtw.ru', url: 'https://penzapeople.entitybtw.ru' },
+          { name: 'extras.entitybtw.ru', url: 'https://extras.entitybtw.ru' },
+          { name: 'koito.entitybtw.ru', url: 'https://koito.entitybtw.ru' },
+          { name: 'hydra.entitybtw.ru', url: 'https://hydra.entitybtw.ru' },
+          { name: 'id.entitybtw.ru', url: 'https://id.entitybtw.ru' },
+          { name: 'git.entitybtw.ru', url: 'https://git.entitybtw.ru' },
+          { name: 'entitybtw.ru', url: 'https://entitybtw.ru' },
+          { name: 'gist.entitybtw.ru', url: 'https://gist.entitybtw.ru' },
+          { name: 'cloud.entitybtw.ru', url: 'https://cloud.entitybtw.ru' }
+        ]
+      },
+      {
+        head: '2. services:',
+        items: [
+          { name: '', url: null },
+          { name: '', url: 'https://id.entitybtw.ru' },
+          { name: 'ns1.', url: 'https://ns1.' },
+          { name: '', url: 'https://entitybtw.ru' },
+          { name: '', url: null },
+          { name: '', url: 'https://cloud.entitybtw.ru' }
+        ]
+      }
+    ];
+  }
+
+  async probe(url) {
+    if (!url) return { ok: true, ms: null, static: true };
+    const t0 = performance.now();
+    try {
+      const ctrl = new AbortController();
+      const to = setTimeout(() => ctrl.abort(), 6000);
+      await fetch(url, { method: 'HEAD', mode: 'no-cors', cache: 'no-store', signal: ctrl.signal });
+      clearTimeout(to);
+      return { ok: true, ms: performance.now() - t0, static: false };
+    } catch (e) {
+      return { ok: false, ms: performance.now() - t0, static: false };
+    }
+  }
+
+  fmtTime(d) {
+    const p = n => String(n).padStart(2, '0');
+    return `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+  }
+
+  fmtMs(ms) {
+    if (ms == null) return 'static';
+    if (ms < 1) return 'took <1ms';
+    if (ms < 1000) return 'took ' + ms.toFixed(0) + 'ms';
+    return 'took ' + (ms / 1000).toFixed(2) + 's';
+  }
+
+  renderSkeleton(groups) {
+    let idx = 0;
+    const html = groups.map(g => {
+      const items = g.items.map(it => {
+        const id = 'svc-' + (idx++);
+        it._id = id;
+        return `
+          <div class="svc-entry svc-pending" id="${id}">
+            <div class="svc-row1"><span class="svc-status">[ .. ]</span></div>
+            <div class="svc-row2">[ ---- ]</div>
+            <div class="svc-row3">
+              <span class="svc-name">${escapeHtml(it.name)}</span>
+              <span class="svc-took">⏳</span>
+            </div>
+          </div>`;
+      }).join('');
+      return `<div class="svc-group"><div class="svc-group-head">${escapeHtml(g.head)}</div>${items}</div>`;
+    }).join('');
+    this.el.innerHTML = html;
+  }
+
+  updateEntry(it, res) {
+    const node = document.getElementById(it._id);
+    if (!node) return;
+    const status = node.querySelector('.svc-status');
+    const time = node.querySelector('.svc-row2');
+    const took = node.querySelector('.svc-took');
+    status.className = 'svc-status ' + (res.ok ? 'ok' : 'fail');
+    status.textContent = res.ok ? '[ OK ]' : '[ FAIL ]';
+    time.textContent = '[ ' + this.fmtTime(new Date()) + ' ]';
+    took.textContent = this.fmtMs(res.ms);
+    node.classList.remove('svc-pending');
+  }
+
+  async updateAll() {
+    if (!this.el) return;
+    const groups = this.groups;
+    this.renderSkeleton(groups);
+    if (this.clockEl) this.clockEl.textContent = this.fmtTime(new Date());
+    const all = [];
+    groups.forEach(g => g.items.forEach(it => all.push(it)));
+    await Promise.all(all.map(async it => {
+      const res = await this.probe(it.url);
+      this.updateEntry(it, res);
+    }));
+    if (this.clockEl) this.clockEl.textContent = this.fmtTime(new Date());
+  }
+
+  start() {
+    this.updateAll();
+    this.timer = setInterval(() => this.updateAll(), 60000);
+    const refresh = document.getElementById('svcRefresh');
+    if (refresh) refresh.onclick = () => this.updateAll();
+    document.addEventListener('languageChanged', () => this.updateAll());
   }
 }
 

@@ -676,6 +676,45 @@ button {
 }
 .gh-more:hover { border-color: var(--border-acc); color: var(--accent); }
 
+/* ── services stats (systemd-like) ── */
+.svc-clock {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  color: var(--text-2);
+}
+.svc-stats { font-family: var(--font-mono); font-size: .76rem; line-height: 1.35; }
+.svc-group { margin-bottom: 14px; }
+.svc-group:last-child { margin-bottom: 0; }
+.svc-group-head {
+  color: var(--text-1);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.svc-entry { margin: 0 0 9px; }
+.svc-entry:last-child { margin-bottom: 0; }
+.svc-row1 { display: flex; align-items: center; gap: 8px; }
+.svc-status { font-weight: 700; letter-spacing: .02em; }
+.svc-status.ok { color: #3fb950; }
+.svc-status.fail { color: #f85149; }
+.svc-row2 {
+  color: var(--text-2);
+  font-size: .7rem;
+  margin: 2px 0 2px 2px;
+}
+.svc-row3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-left: 2px;
+}
+.svc-name { color: var(--text-1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.svc-name a { color: inherit; text-decoration: none; }
+.svc-name a:hover { color: var(--accent); }
+.svc-took { color: var(--text-2); flex-shrink: 0; }
+.svc-pending .svc-status { color: var(--text-2); }
+.svc-pending .svc-took { color: var(--text-2); }
+
 /* ── music ── */
 .music-line {
   display: flex;
