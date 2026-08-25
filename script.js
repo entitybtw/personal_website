@@ -736,12 +736,7 @@ class ServicesStats {
       {
         head: '1. infrastructure:',
         items: [
-          { name: '', url: 'https://' },
-          { name: '', url: null },
-          { name: '', url: 'https://' },
-          { name: '', url: 'https://' },
-          { name: '', url: null },
-          { name: '', url: 'https://' },
+          { name: '', url: 'https://', tcp: true },
           { name: 'morse.entitybtw.ru', url: 'https://morse.entitybtw.ru' },
           { name: 'penzapeople.entitybtw.ru', url: 'https://penzapeople.entitybtw.ru' },
           { name: 'extras.entitybtw.ru', url: 'https://extras.entitybtw.ru' },
@@ -753,33 +748,55 @@ class ServicesStats {
           { name: 'gist.entitybtw.ru', url: 'https://gist.entitybtw.ru' },
           { name: 'cloud.entitybtw.ru', url: 'https://cloud.entitybtw.ru' }
         ]
-      },
-      {
-        head: '2. services:',
-        items: [
-          { name: '', url: null },
-          { name: '', url: 'https://id.entitybtw.ru' },
-          { name: 'ns1.', url: 'https://ns1.' },
-          { name: '', url: 'https://entitybtw.ru' },
-          { name: '', url: null },
-          { name: '', url: 'https://cloud.entitybtw.ru' }
-        ]
       }
     ];
   }
 
-  async probe(url) {
-    if (!url) return { ok: true, ms: null, static: true };
+  async probeHttp(url) {
     const t0 = performance.now();
     try {
       const ctrl = new AbortController();
       const to = setTimeout(() => ctrl.abort(), 6000);
       await fetch(url, { method: 'HEAD', mode: 'no-cors', cache: 'no-store', signal: ctrl.signal });
       clearTimeout(to);
-      return { ok: true, ms: performance.now() - t0, static: false };
+      return { ok: true, ms: performance.now() - t0 };
     } catch (e) {
-      return { ok: false, ms: performance.now() - t0, static: false };
+      return { ok: false, ms: performance.now() - t0 };
     }
+  }
+
+  probeTcp(host) {
+    return new Promise(resolve => {
+      let done = false;
+      const t0 = performance.now();
+      let ws;
+      const finish = (ok) => {
+        if (done) return; done = true;
+        try { if (ws) ws.close(); } catch (e) {}
+        resolve({ ok, ms: performance.now() - t0 });
+      };
+      try {
+        ws = new WebSocket('wss://' + host);
+        setTimeout(() => finish(false), 6000);
+        ws.onopen = () => finish(true);
+        ws.onerror = () => finish(false);
+      } catch (e) {
+        finish(false);
+      }
+    });
+  }
+
+  async probe(item) {
+    if (!item.url) return { ok: true, ms: null, static: true };
+    const host = item.url.replace(/^https?:\/\//, '').split('/')[0];
+    let ok = false, ms = null;
+    if (item.tcp) {
+      const r = await this.probeTcp(host);
+      ok = ok || r.ok; if (r.ms != null) ms = ms || r.ms;
+    }
+    const r2 = await this.probeHttp(item.url);
+    ok = ok || r2.ok; if (r2.ms != null) ms = ms || r2.ms;
+    return { ok, ms, static: false };
   }
 
   fmtTime(d) {
@@ -836,7 +853,7 @@ class ServicesStats {
     const all = [];
     groups.forEach(g => g.items.forEach(it => all.push(it)));
     await Promise.all(all.map(async it => {
-      const res = await this.probe(it.url);
+      const res = await this.probe(it);
       this.updateEntry(it, res);
     }));
     if (this.clockEl) this.clockEl.textContent = this.fmtTime(new Date());
