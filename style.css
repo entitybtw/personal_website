@@ -281,6 +281,7 @@ button {
   font-weight: 500;
   font-size: .85rem;
 }
+.project-item .proj-sep { color: var(--text-2); font-family: var(--font-mono); }
 .project-item a:hover { text-decoration: underline; }
 .project-item p {
   color: var(--text-1);
