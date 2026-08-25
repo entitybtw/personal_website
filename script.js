@@ -599,7 +599,124 @@ document.addEventListener('DOMContentLoaded', () => {
     hackatime.start();
     window.hackatimeIntegration = hackatime;
   }
+  if (document.getElementById('ghStats')) {
+    const github = new GitHubIntegration();
+    github.start();
+    window.githubIntegration = github;
+  }
 });
+
+/* ── GitHub stats ── */
+const GITHUB_LANG_COLORS = {
+  JavaScript: '#f1e05a', TypeScript: '#3178c6', Python: '#3572A5', 'C++': '#f34b7d',
+  C: '#555555', 'C#': '#178600', Go: '#00ADD8', Rust: '#dea584', Java: '#b07219',
+  Lua: '#000080', Shell: '#89e051', HTML: '#e34c26', CSS: '#563d7c', PHP: '#4F5D95',
+  Ruby: '#701516', Swift: '#F05138', Kotlin: '#A97BFF', Dart: '#00B4AB', Vue: '#41b883',
+  Svelte: '#ff3e00', Dockerfile: '#384d54', Makefile: '#427819', Assembly: '#6E4C13',
+  'Objective-C': '#438eff', Perl: '#0298c3', Scala: '#c22d40', Elixir: '#6e4a91',
+  Haskell: '#5e5086', Nim: '#ffc200', Zig: '#ec915c', Nix: '#7e7eff', CMake: '#DA3434',
+  Vim: '#199f4b', GLSL: '#5686a5', JSON: '#cbcb41', YAML: '#cb171e'
+};
+
+class GitHubIntegration {
+  constructor() {
+    this.user = 'entitybtw';
+    this.el = document.getElementById('ghStats');
+    this.maxVisible = 8;
+    this.maxRepos = 6;
+    this.lastData = null;
+    this.updateInterval = null;
+  }
+
+  async update() {
+    if (!this.el) return;
+    try {
+      const [profileRes, reposRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${this.user}`, { cache: 'no-store' }),
+        fetch(`https://api.github.com/users/${this.user}/repos?per_page=100&sort=updated`, { cache: 'no-store' })
+      ]);
+      if (!profileRes.ok) throw new Error('github profile ' + profileRes.status);
+      if (!reposRes.ok) throw new Error('github repos ' + reposRes.status);
+      const profile = await profileRes.json();
+      const repos = await reposRes.json();
+      if (!Array.isArray(repos)) throw new Error('bad repos payload');
+      const d = { profile, repos };
+      this.lastData = d;
+      this.render(d);
+    } catch (e) {
+      console.error('github error:', e);
+      const l = localStorage.getItem('lang') || 'ru';
+      if (this.el) this.el.innerHTML = `<div class="muted">${l === 'ru' ? 'не удалось загрузить гитхаб :/' : 'failed to load github :/'}</div>`;
+    }
+  }
+
+  render(d) {
+    const l = localStorage.getItem('lang') || 'ru';
+    const p = d.profile || {};
+    const repos = (d.repos || []).filter(r => !r.fork);
+
+    const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+
+    const summary = `
+      <div class="gh-summary">
+        <a class="gh-metric" href="https://github.com/${this.user}?tab=repositories" target="_blank">
+          <span class="gh-metric-val">${escapeHtml(p.public_repos != null ? p.public_repos : repos.length)}</span>
+          <span class="gh-metric-lbl">${l === 'ru' ? 'репо' : 'repos'}</span>
+        </a>
+        <a class="gh-metric" href="https://github.com/${this.user}?tab=repositories" target="_blank">
+          <span class="gh-metric-val">★ ${escapeHtml(totalStars)}</span>
+          <span class="gh-metric-lbl">${l === 'ru' ? 'звёзд' : 'stars'}</span>
+        </a>
+        <a class="gh-metric" href="https://github.com/${this.user}?tab=followers" target="_blank">
+          <span class="gh-metric-val">${escapeHtml(p.followers != null ? p.followers : '–')}</span>
+          <span class="gh-metric-lbl">${l === 'ru' ? 'подписчики' : 'followers'}</span>
+        </a>
+        <a class="gh-metric" href="https://github.com/${this.user}?tab=following" target="_blank">
+          <span class="gh-metric-val">${escapeHtml(p.following != null ? p.following : '–')}</span>
+          <span class="gh-metric-lbl">${l === 'ru' ? 'подписки' : 'following'}</span>
+        </a>
+      </div>`;
+
+    const langCount = {};
+    repos.forEach(r => { if (r.language) langCount[r.language] = (langCount[r.language] || 0) + 1; });
+    const langTotal = Object.values(langCount).reduce((s, v) => s + v, 0) || 1;
+    const langs = Object.entries(langCount)
+      .map(([name, count]) => ({ name, count, pct: (count / langTotal) * 100, color: GITHUB_LANG_COLORS[name] || 'var(--accent)' }))
+      .sort((a, b) => b.count - a.count);
+
+    const langRows = langs.slice(0, this.maxVisible).map((lang, i) => `
+      <div class="gh-row">
+        <div class="gh-row-top">
+          <span class="gh-name">${escapeHtml(lang.name)}</span>
+          <span class="gh-time">${lang.count} <span class="gh-pct">${lang.pct.toFixed(0)}%</span></span>
+        </div>
+        <div class="gh-bar"><div class="gh-bar-fill" style="width:${lang.pct}%;background:${lang.color}"></div></div>
+      </div>`).join('');
+
+    const langBlock = langs.length
+      ? `<div class="gh-subhead">${l === 'ru' ? 'языки' : 'languages'}</div><div class="gh-list">${langRows}</div>`
+      : '';
+
+    const topRepos = repos.slice().sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0)).slice(0, this.maxRepos);
+    const repoRows = topRepos.map(r => `
+      <a class="gh-repo" href="${escapeHtml(r.html_url)}" target="_blank">
+        <span class="gh-repo-name">${escapeHtml(r.name)}</span>
+        <span class="gh-repo-stars">★ ${escapeHtml(r.stargazers_count || 0)}</span>
+      </a>`).join('');
+
+    const repoBlock = topRepos.length
+      ? `<div class="gh-subhead" style="margin-top:14px;">${l === 'ru' ? 'топ по звёздам' : 'top by stars'}</div><div class="gh-repos">${repoRows}</div>`
+      : '';
+
+    this.el.innerHTML = summary + langBlock + repoBlock;
+  }
+
+  start() {
+    this.update();
+    this.updateInterval = setInterval(() => this.update(), 600000);
+    document.addEventListener('languageChanged', () => { if (this.lastData) this.render(this.lastData); });
+  }
+}
 
 /* ── sounds ── */
 function initSounds() {
