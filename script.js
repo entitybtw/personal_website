@@ -736,7 +736,6 @@ class ServicesStats {
       {
         head: '1. infrastructure:',
         items: [
-          { name: '', url: 'https://', tcp: true },
           { name: 'morse.entitybtw.ru', url: 'https://morse.entitybtw.ru' },
           { name: 'penzapeople.entitybtw.ru', url: 'https://penzapeople.entitybtw.ru' },
           { name: 'extras.entitybtw.ru', url: 'https://extras.entitybtw.ru' },
