@@ -732,9 +732,10 @@ class ServicesStats {
   }
 
   get groups() {
+    const head = lang === 'ru' ? '1. сервисы:' : '1. services:';
     return [
       {
-        head: '1. infrastructure:',
+        head,
         items: [
           { name: 'morse.entitybtw.ru', url: 'https://morse.entitybtw.ru' },
           { name: 'penzapeople.entitybtw.ru', url: 'https://penzapeople.entitybtw.ru' },
