@@ -140,7 +140,7 @@ button {
   justify-content: center;
 }
 .btn-icon:hover { border-color: var(--border-acc); color: var(--text-0); background: var(--bg-2); }
-.btn-icon svg { width: 15px; height: 15px; display: block; flex-shrink: 0; }
+.btn-icon svg { width: 16px; height: 16px; display: block; flex-shrink: 0; }
 
 /* ── welcome ── */
 .welcome { padding: 24px 0 16px; text-align: center; }
