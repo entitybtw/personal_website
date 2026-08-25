@@ -737,16 +737,13 @@ class ServicesStats {
       {
         head,
         items: [
-          { name: 'morse.entitybtw.ru', url: 'https://morse.entitybtw.ru' },
-          { name: 'penzapeople.entitybtw.ru', url: 'https://penzapeople.entitybtw.ru' },
-          { name: 'extras.entitybtw.ru', url: 'https://extras.entitybtw.ru' },
-          { name: 'koito.entitybtw.ru', url: 'https://koito.entitybtw.ru' },
-          { name: 'hydra.entitybtw.ru', url: 'https://hydra.entitybtw.ru' },
-          { name: 'id.entitybtw.ru', url: 'https://id.entitybtw.ru' },
-          { name: 'git.entitybtw.ru', url: 'https://git.entitybtw.ru' },
-          { name: 'entitybtw.ru', url: 'https://entitybtw.ru' },
-          { name: 'gist.entitybtw.ru', url: 'https://gist.entitybtw.ru' },
-          { name: 'cloud.entitybtw.ru', url: 'https://cloud.entitybtw.ru' }
+          { name: 'koito', url: 'https://koito.entitybtw.ru' },
+          { name: 'hydra-selfhosted instance', url: 'https://hydra.entitybtw.ru' },
+          { name: 'pocket id', url: 'https://id.entitybtw.ru' },
+          { name: 'forgejo', url: 'https://git.entitybtw.ru' },
+          { name: 'personal website', url: 'https://entitybtw.ru' },
+          { name: 'opengist', url: 'https://gist.entitybtw.ru' },
+          { name: 'copyparty', url: 'https://cloud.entitybtw.ru' }
         ]
       }
     ];
