@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=2">
+  <link rel="stylesheet" href="/style.css?v=3">
   <script defer src="https://umami.entitybtw.ru/script.js" data-website-id="89687f7a-ea1f-4551-9f05-08b071e72f56"></script>
 </head>
 <body>
@@ -36,141 +36,193 @@
       <h1><span data-lang="ru">привет, я</span><span data-lang="en" style="display:none;">hello, i'm</span> <span class="d">entitybtw</span></h1>
     </div>
 
-    <!-- Profile -->
-    <section class="section">
-      <div class="card">
-        <div class="profile-section">
-          <img src="/images/me.jpg" class="profile-photo" alt="me">
-          <div class="profile-info">
-            <p data-lang="ru">меня зовут ваня, никнейм entitybtw</p>
-            <p data-lang="en" style="display:none;">my name is vanya, nickname entitybtw</p>
-            <p data-lang="ru">мне <span id="age"></span></p>
-            <p data-lang="en" style="display:none;">i'm <span id="ageEn"></span></p>
-            <p data-lang="ru">обожаю селфхостинг</p>
-            <p data-lang="en" style="display:none;">i love self-hosting</p>
-            <p data-lang="ru">я дев-опс инженер</p>
-            <p data-lang="en" style="display:none;">i'm a dev-ops engineer</p>
-            <div class="music-line" style="margin-top: 8px;">
-              <span>🎵</span>
-              <span id="song">⏳</span>
+    <!-- Two-column layout -->
+    <div class="columns">
+      <div class="col">
+
+        <!-- Profile -->
+        <section class="section">
+          <div class="card">
+            <div class="profile-section">
+              <img src="/images/me.jpg" class="profile-photo" alt="me">
+              <div class="profile-info">
+                <p data-lang="ru">меня зовут ваня, никнейм entitybtw</p>
+                <p data-lang="en" style="display:none;">my name is vanya, nickname entitybtw</p>
+                <p data-lang="ru">мне <span id="age"></span></p>
+                <p data-lang="en" style="display:none;">i'm <span id="ageEn"></span></p>
+                <p data-lang="ru">обожаю селфхостинг</p>
+                <p data-lang="en" style="display:none;">i love self-hosting</p>
+                <p data-lang="ru">я дев-опс инженер</p>
+                <p data-lang="en" style="display:none;">i'm a dev-ops engineer</p>
+                <div class="music-line" style="margin-top: 8px;">
+                  <span>🎵</span>
+                  <span id="song">⏳</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- Games -->
-    <section class="section">
-      <div class="card">
-        <div class="card-head">
-          <h3 data-lang="ru">статус</h3>
-          <h3 data-lang="en" style="display:none;">status</h3>
-          <div class="spacer"></div>
-          <div class="shop-toggle" id="shopToggle">
-            <button class="shop-btn" data-shop="steam">steam</button>
-            <button class="shop-btn" data-shop="hydra">hydra</button>
+        <!-- Links -->
+        <section class="section">
+          <div class="card">
+            <div class="card-head">
+              <h3 data-lang="ru">ссылки</h3>
+              <h3 data-lang="en" style="display:none;">links</h3>
+            </div>
+            <div class="links-grid">
+              <a class="link-item" href="https://koito.entitybtw.ru" target="_blank">
+                <img src="https://koito.entitybtw.ru/favicon.ico" width="18" height="18" alt="koito">
+                <span>koito</span>
+              </a>
+              <a class="link-item" href="https://github.com/entitybtw" target="_blank">
+                <img src="/images/github.png">
+                <span>github</span>
+              </a>
+              <a class="link-item" href="https://t.me/entitybtw" target="_blank">
+                <img src="/images/telegram.png">
+                <span>telegram</span>
+              </a>
+            </div>
           </div>
-        </div>
-        <div id="gameStatus" class="game-status">
-          <div class="current-game">
-            <span class="cg-dot"></span>
-            <span class="cg-label" data-lang="ru">сейчас играет:</span>
-            <span class="cg-label" data-lang="en" style="display:none;">now playing:</span>
-            <span class="cg-title" id="cgTitle">⏳</span>
-          </div>
-          <div class="game-stats">
-            <span id="gameCount">–</span> <span data-lang="ru">игр</span><span data-lang="en" style="display:none;">games</span>
-            · <span id="gameHours">–</span> h
-          </div>
-          <div class="games-list" id="gamesList">
-            <span class="muted">⏳</span>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- Links -->
-    <section class="section">
-      <div class="card">
-        <div class="card-head">
-          <h3 data-lang="ru">ссылки</h3>
-          <h3 data-lang="en" style="display:none;">links</h3>
-        </div>
-        <div class="links-grid">
-          <a class="link-item" href="https://koito.entitybtw.ru" target="_blank">
-            <img src="https://koito.entitybtw.ru/favicon.ico" width="18" height="18" alt="koito">
-            <span>koito</span>
-          </a>
-          <a class="link-item" href="https://github.com/entitybtw" target="_blank">
-            <img src="/images/github.png">
-            <span>github</span>
-          </a>
-          <a class="link-item" href="https://t.me/entitybtw" target="_blank">
-            <img src="/images/telegram.png">
-            <span>telegram</span>
-          </a>
-        </div>
-      </div>
-    </section>
+        <!-- Additional links -->
+        <section class="section">
+          <div class="card">
+            <div class="card-head">
+              <h3 data-lang="ru">ещё</h3>
+              <h3 data-lang="en" style="display:none;">more</h3>
+            </div>
+            <div class="projects-list">
+              <div class="project-item">
+                <a href="https://t.me/devblogentbtw" target="_blank">devblogentbtw</a>
+                <p data-lang="ru">мой девблог телеграм канал</p>
+                <p data-lang="en" style="display:none;">my devblog telegram channel</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-    <!-- Projects -->
-    <section class="section">
-      <div class="card">
-        <div class="card-head">
-          <h3 data-lang="ru">проекты</h3>
-          <h3 data-lang="en" style="display:none;">projects</h3>
-        </div>
-        <div class="projects-list">
-          <div class="project-item">
-            <a href="https://git.entitybtw.ru/entitybtw/pspfetch" target="_blank">pspfetch</a>
-            <p data-lang="ru">фетч программка для псп на луа</p>
-            <p data-lang="en" style="display:none;">fetch app for psp written in lua</p>
-          </div>
-          <div class="project-item">
-            <a href="https://git.entitybtw.ru/entitybtw/widgets_portable" target="_blank">widgets_portable</a>
-            <p data-lang="ru">многофункциональное приложение для PSP для отображения информации с компьютера</p>
-            <p data-lang="en" style="display:none;">a multifunctional PSP app for displaying information from a PC</p>
-          </div>
-          <div class="project-item">
-            <a href="https://git.entitybtw.ru/entitybtw/mcsm_portable" target="_blank">mcsm_portable</a>
-            <p data-lang="ru">порт игры minecraft story mode на псп основанный на netflix версии игры (в разработке)</p>
-            <p data-lang="en" style="display:none;">port of minecraft story mode to psp based on the netflix version (currently working on it)</p>
-          </div>
-          <div class="project-item">
-            <a href="https://git.entitybtw.ru/entitybtw/arduino-nano-morse-keyboard" target="_blank">arduino-nano-morse-keyboard</a>
-            <p data-lang="ru">USB адаптер для телеграфного ключа основанный на Arduino Nano</p>
-            <p data-lang="en" style="display:none;">USB adapter for a Morse telegraph key based on Arduino Nano</p>
-          </div>
-          <div class="project-item">
-            <a href="https://git.entitybtw.ru/entitybtw/morse-trainer" target="_blank">morse-trainer</a>
-            <p data-lang="ru">многофункциональный веб-тренажёр азбуки Морзе</p>
-            <p data-lang="en" style="display:none;">a multifunctional web-based Morse code training tool</p>
-          </div>
-          <div class="project-item">
-            <a href="https://v1.luaplayeryt.ru" target="_blank">lpyt-docs</a>
-            <p data-lang="ru">веб-документация для движка LuaPlayerYT (PSP)</p>
-            <p data-lang="en" style="display:none;">web documentation for the LuaPlayerYT PSP engine</p>
-          </div>
-        </div>
       </div>
-    </section>
+      <div class="col">
 
-    <!-- Additional links -->
-    <section class="section">
-      <div class="card">
-        <div class="card-head">
-          <h3 data-lang="ru">ещё</h3>
-          <h3 data-lang="en" style="display:none;">more</h3>
-        </div>
-        <div class="projects-list">
-          <div class="project-item">
-            <a href="https://t.me/devblogentbtw" target="_blank">devblogentbtw</a>
-            <p data-lang="ru">мой девблог телеграм канал</p>
-            <p data-lang="en" style="display:none;">my devblog telegram channel</p>
+        <!-- Games -->
+        <section class="section">
+          <div class="card">
+            <div class="card-head">
+              <h3 data-lang="ru">статус</h3>
+              <h3 data-lang="en" style="display:none;">status</h3>
+              <div class="spacer"></div>
+              <div class="shop-toggle" id="shopToggle">
+                <button class="shop-btn" data-shop="steam">steam</button>
+                <button class="shop-btn" data-shop="hydra">hydra</button>
+              </div>
+            </div>
+            <div id="gameStatus" class="game-status">
+              <div class="current-game">
+                <span class="cg-dot"></span>
+                <span class="cg-label" data-lang="ru">сейчас играет:</span>
+                <span class="cg-label" data-lang="en" style="display:none;">now playing:</span>
+                <span class="cg-title" id="cgTitle">⏳</span>
+              </div>
+              <div class="game-stats">
+                <span id="gameCount">–</span> <span data-lang="ru">игр</span><span data-lang="en" style="display:none;">games</span>
+                · <span id="gameHours">–</span> h
+              </div>
+              <div class="games-list" id="gamesList">
+                <span class="muted">⏳</span>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section">
+          <div class="card">
+            <div class="card-head">
+              <h3 data-lang="ru">проекты</h3>
+              <h3 data-lang="en" style="display:none;">projects</h3>
+            </div>
+            <div class="projects-list">
+              <div class="project-item">
+                <a href="https://git.entitybtw.ru/entitybtw/pspfetch" target="_blank">pspfetch</a>
+                <p data-lang="ru">фетч программка для псп на луа</p>
+                <p data-lang="en" style="display:none;">fetch app for psp written in lua</p>
+              </div>
+              <div class="project-item">
+                <a href="https://git.entitybtw.ru/entitybtw/widgets_portable" target="_blank">widgets_portable</a>
+                <p data-lang="ru">многофункциональное приложение для PSP для отображения информации с компьютера</p>
+                <p data-lang="en" style="display:none;">a multifunctional PSP app for displaying information from a PC</p>
+              </div>
+              <div class="project-item">
+                <a href="https://git.entitybtw.ru/entitybtw/mcsm_portable" target="_blank">mcsm_portable</a>
+                <p data-lang="ru">порт игры minecraft story mode на псп основанный на netflix версии игры (в разработке)</p>
+                <p data-lang="en" style="display:none;">port of minecraft story mode to psp based on the netflix version (currently working on it)</p>
+              </div>
+              <div class="project-item">
+                <a href="https://git.entitybtw.ru/entitybtw/arduino-nano-morse-keyboard" target="_blank">arduino-nano-morse-keyboard</a>
+                <p data-lang="ru">USB адаптер для телеграфного ключа основанный на Arduino Nano</p>
+                <p data-lang="en" style="display:none;">USB adapter for a Morse telegraph key based on Arduino Nano</p>
+              </div>
+              <div class="project-item">
+                <a href="https://git.entitybtw.ru/entitybtw/morse-trainer" target="_blank">morse-trainer</a>
+                <p data-lang="ru">многофункциональный веб-тренажёр азбуки Морзе</p>
+                <p data-lang="en" style="display:none;">a multifunctional web-based Morse code training tool</p>
+              </div>
+              <div class="project-item">
+                <a href="https://v1.luaplayeryt.ru" target="_blank">lpyt-docs</a>
+                <p data-lang="ru">веб-документация для движка LuaPlayerYT (PSP)</p>
+                <p data-lang="en" style="display:none;">web documentation for the LuaPlayerYT PSP engine</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Homelab -->
+        <section class="section">
+          <div class="card">
+            <div class="card-head">
+              <h3 data-lang="ru">хомлаб</h3>
+              <h3 data-lang="en" style="display:none;">homelab</h3>
+              <div class="spacer"></div>
+              <div class="shop-toggle" id="homelabToggle">
+                <button class="shop-btn" data-host="laptop">ноут</button>
+                <button class="shop-btn" data-host="desktop">пк</button>
+              </div>
+            </div>
+            <div class="homelab">
+              <pre class="fetch-block" data-host="laptop"><span class="d">        entity@notebook</span>
+    ───────────────────
+    os     arch linux
+    host   lenovo thinkpad t14s
+    kernel 6.16.0-zen1
+    uptime 3h 12m
+    pkgs   941
+    shell  zsh
+    wm     hyprland
+    cpu    ryzen 5 7530u
+    mem    4.2G / 16G
+    disk   78G / 256G</pre>
+              <pre class="fetch-block" data-host="desktop" style="display:none;"><span class="d">        entity@desktop</span>
+    ──────────────────
+    os     arch linux
+    host   custom build
+    kernel 6.16.0-zen1
+    uptime 2d 4h
+    pkgs   1523
+    shell  zsh
+    wm     hyprland
+    cpu    ryzen 7 5700x
+    gpu    radeon rx 6800
+    mem    12G / 32G
+    disk   412G / 1.8T</pre>
+            </div>
+          </div>
+        </section>
+
       </div>
-    </section>
+    </div>
   </div>
 
   <footer class="footer">
@@ -210,24 +262,24 @@
       <button class="settings-x" id="settingsClose">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
       </button>
-      <h3>accent цвет</h3>
+      <h3><span data-lang="ru">accent цвет</span><span data-lang="en" style="display:none;">accent color</span></h3>
       <div class="accent-presets" id="accentPresets"></div>
       <div class="accent-row">
         <input type="color" id="accentColorPicker" value="#d4a574">
         <input type="text" id="accentHex" placeholder="#d4a574" maxlength="7">
         <span class="accent-current" id="accentCurrent"></span>
-        <button class="btn-sm accent" id="accentApply">применить</button>
-        <button class="btn-sm" id="accentReset">сбросить</button>
+        <button class="btn-sm accent" id="accentApply"><span data-lang="ru">применить</span><span data-lang="en" style="display:none;">apply</span></button>
+        <button class="btn-sm" id="accentReset"><span data-lang="ru">сбросить</span><span data-lang="en" style="display:none;">reset</span></button>
       </div>
-      <p style="color:var(--text-2);font-size:.75rem;margin-top:8px;">акцент сохраняется в этом браузере</p>
+      <p style="color:var(--text-2);font-size:.75rem;margin-top:8px;"><span data-lang="ru">акцент сохраняется в этом браузере</span><span data-lang="en" style="display:none;">accent is saved in this browser</span></p>
       <div class="volume-section">
-        <h3>звук</h3>
+        <h3><span data-lang="ru">звук</span><span data-lang="en" style="display:none;">sound</span></h3>
         <div class="volume-row">
           <span class="volume-icon" id="volumeIcon"></span>
           <input type="range" id="volumeSlider" min="0" max="100" value="80" class="volume-slider">
           <span class="volume-val" id="volumeVal">80%</span>
         </div>
-        <p style="color:var(--text-2);font-size:.75rem;margin-top:4px;">громкость звуков (сохраняется)</p>
+        <p style="color:var(--text-2);font-size:.75rem;margin-top:4px;"><span data-lang="ru">громкость звуков (сохраняется)</span><span data-lang="en" style="display:none;">sound volume (saved)</span></p>
       </div>
     </div>
   </div>

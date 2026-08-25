@@ -5,7 +5,7 @@
   --blue: #7a9db8;
   --green: #7a9;
   --red: #d77;
-  --max-w: 900px;
+  --max-w: 1080px;
   --font-sans: 'Onest', system-ui, -apple-system, sans-serif;
   --font-display: 'Onest', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
@@ -82,6 +82,16 @@ button {
 }
 
 .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 16px; }
+
+/* ── two-column layout ── */
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.col { display: flex; flex-direction: column; }
+.col .section:first-child { padding-top: 8px; }
 
 /* ── nav ── */
 .nav { padding: 8px 0; border-bottom: 1px solid var(--border-1); position: sticky; top: 0; z-index: 100; background: var(--bg-0); }
@@ -283,6 +293,22 @@ button {
   display: block;
   margin: 0 auto;
 }
+
+/* ── homelab fetch ── */
+.homelab { margin-top: 4px; }
+.fetch-block {
+  font-family: var(--font-mono);
+  font-size: .76rem;
+  line-height: 1.45;
+  color: var(--text-1);
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  padding: 12px;
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
+}
+.fetch-block .d { color: var(--accent); }
 
 /* ── games status ── */
 .shop-toggle {
@@ -539,6 +565,8 @@ button {
   .profile-photo { width: 100%; max-width: 300px; height: auto; }
   .links-grid { grid-template-columns: 1fr 1fr; }
   .card { padding: 12px; }
+  .columns { grid-template-columns: 1fr; }
+  .col .section:first-child { padding-top: 8px; }
 }
 @media (max-width: 420px) {
   .wrap { padding: 0 8px; }

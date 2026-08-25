@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSounds();
   initVolume();
   initSnowflakes();
+  initHomelab();
 });
 
 /* ── dynamic age ── */
@@ -189,6 +190,21 @@ fetch('https://webring.otomir23.me/32/data')
     document.getElementById('next-link').innerHTML = `${data.next.name} >`;
   })
   .catch(err => console.error('webring fetch error:', err));
+
+/* ── homelab fetch toggle ── */
+function initHomelab() {
+  const toggle = document.getElementById('homelabToggle');
+  if (!toggle) return;
+  const blocks = document.querySelectorAll('.fetch-block');
+  function select(host) {
+    toggle.querySelectorAll('.shop-btn').forEach(b => b.classList.toggle('active', b.dataset.host === host));
+    blocks.forEach(b => { b.style.display = (b.dataset.host === host) ? '' : 'none'; });
+  }
+  toggle.querySelectorAll('.shop-btn').forEach(btn => {
+    btn.onclick = () => select(btn.dataset.host);
+  });
+  select((toggle.querySelector('.shop-btn') || {}).dataset?.host || 'laptop');
+}
 
 /* ── snowflakes ── */
 function initSnowflakes() {
