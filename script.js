@@ -48,7 +48,7 @@ $('#themeBtn').onclick = () => setTheme(themes[(themes.indexOf(document.document
 
 /* ── accent color ── */
 const ACCENT_PRESETS = ['#d4a574', '#e6a23c', '#e15b64', '#b56576', '#7a9db8', '#5aa7a7', '#6ba76b', '#8a7ad4', '#c475d4', '#333333'];
-const ACCENT_DEFAULT = '#d4a574';
+const ACCENT_DEFAULT = '#5aa7a7';
 
 function hexToRgb(h) {
   h = h.replace('#', '');
