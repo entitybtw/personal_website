@@ -44,6 +44,16 @@ function setTheme(t) {
   document.dispatchEvent(new CustomEvent('themeChanged', { detail: { isDark } }));
 }
 
+/* ── pagering (page webring) theme sync ── */
+function syncPageringTheme() {
+  const el = document.getElementById('pageringLink');
+  if (!el) return;
+  const t = document.documentElement.dataset.theme;
+  el.setAttribute('theme', t === 'light' ? 'light' : 'dark');
+}
+document.addEventListener('themeChanged', syncPageringTheme);
+window.addEventListener('load', syncPageringTheme);
+
 $('#themeBtn').onclick = () => setTheme(themes[(themes.indexOf(document.documentElement.dataset.theme) + 1) % themes.length]);
 
 /* ── accent color ── */

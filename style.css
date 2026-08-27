@@ -761,6 +761,16 @@ button {
 .webring { padding: 4px 8px; }
 .webring:hover { color: var(--accent); }
 
+.pagering-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 14px 0 4px;
+}
+.pagering-wrap pagering-link {
+  max-width: 100%;
+}
+
 .footer-btn {
   display: inline-flex;
   align-items: center;
