@@ -13,4 +13,4 @@ jobs:
       - name: Deploy
         run: |
           rsync -a --delete --exclude='.git' ./ /var/www/personal_website/
-          deploy add personal_website /var/www/personal_website
+          deploy add personal_website /var/www/personal_website --port 8084
