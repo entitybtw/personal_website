@@ -1,0 +1,16 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: entbtw
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy
+        run: |
+          rsync -a --delete --exclude='.git' ./ /var/www/personal_website/
+          deploy add personal_website /var/www/personal_website
