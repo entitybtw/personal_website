@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: entbtw
+    runs-on: websites
     steps:
       - uses: actions/checkout@v4
 
