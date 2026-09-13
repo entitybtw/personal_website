@@ -7,10 +7,9 @@ on:
 jobs:
   deploy:
     runs-on: websites
+    env:
+      PORT: 8084
     steps:
       - uses: actions/checkout@v4
-
       - name: Deploy
-        run: |
-          rsync -a --delete --exclude='.git' ./ /var/www/personal_website/
-          deploy add personal_website /var/www/personal_website --port 8084
+        run: deploy

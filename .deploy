@@ -1,0 +1,5 @@
+# deploy-stack: параметры деплоя для этого репозитория.
+# Можно ничего не писать в workflow — deploy прочитает этот файл.
+NAME=personal_website
+PORT=8084
+TYPE=static
